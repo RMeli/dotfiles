@@ -1,0 +1,4 @@
+changeps1: false # Do not change shell prompt
+channels:
+  - conda-forge
+  - defaults
