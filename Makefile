@@ -2,16 +2,18 @@
 
 help:
 	@echo "=== Install Dotfiles ==="
-	@echo "vimrc:\n    install .vimrc"
+	@echo "bash:\n    install .bash_profile"
+	@echo "vim:\n    install .vimrc"
+	@echo "conda:\n    install .condarc"
 
 bash:
 	@echo "Soft link bash files"
-	ln -s ${PWD}/.bash_profile ${HOME}/.bash_profile
+	ln -s ${PWD}/bash_profile ${HOME}/.bash_profile
 
-condarc:
+conda:
 	@echo "Soft link .condarc"
-	ln -s ${PWD}/.condarc ${HOME}/.condarc
+	ln -s ${PWD}/condarc ${HOME}/.condarc
 
-vimrc:
+vim:
 	@echo "Soft link .vimrc"
-	ln -s ${PWD}/.vimrc ${HOME}/.vimrc
+	ln -s ${PWD}/vimrc ${HOME}/.vimrc
