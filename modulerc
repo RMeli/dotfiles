@@ -1,0 +1,2 @@
+#%Module4.0
+module use --append .modulefiles

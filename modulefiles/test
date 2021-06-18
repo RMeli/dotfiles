@@ -1,0 +1,15 @@
+#%Module4.0
+
+proc ModulesHelp { } {
+    puts stderr "Test module."
+}
+
+set modName [module-info name]
+
+if { [ module-info mode load ] } {
+    puts stderr "'$modName' module"
+}
+
+# Module not to be listed as loaded
+# Causes ERROR: Module evaluation aborted
+break

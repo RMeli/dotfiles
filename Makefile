@@ -17,3 +17,7 @@ conda:
 vim:
 	@echo "Soft link .vimrc"
 	ln -s ${PWD}/vimrc ${HOME}/.vimrc
+
+module:
+	ln -s ${PWD}/modulerc ${HOME}/.modulerc
+	ln -s ${PWD}/modulefiles ${HOME}/.modulefiles
