@@ -1,0 +1,6 @@
+#%Module4.0
+
+set app     smina
+set appdir  Users/rmeli/software/smina
+
+prepend-path PATH           ${appdir}
