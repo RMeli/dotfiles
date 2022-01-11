@@ -1,6 +1,6 @@
 #%Module4.0
 
-set app     smina
-set appdir  Users/rmeli/software/smina
+set app     smina.osx
+set appdir  Users/rmeli/software/
 
 prepend-path PATH           ${appdir}
