@@ -1,0 +1,63 @@
+add_newline = false
+
+[character]
+success_symbol = "[↳](bold blue)"
+error_symbol = "[✗](bold red)"
+
+[aws]
+disabled = true
+
+[conda]
+ignore_base = false
+format = "[$symbol$environment](green) "
+
+[git_branch]
+symbol = "🔀 "
+truncation_length = 4
+truncation_symbol = "…"
+
+[git_commit]
+commit_hash_length = 7
+tag_symbol = "🔖 "
+only_detached = false
+tag_disabled = false
+style = "yellow"
+
+# https://gitmoji.dev/
+[git_status]
+style = "grey"
+conflicted = "🏳"
+ahead = "🏎"
+behind = "😰"
+diverged = "😵"
+up_to_date = "✅"
+untracked = "🤷‍"
+stashed = "📦"
+modified = "📝"
+staged = '[++\($count\)](green)'
+renamed = "👅"
+deleted = "🗑"
+
+[memory_usage]
+disabled = false
+threshold = -1
+symbol = "🧠"
+style = "bold dimmed grey"
+format = "$symbol [${ram}]($style) "
+
+[singularity]
+format = '[📦 \[$env\]]($style) '
+
+[time]
+disabled = false
+style = "dimmed grey"
+format = '🕙[\[ $time \]]($style) '
+time_format = "%T"
+
+
+[username]
+style_user = "white bold"
+style_root = "red bold"
+format = "[$user]($style) "
+disabled = false
+show_always = true

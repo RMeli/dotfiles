@@ -14,6 +14,11 @@ conda:
 	@echo "Soft link .condarc"
 	ln -s ${PWD}/condarc ${HOME}/.condarc
 
+starship:
+	@echo "Soft link starship.toml"
+	mkdir -p ${HOME}/.config
+	ln -s ${PWD}/starship.toml ${HOME}/.config/starship.toml
+
 vim:
 	@echo "Soft link .vimrc"
 	ln -s ${PWD}/vimrc ${HOME}/.vimrc
