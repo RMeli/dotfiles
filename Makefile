@@ -8,21 +8,22 @@ help:
 
 bash:
 	@echo "Soft link bash files"
-	ln -s ${PWD}/bash_profile ${HOME}/.bash_profile
+	ln -sf ${PWD}/bash_profile ${HOME}/.bash_profile
 
 conda:
 	@echo "Soft link .condarc"
-	ln -s ${PWD}/condarc ${HOME}/.condarc
+	ln -sf ${PWD}/condarc ${HOME}/.condarc
 
 starship:
 	@echo "Soft link starship.toml"
 	mkdir -p ${HOME}/.config
-	ln -s ${PWD}/starship.toml ${HOME}/.config/starship.toml
+	ln -sf ${PWD}/starship.toml ${HOME}/.config/starship.toml
+	sh installers/starship.sh 
 
 vim:
 	@echo "Soft link .vimrc"
-	ln -s ${PWD}/vimrc ${HOME}/.vimrc
+	ln -sf ${PWD}/vimrc ${HOME}/.vimrc
 
 module:
-	ln -s ${PWD}/modulerc ${HOME}/.modulerc
-	ln -s ${PWD}/modulefiles ${HOME}/.modulefiles
+	ln -sf ${PWD}/modulerc ${HOME}/.modulerc
+	ln -sf ${PWD}/modulefiles ${HOME}/.modulefiles
