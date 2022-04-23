@@ -11,9 +11,6 @@
 
 ## Customisation
 
-* [BetterDiscord](https://github.com/BetterDiscord/BetterDiscord): enhances Discord desktop app with new features
-
-
 ### macOS Only
 
 * [Übersicht](https://github.com/felixhageloh/uebersicht): Keep an eye on what's happening on your machine and in the world
