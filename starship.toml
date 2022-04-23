@@ -1,3 +1,5 @@
+scan_timeout = 50
+command_timeout = 1000
 add_newline = false
 
 [character]
