@@ -27,3 +27,6 @@ vim:
 module:
 	ln -sf ${PWD}/modulerc ${HOME}/.modulerc
 	ln -sf ${PWD}/modulefiles ${HOME}/.modulefiles
+
+yabai:
+	ln -sf ${PWD}/yabairc ${HOME}/.yabairc
