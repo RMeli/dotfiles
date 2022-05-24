@@ -30,3 +30,7 @@ module:
 
 yabai:
 	ln -sf ${PWD}/yabairc ${HOME}/.yabairc
+
+skhd:
+	mkdir -p ${HOME}/.config/skhd
+	ln -sf ${PWD}/skhdrc ${HOME}/.config/skhd/skhdrc
