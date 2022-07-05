@@ -47,4 +47,8 @@ set writebackup
 " ---------- PLUGINS ---------- "
 " ---------- ------- ---------- "
 
-runtime ./vundle.vim
+runtime ./plugin.vim
+
+" ---------- airline ---------- "
+
+let g:airline_theme='minimalist'

@@ -11,6 +11,10 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
+" Lean & mean status/tabline for vim that's light as air
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 " A Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
 
