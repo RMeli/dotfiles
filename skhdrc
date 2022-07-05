@@ -1,0 +1,17 @@
+# + ----- +
+# | Yabai |
+# + ----- +
+
+# Change focus (window)
+lcmd + lshift - k : yabai -m window --focus north
+lcmd + lshift - 0x2B : yabai -m window --focus south # comma
+lcmd + lshift - m : yabai -m window --focus west
+lcmd + lshift - 0x2F : yabai -m window --focus east # period
+
+# Change focus (space)
+lcmd + lshift - j : yabai -m space --focus prev
+lcmd + lshift - l : yabai -m space --focus next
+
+# Toggle float
+lcmd + lshift - f : yabai -m window --toggle float;\
+                    yabai -m window --grid 4:4:1:1:2:2;

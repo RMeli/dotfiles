@@ -8,3 +8,9 @@
 * [exa](https://github.com/ogham/exa): a modern replacement for `ls`
 * [fig](https://fig.io/): fig adds autocomplete to your terminal
 * [fzf](https://github.com/junegunn/fzf): a command-line fuzzy finder
+
+## Customisation
+
+### macOS Only
+
+* [Übersicht](https://github.com/felixhageloh/uebersicht): Keep an eye on what's happening on your machine and in the world
