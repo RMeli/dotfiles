@@ -24,6 +24,12 @@ vim:
 	@echo "Soft link .vimrc"
 	ln -sf ${PWD}/vimrc ${HOME}/.vimrc
 
+nvim:
+	@echo ">>> Setup VindleVim"
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	@echo ">>> Soft link .config/nvim"
+	ln -sf ${PWD}/config/nvim ${HOME}/.config/nvim
+
 module:
 	ln -sf ${PWD}/modulerc ${HOME}/.modulerc
 	ln -sf ${PWD}/modulefiles ${HOME}/.modulefiles
