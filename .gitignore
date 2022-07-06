@@ -1,2 +1,5 @@
 # editors
 .vscode
+
+# files
+config/nvim/undo/

@@ -1,4 +1,5 @@
 set nocompatible
+
 scriptencoding utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
@@ -29,6 +30,9 @@ set lazyredraw                  " redraw lazily
 set showmatch                   " highlight matching brakets
 set ruler                       " row and column ruler information
 set visualbell                  " use visual bell (no beeping)
+set list
+set lcs+=space:·                " Show spaces
+set lcs+=eol:↴                  " Show End Of Line
 
 " Searching
 set incsearch                   " search as characters are typed
@@ -48,6 +52,11 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
+set noswapfile
+
+" Undo
+set undofile
+set undodir=$HOME/.config/nvim/undo
 
 " ---------- ------- ---------- "
 " ---------- PLUGINS ---------- "
@@ -62,3 +71,8 @@ let g:airline_theme='minimalist'
 " --------- NERDTree ---------- "
 
 let g:NERDTreeWinPos = "right"
+
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+

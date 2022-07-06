@@ -21,6 +21,9 @@ Plugin 'tpope/vim-fugitive'
 " A tree explorer plugin for vim.
 Plugin 'preservim/nerdtree'
 
+" Vim undo tree visualizer
+Plugin 'simnalamburt/vim-mundo'
+
 " Adds file type icons to Vim plugins
 " Need Nerd Fonts installed: https://github.com/ryanoasis/nerd-fonts
 Plugin 'ryanoasis/vim-devicons'
@@ -30,8 +33,7 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 if has("nvim")
 
-    " Quickstart configs for Nvim LSP
-    "   LSP: Language Server Protocol
+    " Quickstart configs for Nvim Language Server Protocol (LSP)
     Plugin 'neovim/nvim-lspconfig'
 
     " Neovim LSP plugin
@@ -43,6 +45,9 @@ if has("nvim")
     " Find, Filter, Preview, Pick. All lua, all the time
     Plugin 'nvim-lua/plenary.nvim'
     Plugin 'nvim-telescope/telescope.nvim'
+
+    "  Indent guides for Neovim
+    Plugin 'lukas-reineke/indent-blankline.nvim'
 
     " Github theme for Neovim
     Plugin 'projekt0n/github-nvim-theme'
