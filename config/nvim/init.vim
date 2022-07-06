@@ -1,28 +1,34 @@
 set nocompatible
 scriptencoding utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+set encoding=utf-8
 
-set number
+let mapleader=','
 
 syntax enable
 
-set fileencodings=utf-8
-set encoding=UTF-8
+set autoread                    " reload file when changed from outside
 
 " Spaces and tabs
-set tabstop=4
-set softtabstop=4
-set expandtab                   " tabs are spaces
+set autoindent                  " auto-indent new lines
+set smartindent
 set smarttab
+set tabstop=4
+set softtabstop=4               " number of auto-indent spaces
+set shiftwidth=4
+set expandtab                   " tabs are spaces
 filetype plugin indent on
 
 " UI
 set number                      " line numbers
 set showcmd                     " show command
 set cursorline                  " highlight current line
-filetype indent on              " filetype-specific indentation
 set wildmenu                    " visual command autocomplete
 set lazyredraw                  " redraw lazily
 set showmatch                   " highlight matching brakets
+set ruler                       " row and column ruler information
+set visualbell                  " use visual bell (no beeping)
 
 " Searching
 set incsearch                   " search as characters are typed
@@ -52,3 +58,7 @@ runtime ./plugin.vim
 " ---------- airline ---------- "
 
 let g:airline_theme='minimalist'
+
+" --------- NERDTree ---------- "
+
+let g:NERDTreeWinPos = "right"
