@@ -20,9 +20,9 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'neoclide/coc.nvim'
 Plugin 'josa42/coc-sh'
-Plugin 'coc-clangd'
-Plugin 'coc-cmake'
-Plugin 'coc-pyright' " Pyright extension for coc.nvim
+Plugin 'clangd/coc-clangd'
+Plugin 'voldikss/coc-cmake'
+Plugin 'fannheyward/coc-pyright' " Pyright extension for coc.nvim
 
 " A vim plugin to display the indentation levels with thin vertical lines
 Plugin 'Yggdroot/indentLine'
