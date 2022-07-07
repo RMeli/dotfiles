@@ -33,6 +33,7 @@ set visualbell                  " use visual bell (no beeping)
 set list
 set lcs+=space:·                " Show spaces
 set lcs+=eol:↴                  " Show End Of Line
+set colorcolumn=80,120
 
 " Searching
 set incsearch                   " search as characters are typed
