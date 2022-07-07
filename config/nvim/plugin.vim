@@ -18,6 +18,9 @@ Plugin 'vim-airline/vim-airline-themes'
 " A Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
 
+" Yet another EditorConfig pluding for vim
+Plugin 'sgur/vim-editorconfig'
+
 Plugin 'neoclide/coc.nvim'
 Plugin 'josa42/coc-sh'
 Plugin 'clangd/coc-clangd'
