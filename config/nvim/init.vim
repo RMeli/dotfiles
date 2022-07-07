@@ -10,6 +10,7 @@ let mapleader=','
 syntax enable
 
 set autoread                    " reload file when changed from outside
+set updatetime=300
 
 " Spaces and tabs
 set autoindent                  " auto-indent new lines
@@ -34,6 +35,7 @@ set list
 set lcs+=space:·                " Show spaces
 set lcs+=eol:↴                  " Show End Of Line
 set colorcolumn=80,120
+set cmdheight=2                 " More space to display messages
 
 " Searching
 set incsearch                   " search as characters are typed
@@ -48,11 +50,8 @@ set foldmethod=indent           " fold based on indent level
 nnoremap <space> za
 
 " Backup
-set backup
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set writebackup
+set nobackup
+set nowritebackup
 set noswapfile
 
 " Undo

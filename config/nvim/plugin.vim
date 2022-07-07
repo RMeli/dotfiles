@@ -18,6 +18,12 @@ Plugin 'vim-airline/vim-airline-themes'
 " A Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
 
+Plugin 'neoclide/coc.nvim'
+Plugin 'josa42/coc-sh'
+Plugin 'coc-clangd'
+Plugin 'coc-cmake'
+Plugin 'coc-pyright' " Pyright extension for coc.nvim
+
 " A tree explorer plugin for vim.
 Plugin 'preservim/nerdtree'
 
