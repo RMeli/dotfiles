@@ -68,42 +68,6 @@ runtime ./plugin.vim
 
 let g:airline_theme='minimalist'
 
-" --------- NERDTree ---------- "
-
-let g:NERDTreeWinPos = "right"
-
-" Start NERDTree when Vim is started without file arguments.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-
-" -------- indentLine ----------"
+" -------- indentLine --------- "
 
 let g:indentLine_char = '|'
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {
-    "bash",
-    "c",
-    "cmake",
-    "cpp",
-    "cuda",
-    "latex",
-    "make",
-    "markdown",
-    "python",
-    "toml",
-    "vim",
-    "yaml",
-  },
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-}
-EOF
-
