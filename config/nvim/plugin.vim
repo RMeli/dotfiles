@@ -24,6 +24,9 @@ Plugin 'coc-clangd'
 Plugin 'coc-cmake'
 Plugin 'coc-pyright' " Pyright extension for coc.nvim
 
+" A vim plugin to display the indentation levels with thin vertical lines
+Plugin 'Yggdroot/indentLine'
+
 " A tree explorer plugin for vim.
 Plugin 'preservim/nerdtree'
 
@@ -52,9 +55,6 @@ if has("nvim")
     Plugin 'nvim-lua/plenary.nvim'
     Plugin 'nvim-telescope/telescope.nvim'
 
-    "  Indent guides for Neovim
-    Plugin 'lukas-reineke/indent-blankline.nvim'
-
     " Github theme for Neovim
     Plugin 'projekt0n/github-nvim-theme'
 
@@ -62,3 +62,4 @@ endif
 
 call vundle#end()
 filetype plugin indent on " required
+

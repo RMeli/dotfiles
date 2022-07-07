@@ -35,7 +35,7 @@ set list
 set lcs+=space:·                " Show spaces
 set lcs+=eol:↴                  " Show End Of Line
 set colorcolumn=80,120
-set cmdheight=2                 " More space to display messages
+set cmdheight=1                 " More space to display messages
 
 " Searching
 set incsearch                   " search as characters are typed
@@ -75,4 +75,8 @@ let g:NERDTreeWinPos = "right"
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+" -------- indentLine ----------"
+
+let g:indentLine_char = '|'
 
