@@ -9,6 +9,8 @@ help:
 bash:
 	@echo "Soft link bash files"
 	ln -sf ${PWD}/bash_profile ${HOME}/.bash_profile
+	ln -sf ${PWD}/bash/aliases.sh ${HOME}/.aliases.sh
+	ln -sf ${PWD}/bash/functions.sh ${HOME}/.functions.sh
 
 conda:
 	@echo "Soft link .condarc"
