@@ -63,11 +63,3 @@ set undodir=$HOME/.config/nvim/undo
 " ---------- ------- ---------- "
 
 runtime ./plugin.vim
-
-" ---------- airline ---------- "
-
-let g:airline_theme='minimalist'
-
-" -------- indentLine --------- "
-
-let g:indentLine_char = '|'
