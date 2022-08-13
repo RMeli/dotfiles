@@ -11,6 +11,13 @@
 
 ## Customisation
 
-### macOS Only
+### macOS
 
 * [Übersicht](https://github.com/felixhageloh/uebersicht): Keep an eye on what's happening on your machine and in the world
+* [Yabai](https://github.com/koekeishiya/yabai)
+
+## Security
+
+### macOS
+
+* [OverSight](https://github.com/objective-see/OverSight): monitors a mac's mic and webcam, alerting the user when the internal mic is activated, or whenever a process accesses the webcam.
