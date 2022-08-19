@@ -8,6 +8,7 @@
 * [exa](https://github.com/ogham/exa): a modern replacement for `ls`
 * [fig](https://fig.io/): fig adds autocomplete to your terminal
 * [fzf](https://github.com/junegunn/fzf): a command-line fuzzy finder
+* [tmux](https://github.com/tmux/tmux): a terminal multiplexer
 
 ## Customisation
 
