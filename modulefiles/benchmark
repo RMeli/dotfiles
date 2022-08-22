@@ -1,0 +1,15 @@
+#%Module4.0
+
+proc ModulesHelp { } {
+    puts stderr "google/benchmark"
+}
+
+set modName [module-info name]
+
+if { [ module-info mode load ] } {
+    puts stderr "'$modName' module"
+}
+
+set BENCHMARK_ROOT		/Users/rmeli/software/benchmark
+
+prepend-path PATH	$BENCHMARK_ROOT
