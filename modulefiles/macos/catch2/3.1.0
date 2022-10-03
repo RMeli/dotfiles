@@ -1,0 +1,14 @@
+#%Module4.0
+
+proc ModulesHelp { } {
+    puts stderr "catch2"
+}
+
+set modName [module-info name]
+
+if { [ module-info mode load ] } {
+    puts stderr "'$modName' module"
+}
+
+set CATCH2_ROOT		/Users/rmeli/software/catch2/3.1.0/
+prepend-path PATH	$CATCH2_ROOT
