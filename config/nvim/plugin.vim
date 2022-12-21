@@ -21,11 +21,11 @@ Plugin 'tpope/vim-fugitive'
 " Yet another EditorConfig pluding for vim
 Plugin 'sgur/vim-editorconfig'
 
-Plugin 'neoclide/coc.nvim'
-Plugin 'josa42/coc-sh'
-Plugin 'clangd/coc-clangd'
-Plugin 'voldikss/coc-cmake'
-Plugin 'fannheyward/coc-pyright' " Pyright extension for coc.nvim
+" Plugin 'neoclide/coc.nvim'
+" Plugin 'josa42/coc-sh'
+" Plugin 'clangd/coc-clangd'
+" Plugin 'voldikss/coc-cmake'
+" Plugin 'fannheyward/coc-pyright' " Pyright extension for coc.nvim
 
 " A vim plugin to display the indentation levels with thin vertical lines
 Plugin 'Yggdroot/indentLine'
@@ -46,10 +46,10 @@ Plugin 'LaTeX-Box-Team/LaTeX-Box'
 if has("nvim")
 
     " Quickstart configs for Nvim Language Server Protocol (LSP)
-    Plugin 'neovim/nvim-lspconfig'
+    " Plugin 'neovim/nvim-lspconfig'
 
     " Neovim LSP plugin
-    Plugin 'glepnir/lspsaga.nvim'
+    " Plugin 'glepnir/lspsaga.nvim'
 
     " Nvim Treesitter configurations and abstraction layer
     Plugin 'nvim-treesitter/nvim-treesitter'
@@ -65,4 +65,3 @@ endif
 
 call vundle#end()
 filetype plugin indent on " required
-

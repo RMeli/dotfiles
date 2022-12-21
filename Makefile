@@ -42,3 +42,7 @@ yabai:
 skhd:
 	mkdir -p ${HOME}/.config/skhd
 	ln -sf ${PWD}/skhdrc ${HOME}/.config/skhd/skhdrc
+
+spack:
+	@echo "Installing Spack (RMeli/Spack)"
+	sh installers/spack.sh
