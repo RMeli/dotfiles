@@ -18,6 +18,10 @@ Plugin 'vim-airline/vim-airline-themes'
 " A Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
 
+" A Vim plugin which shows git diff markers in the sign column and
+" stages/previews/undoes hunks and partial hunks.
+Plugin 'airblade/vim-gitgutter'
+
 " Yet another EditorConfig pluding for vim
 Plugin 'sgur/vim-editorconfig'
 
