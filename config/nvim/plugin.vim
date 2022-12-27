@@ -64,7 +64,11 @@ if has("nvim")
     " Github theme for Neovim
     Plugin 'projekt0n/github-nvim-theme'
 
+    " Quickstart configs for Nvim LSP
+     Plugin 'neovim/nvim-lspconfig'
 endif
 
 call vundle#end()
+
 filetype plugin indent on " required
+
