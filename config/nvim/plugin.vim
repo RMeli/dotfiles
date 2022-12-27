@@ -64,8 +64,14 @@ if has("nvim")
     " Github theme for Neovim
     Plugin 'projekt0n/github-nvim-theme'
 
+    " Portable package manager for Neovim that runs everywhere Neovim runs
+    Plugin 'williamboman/mason.nvim'
+
+    " Extension to mason.nvim that makes it easier to use lspconfig with mason.nvim
+    Plugin 'williamboman/mason-lspconfig.nvim'
+
     " Quickstart configs for Nvim LSP
-     Plugin 'neovim/nvim-lspconfig'
+    Plugin 'neovim/nvim-lspconfig'
 endif
 
 call vundle#end()

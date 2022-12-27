@@ -63,3 +63,15 @@ set undodir=$HOME/.config/nvim/undo
 " ---------- ------- ---------- "
 
 runtime ./plugin.vim
+
+" ---------- --- ---------- "
+" ---------- LSP ---------- "
+" ---------- --- ---------- "
+
+lua require("mason").setup()
+lua require("mason-lspconfig").setup()
+lua require("lspconfig").fortls.setup {}
+lua require("lspconfig").clangd.setup {}
+lua require("lspconfig").cmake.setup {}
+lua require("lspconfig").pyright.setup {}
+
