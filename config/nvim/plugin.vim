@@ -1,4 +1,3 @@
-
 " Install plugins using ':PluginInstall'
 " Vimdoc for more details with ':h vundle'
 
