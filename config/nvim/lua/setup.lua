@@ -21,7 +21,10 @@ opt.cursorline      = true      -- highlight current line
 opt.showmatch       = true      -- highlight matching brakets
 opt.list            = true
 opt.showbreak       = "↪"
-opt.lcs             = "tab:→ ,trail:-,nbsp:+,space:·,eol:↴"
+opt.listchars       = "tab:→ "
+opt.listchars:append "trail:-"
+opt.listchars:append "space:⋅"
+opt.listchars:append "eol:↴"
 
 -- set showcmd                     " show command
 -- set wildmenu                    " visual command autocomplete

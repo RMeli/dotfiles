@@ -41,5 +41,13 @@ return require('packer').startup(function(use)
         requires = {{'nvim-lua/plenary.nvim'}}
     }
 
+    -- [[ vim-illuminate ]]
+    -- (Neo)Vim plugin for automatically highlighting other uses of the word under the cursor
+    use {'RRethy/vim-illuminate'}
+
+    -- [[ indent-blankline.nvim ]]
+    -- Indent guides for Neovim
+    use {'lukas-reineke/indent-blankline.nvim'}
+
 end)
 
