@@ -27,7 +27,7 @@ require('github-theme').setup()
 
 -- [[ nvim-treesitter ]]
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = { 
+    ensure_installed = {
         "bash", "c", "cmake", "cpp", "cuda", "latex", "lua", "make",
         "markdown", "python", "toml", "vim", "yaml"
     },
@@ -76,3 +76,94 @@ require("bufferline").setup{}
 
 -- [[ Comment.nvim ]]
 require('Comment').setup()
+
+-- [[ alpha-nvim ]]
+require'alpha'.setup(require'alpha.themes.dashboard'.config)
+
+-- [[ gitsigns.nvim ]]
+require('gitsigns').setup {
+    signs = {
+        add = {
+            hl = 'GitSignsAdd',
+            text = '+',
+            numhl = 'GitSignsAddNr',
+            linehl = 'GitSignsAddLn'
+        },
+        change = {
+            hl ='GitSignsChange',
+            text = '│',
+            numhl = 'GitSignsChangeNr',
+            linehl = 'GitSignsChangeLn'
+        },
+        delete = {
+            hl = 'GitSignsDelete',
+            text = '-',
+            numhl='GitSignsDeleteNr',
+            linehl='GitSignsDeleteLn'
+        },
+        topdelete = {
+            hl = 'GitSignsDelete',
+            text = '‾',
+            numhl='GitSignsDeleteNr',
+            linehl='GitSignsDeleteLn'
+        },
+        changedelete = {
+            hl = 'GitSignsChange',
+            text = '~',
+            numhl='GitSignsChangeNr',
+            linehl='GitSignsChangeLn'
+        },
+        untracked = {
+            hl = 'GitSignsAdd',
+            text = '┆',
+            numhl='GitSignsAddNr',
+            linehl='GitSignsAddLn'
+        },
+    },
+    current_line_blame = true,
+    current_line_blame_opts = {
+        delay = 500,
+        ignore_whitespace = true,
+    },
+}
+
+-- [[ mason.nvim ]]
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+})
+
+-- [[ mason-lspconfig.nvim ]]
+require("mason-lspconfig").setup {
+    ensure_installed = {
+        "bashls",                   -- Bash
+        "clangd",                   -- C and C++
+        "cmake",                    -- CMake
+        "dockerls",                 -- Docker
+        "fortls",                   -- Fortran
+        "julials",                  -- Julia
+        "ltex",                     -- LaTeX
+        "sumneko_lua",              -- Lua
+        "pyright",                  -- Python
+        "taplo",                    -- TOML
+        "yamlls"                    -- YAML
+    }
+}
+
+-- [[ nvim-slpconfig ]]
+require'lspconfig'.bashls.setup{}
+require'lspconfig'.clangd.setup{}
+require'lspconfig'.cmake.setup{}
+require'lspconfig'.dockerls.setup{}
+require'lspconfig'.fortls.setup{}
+require'lspconfig'.julials.setup{}
+require'lspconfig'.ltex.setup{}
+require'lspconfig'.sumneko_lua.setup{}
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.taplo.setup{}
+require'lspconfig'.yamlls.setup{}

@@ -69,5 +69,26 @@ return require('packer').startup(function(use)
     use {
         'numToStr/Comment.nvim',
     }
+
+    -- [[ alpha-nvim ]]
+    use {
+        'goolord/alpha-nvim',
+        requires = {'nvim-tree/nvim-web-devicons'}
+    }
+
+    -- [[ gitsigns.nvim ]]
+    -- Git integration for buffers
+    use {
+        'lewis6991/gitsigns.nvim',
+    }
+
+    -- --- --
+    -- LSP --
+    -- --- --
+    use {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+    }
 end)
 
