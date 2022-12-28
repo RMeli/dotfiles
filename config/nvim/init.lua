@@ -127,6 +127,9 @@ require('gitsigns').setup {
     },
 }
 
+-- [[ nvim-notify ]]
+vim.notify = require("notify")
+
 -- [[ mason.nvim ]]
 require("mason").setup({
     ui = {

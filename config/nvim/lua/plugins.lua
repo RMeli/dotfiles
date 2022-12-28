@@ -82,6 +82,10 @@ return require('packer').startup(function(use)
         'lewis6991/gitsigns.nvim',
     }
 
+    use {
+        'rcarriga/nvim-notify'
+    }
+
     -- --- --
     -- LSP --
     -- --- --
