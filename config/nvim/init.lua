@@ -25,7 +25,7 @@ require("nvim-tree").setup()
 -- [[ github-theme ]]
 require('github-theme').setup()
 
-[[ nvim-treesitter ]]
+-- [[ nvim-treesitter ]]
 require'nvim-treesitter.configs'.setup {
     ensure_installed = { 
         "bash", "c", "cmake", "cpp", "cuda", "latex", "lua", "make",
