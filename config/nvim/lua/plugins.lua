@@ -64,5 +64,10 @@ return require('packer').startup(function(use)
         requires = 'nvim-tree/nvim-web-devicons'
     }
 
+    -- [[ Comment.nvim ]]
+    -- Smart and powerful comment plugin for neovim
+    use {
+        'numToStr/Comment.nvim',
+    }
 end)
 
