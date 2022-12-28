@@ -49,5 +49,20 @@ return require('packer').startup(function(use)
     -- Indent guides for Neovim
     use {'lukas-reineke/indent-blankline.nvim'}
 
+    -- [[ toggleterm.nvim ]]
+    -- A neovim lua plugin to help easily manage multiple terminal windows
+    use {
+        "akinsho/toggleterm.nvim",
+        tag = '*'
+    }
+
+    -- [[ bufferline.nvim ]]
+    -- A snazzy bufferline for Neovim
+    use {
+        'akinsho/bufferline.nvim',
+        tag = "v3.*",
+        requires = 'nvim-tree/nvim-web-devicons'
+    }
+
 end)
 
