@@ -10,6 +10,14 @@ vim.g.localleader = "\\"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Reloads NeoVim whenever init.lua is saved
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost init.lua source <afile> | PackerSync
+  augroup end
+]])
+
 -- require files in ./lua/ folder
 require("vars")
 require("setup")
@@ -19,10 +27,19 @@ require("plugins")
 -- [[ plugins ]] --
 -- ------------- --
 
+-- Load plugin configurations
+
 require("lua.plugins.github-nvim-theme")
 require("lua.plugins.nvim-tree")
 require("lua.plugins.nvim-treesitter")
 require("lua.plugins.lualine")
+
+-- LSP Plugins
+
+-- Patches
+
+-- [[ nvim-notify ]]
+vim.notify = require("notify")
 
 -- [[ telescope.nvim ]]
 local builtin = require("telescope.builtin")
@@ -59,55 +76,6 @@ require("Comment").setup()
 -- [[ alpha-nvim ]]
 require("alpha").setup(require("alpha.themes.dashboard").config)
 
--- [[ gitsigns.nvim ]]
-require("gitsigns").setup({
-  signs = {
-    add = {
-      hl = "GitSignsAdd",
-      text = "+",
-      numhl = "GitSignsAddNr",
-      linehl = "GitSignsAddLn",
-    },
-    change = {
-      hl = "GitSignsChange",
-      text = "│",
-      numhl = "GitSignsChangeNr",
-      linehl = "GitSignsChangeLn",
-    },
-    delete = {
-      hl = "GitSignsDelete",
-      text = "-",
-      numhl = "GitSignsDeleteNr",
-      linehl = "GitSignsDeleteLn",
-    },
-    topdelete = {
-      hl = "GitSignsDelete",
-      text = "‾",
-      numhl = "GitSignsDeleteNr",
-      linehl = "GitSignsDeleteLn",
-    },
-    changedelete = {
-      hl = "GitSignsChange",
-      text = "~",
-      numhl = "GitSignsChangeNr",
-      linehl = "GitSignsChangeLn",
-    },
-    untracked = {
-      hl = "GitSignsAdd",
-      text = "┆",
-      numhl = "GitSignsAddNr",
-      linehl = "GitSignsAddLn",
-    },
-  },
-  current_line_blame = true,
-  current_line_blame_opts = {
-    delay = 500,
-    ignore_whitespace = true,
-  },
-})
-
--- [[ nvim-notify ]]
-vim.notify = require("notify")
 
 -- [[ mason.nvim ]]
 require("mason").setup({
@@ -159,26 +127,6 @@ null_ls.setup({
   },
 })
 
--- [[ cmp-nvim ]]
-local cmp = require("cmp")
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "buffer" },
-  },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-  }),
-})
 
 -- Allows to add nvim-cmp support to LSPs
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
