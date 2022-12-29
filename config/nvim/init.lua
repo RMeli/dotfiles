@@ -33,6 +33,8 @@ require("lua.plugins.github-nvim-theme")
 require("lua.plugins.nvim-tree")
 require("lua.plugins.nvim-treesitter")
 require("lua.plugins.lualine")
+require("lua.plugins.cmp-nvim")
+require("lua.plugins.alpha-nvim")
 
 -- LSP Plugins
 
@@ -72,10 +74,6 @@ require("bufferline").setup({})
 
 -- [[ Comment.nvim ]]
 require("Comment").setup()
-
--- [[ alpha-nvim ]]
-require("alpha").setup(require("alpha.themes.dashboard").config)
-
 
 -- [[ mason.nvim ]]
 require("mason").setup({
