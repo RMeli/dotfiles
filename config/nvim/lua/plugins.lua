@@ -23,7 +23,13 @@ return require("packer").startup(function(use)
 
   -- [[ github-nvim-theme ]]
   -- Github's Neovim themes
-  use({ "projekt0n/github-nvim-theme" })
+  --use({ "projekt0n/github-nvim-theme" })
+  use({
+    "projekt0n/github-nvim-theme",
+    config = function()
+      require("github-theme").setup({})
+    end,
+  })
 
   -- [[ lualine.nvim ]]
   -- A blazing fast and easy to configure neovim statusline written in pure lua
@@ -124,16 +130,20 @@ return require("packer").startup(function(use)
 
   -- [[ nvim-autopairs ]]
   -- autopairs for neovim written by lua
-  use {
+  use({
     "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
-  }
+    config = function()
+      require("nvim-autopairs").setup({})
+    end,
+  })
 
   -- [[ which-key.nvim ]]
-  use {
+  use({
     "folke/which-key.nvim",
-    config = function() require("which-key").setup {} end
-  }
+    config = function()
+      require("which-key").setup({})
+    end,
+  })
 
   -- --- --
   -- LSP --
