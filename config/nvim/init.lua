@@ -164,12 +164,17 @@ local null_ls = require("null-ls")
 null_ls.setup({
     sources = {
         null_ls.builtins.completion.vsnip,
+        -- Lua 
         null_ls.builtins.formatting.stylua,
+        -- C/C++/CUDA
         null_ls.builtins.diagnostics.clang_check,
         null_ls.builtins.formatting.clang_format,
+        -- CMake
         null_ls.builtins.diagnostics.cmake_lint,
         null_ls.builtins.formatting.cmake_format,
+        -- Fortran
         null_ls.builtins.formatting.fprettify,
+        --
         null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.completion.spell,
     }
