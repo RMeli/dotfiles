@@ -121,6 +121,20 @@ return require("packer").startup(function(use)
   -- [[ null-ls ]]
   -- Use Neovim as a LS to inject LSP diagnostics, code actions, and more via Lua
   use({ "jose-elias-alvarez/null-ls.nvim" })
+
+  -- [[ nvim-autopairs ]]
+  -- autopairs for neovim written by lua
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
+
+  -- [[ which-key.nvim ]]
+  use {
+    "folke/which-key.nvim",
+    config = function() require("which-key").setup {} end
+  }
+
   -- --- --
   -- LSP --
   -- --- --
