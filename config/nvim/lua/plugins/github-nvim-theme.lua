@@ -1,0 +1,6 @@
+-- [[ github-nvim-theme ]]
+-- Github's Neovim themes
+-- https://github.com/projekt0n/github-nvim-theme
+
+require("github-theme").setup()
+

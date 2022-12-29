@@ -19,42 +19,10 @@ require("plugins")
 -- [[ plugins ]] --
 -- ------------- --
 
--- [[ nvim-tree ]]
-require("nvim-tree").setup()
-
--- [[ github-theme ]]
-require("github-theme").setup()
-
--- [[ nvim-treesitter ]]
-require("nvim-treesitter.configs").setup({
-  ensure_installed = {
-    "bash",
-    "c",
-    "cmake",
-    "cpp",
-    "cuda",
-    "latex",
-    "lua",
-    "make",
-    "markdown",
-    "python",
-    "toml",
-    "vim",
-    "yaml",
-  },
-  auto_install = true, -- automatically install missing parsers
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-})
-
--- [[ lualine ]]
-require("lualine").setup({
-  options = {
-    theme = "auto",
-  },
-})
+require("lua.plugins.github-nvim-theme")
+require("lua.plugins.nvim-tree")
+require("lua.plugins.nvim-treesitter")
+require("lua.plugins.lualine")
 
 -- [[ telescope.nvim ]]
 local builtin = require("telescope.builtin")
