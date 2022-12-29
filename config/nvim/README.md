@@ -8,3 +8,5 @@
 ## Projects
 
 - [LunarVim - IDE for NeoVim](https://www.lunarvim.org)
+- [Oni2 - Native, lightweight modal code editor](https://v2.onivim.io)
+
