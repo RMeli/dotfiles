@@ -23,7 +23,7 @@ cmp.setup({
   },
   sources = {
     { name = "nvim_lsp" },
-    --{ name = "buffer" }, -- Uncomment for TEXT completion
+    { name = "buffer" },
     { name = "path" },
     { name = "cmdline" },
   },

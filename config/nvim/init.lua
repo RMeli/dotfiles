@@ -137,7 +137,19 @@ require("lspconfig").dockerls.setup({ capabilities = capabilities })
 require("lspconfig").fortls.setup({ capabilities = capabilities })
 require("lspconfig").julials.setup({ capabilities = capabilities })
 require("lspconfig").ltex.setup({ capabilities = capabilities })
-require("lspconfig").sumneko_lua.setup({ capabilities = capabilities })
+require("lspconfig").sumneko_lua.setup({ 
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            runtime = {
+                version = "Lua 5.1"
+            },
+            completion = {
+                showWord = "Disable",
+            }
+        }
+    }
+})
 require("lspconfig").ltex.setup({ capabilities = capabilities })
 require("lspconfig").sumneko_lua.setup({ capabilities = capabilities })
 require("lspconfig").pyright.setup({ capabilities = capabilities })
