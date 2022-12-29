@@ -111,6 +111,17 @@ return require('packer').startup(function(use)
         'hrsh7th/cmp-cmdline',
         requires = {'hrsh7th/nvim-cmp'}
     }
+
+    -- [[ vim-vsnip ]]
+    -- Snippet plugin for vim/nvim that supports LSP/VSCode's snippet format
+    use {
+        'hrsh7th/cmp-vsnip',
+        requires = { 'hrsh7th/nvim-cmp', 'hrsh7th/vim-vsnip' }
+    }
+
+    -- [[ null-ls ]]
+    -- Use Neovim as a LS to inject LSP diagnostics, code actions, and more via Lua
+    use { 'jose-elias-alvarez/null-ls.nvim' }
     -- --- --
     -- LSP --
     -- --- --

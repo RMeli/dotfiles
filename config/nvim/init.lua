@@ -158,11 +158,42 @@ require("mason-lspconfig").setup {
     }
 }
 
+-- [[
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.completion.vsnip,
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.clang_check,
+        null_ls.builtins.formatting.clang_format,
+        null_ls.builtins.diagnostics.cmake_lint,
+        null_ls.builtins.formatting.cmake_format,
+        null_ls.builtins.formatting.fprettify,
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.completion.spell,
+    }
+})
+
 -- [[ cmp-nvim ]]
-require'cmp'.setup {
+local cmp = require'cmp'
+cmp.setup {
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
   sources = {
-    { name = 'nvim_lsp' }
-  }
+    { name = 'nvim_lsp' },
+    { name = 'buffer' }
+  },
+  mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    })
 }
 
 -- Allows to add nvim-cmp support to LSPs
