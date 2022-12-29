@@ -158,15 +158,28 @@ require("mason-lspconfig").setup {
     }
 }
 
--- [[ nvim-slpconfig ]]
-require'lspconfig'.bashls.setup{}
-require'lspconfig'.clangd.setup{}
-require'lspconfig'.cmake.setup{}
-require'lspconfig'.dockerls.setup{}
-require'lspconfig'.fortls.setup{}
-require'lspconfig'.julials.setup{}
-require'lspconfig'.ltex.setup{}
-require'lspconfig'.sumneko_lua.setup{}
-require'lspconfig'.pyright.setup{}
-require'lspconfig'.taplo.setup{}
-require'lspconfig'.yamlls.setup{}
+-- [[ cmp-nvim ]]
+require'cmp'.setup {
+  sources = {
+    { name = 'nvim_lsp' }
+  }
+}
+
+-- Allows to add nvim-cmp support to LSPs
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- [[ nvim-lspconfig ]]
+require'lspconfig'.bashls.setup{capabilities = capabilities}
+require'lspconfig'.clangd.setup{capabilities = capabilities}
+require'lspconfig'.cmake.setup{capabilities = capabilities}
+require'lspconfig'.dockerls.setup{capabilities = capabilities}
+require'lspconfig'.fortls.setup{capabilities = capabilities}
+require'lspconfig'.julials.setup{capabilities = capabilities}
+require'lspconfig'.ltex.setup{capabilities = capabilities}
+require'lspconfig'.sumneko_lua.setup{capabilities = capabilities}
+require'lspconfig'.ltex.setup{capabilities = capabilities}
+require'lspconfig'.sumneko_lua.setup{capabilities = capabilities}
+require'lspconfig'.pyright.setup{capabilities = capabilities}
+require'lspconfig'.taplo.setup{capabilities = capabilities}
+require'lspconfig'.yamlls.setup{capabilities = capabilities}
+

@@ -86,6 +86,31 @@ return require('packer').startup(function(use)
         'rcarriga/nvim-notify'
     }
 
+    -- [[ nvim-cmp ]]
+    -- A completion plugin for neovim coded in Lua
+    use {'hrsh7th/nvim-cmp'}
+
+    -- [[ cmp-nvim-lsp ]]
+    -- nvim-cmp source for neovim builtin LSP client
+    use {
+        'hrsh7th/cmp-nvim-lsp',
+        requires = {'hrsh7th/nvim-cmp'}
+    }
+
+    use {
+        'hrsh7th/cmp-buffer',
+        requires = {'hrsh7th/nvim-cmp'}
+    }
+
+    use {
+        'hrsh7th/cmp-path',
+        requires = {'hrsh7th/nvim-cmp'}
+    }
+
+    use {
+        'hrsh7th/cmp-cmdline',
+        requires = {'hrsh7th/nvim-cmp'}
+    }
     -- --- --
     -- LSP --
     -- --- --
