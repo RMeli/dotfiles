@@ -7,6 +7,8 @@
 ```bash
 brew install node # npm
 brew inastall rust # cargo
+
+brew install ripgrep # Telescope's live grep
 ```
 
 ## Sources

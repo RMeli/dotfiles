@@ -30,41 +30,17 @@ require("plugins")
 -- Load plugin configurations
 
 require("lua.plugins.github-nvim-theme")
+require("lua.plugins.notify")
 require("lua.plugins.nvim-tree")
 require("lua.plugins.nvim-treesitter")
 require("lua.plugins.lualine")
 require("lua.plugins.cmp-nvim")
 require("lua.plugins.alpha-nvim")
+require("lua.plugins.indent-blankline")
+require("lua.plugins.telescope")
 
--- LSP Plugins
-
--- Patches
-
--- [[ nvim-notify ]]
-vim.notify = require("notify")
-
--- [[ telescope.nvim ]]
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-local actions = require("telescope.actions")
-require("telescope").setup({
-  defaults = {
-    mappings = {
-      n = {
-        ["q"] = actions.close,
-      },
-    },
-  },
-})
-
--- [[ indent-blankline.nvim ]]
-require("indent_blankline").setup({
-  show_end_of_line = true,
-  space_char_blankline = " ",
-})
+-- LSP
+require("lua.plugins.lsp.mason")
 
 -- [[ toggleterm.nvim ]]
 require("toggleterm").setup()
@@ -75,33 +51,6 @@ require("bufferline").setup({})
 -- [[ Comment.nvim ]]
 require("Comment").setup()
 
--- [[ mason.nvim ]]
-require("mason").setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗",
-    },
-  },
-})
-
--- [[ mason-lspconfig.nvim ]]
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    "bashls", -- Bash
-    "clangd", -- C and C++
-    "cmake", -- CMake
-    "dockerls", -- Docker
-    "fortls", -- Fortran
-    "julials", -- Julia
-    "ltex", -- LaTeX
-    "sumneko_lua", -- Lua
-    "pyright", -- Python
-    "taplo", -- TOML
-    "yamlls", -- YAML
-  },
-})
 
 -- [[
 local null_ls = require("null-ls")
@@ -112,7 +61,7 @@ null_ls.setup({
     -- Lua
     null_ls.builtins.formatting.stylua,
     -- C/C++/CUDA
-    null_ls.builtins.diagnostics.clang_check,
+    -- null_ls.builtins.diagnostics.clang_check,
     null_ls.builtins.formatting.clang_format,
     -- CMake
     null_ls.builtins.diagnostics.cmake_lint,
@@ -125,9 +74,11 @@ null_ls.setup({
   },
 })
 
-
 -- Allows to add nvim-cmp support to LSPs
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
+capabilities.offsetEncoding = { "utf-16" } -- Use same offset encoding as null-ls
 
 -- [[ nvim-lspconfig ]]
 require("lspconfig").bashls.setup({ capabilities = capabilities })
@@ -146,7 +97,10 @@ require("lspconfig").sumneko_lua.setup({
             },
             completion = {
                 showWord = "Disable",
-            }
+            },
+            diagnostics = {
+		globals = { "vim" },
+	    },
         }
     }
 })
