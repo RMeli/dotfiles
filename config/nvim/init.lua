@@ -12,10 +12,10 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Reloads NeoVim whenever init.lua is saved
 vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost init.lua source <afile> | PackerSync
-  augroup end
+    augroup packer_user_config
+        autocmd!
+        autocmd BufWritePost init.lua source <afile> | PackerSync
+    augroup end
 ]])
 
 -- require files in ./lua/ folder
@@ -51,27 +51,26 @@ require("bufferline").setup({})
 -- [[ Comment.nvim ]]
 require("Comment").setup()
 
-
 -- [[
 local null_ls = require("null-ls")
 
 null_ls.setup({
-  sources = {
-    null_ls.builtins.completion.vsnip,
-    -- Lua
-    null_ls.builtins.formatting.stylua,
-    -- C/C++/CUDA
-    -- null_ls.builtins.diagnostics.clang_check,
-    null_ls.builtins.formatting.clang_format,
-    -- CMake
-    null_ls.builtins.diagnostics.cmake_lint,
-    null_ls.builtins.formatting.cmake_format,
-    -- Fortran
-    null_ls.builtins.formatting.fprettify,
-    --
-    null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.completion.spell,
-  },
+    sources = {
+        null_ls.builtins.completion.vsnip,
+        -- Lua
+        null_ls.builtins.formatting.stylua,
+        -- C/C++/CUDA
+        -- null_ls.builtins.diagnostics.clang_check,
+        null_ls.builtins.formatting.clang_format,
+        -- CMake
+        null_ls.builtins.diagnostics.cmake_lint,
+        null_ls.builtins.formatting.cmake_format,
+        -- Fortran
+        null_ls.builtins.formatting.fprettify,
+        --
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.completion.spell,
+    },
 })
 
 -- Allows to add nvim-cmp support to LSPs
@@ -88,21 +87,21 @@ require("lspconfig").dockerls.setup({ capabilities = capabilities })
 require("lspconfig").fortls.setup({ capabilities = capabilities })
 require("lspconfig").julials.setup({ capabilities = capabilities })
 require("lspconfig").ltex.setup({ capabilities = capabilities })
-require("lspconfig").sumneko_lua.setup({ 
+require("lspconfig").sumneko_lua.setup({
     capabilities = capabilities,
     settings = {
         Lua = {
             runtime = {
-                version = "Lua 5.1"
+                version = "Lua 5.1",
             },
             completion = {
                 showWord = "Disable",
             },
             diagnostics = {
-		globals = { "vim" },
-	    },
-        }
-    }
+                globals = { "vim" },
+            },
+        },
+    },
 })
 require("lspconfig").ltex.setup({ capabilities = capabilities })
 require("lspconfig").sumneko_lua.setup({ capabilities = capabilities })
