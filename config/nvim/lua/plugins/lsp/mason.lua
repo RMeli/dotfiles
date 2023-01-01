@@ -21,9 +21,9 @@ require("mason-lspconfig").setup({
         "bashls", -- Bash
         "clangd", -- C and C++
         "cmake", -- CMake
-        "dockerls", -- Docker
+--        "dockerls", -- Docker
         "fortls", -- Fortran
-        "julials", -- Julia
+--        "julials", -- Julia
         "ltex", -- LaTeX
         "sumneko_lua", -- Lua
         "pyright", -- Python
