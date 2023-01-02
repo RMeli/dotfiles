@@ -29,20 +29,20 @@ require("plugins")
 
 -- Load plugin configurations
 
-require("lua.plugins.github-nvim-theme")
-require("lua.plugins.notify")
-require("lua.plugins.nvim-tree")
-require("lua.plugins.nvim-treesitter")
-require("lua.plugins.lualine")
-require("lua.plugins.cmp-nvim")
-require("lua.plugins.alpha-nvim")
-require("lua.plugins.indent-blankline")
-require("lua.plugins.telescope")
-require("lua.plugins.toggleterm")
+require("plugins.github-nvim-theme")
+require("plugins.notify")
+require("plugins.nvim-tree")
+require("plugins.nvim-treesitter")
+require("plugins.lualine")
+require("plugins.cmp-nvim")
+require("plugins.alpha-nvim")
+require("plugins.indent-blankline")
+require("plugins.telescope")
+require("plugins.toggleterm")
 
 -- LSP
-require("lua.plugins.lsp.mason")
-require("lua.plugins.lsp.null-ls")
+require("plugins.lsp.mason")
+require("plugins.lsp.null-ls")
 
 -- [[ bufferline.nvim ]]
 require("bufferline").setup({})
