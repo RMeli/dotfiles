@@ -39,18 +39,13 @@ require("plugins.alpha-nvim")
 require("plugins.indent-blankline")
 require("plugins.telescope")
 require("plugins.toggleterm")
+require("plugins.bufferline")
+require("plugins.comment")
 
 -- LSP
 require("plugins.lsp.mason")
 require("plugins.lsp.null-ls")
 
--- [[ bufferline.nvim ]]
-require("bufferline").setup({})
-
--- [[ Comment.nvim ]]
-require("Comment").setup()
-
--- [[
 -- Allows to add nvim-cmp support to LSPs
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -82,7 +77,6 @@ require("lspconfig").sumneko_lua.setup({
     },
 })
 require("lspconfig").ltex.setup({ capabilities = capabilities })
-require("lspconfig").sumneko_lua.setup({ capabilities = capabilities })
 require("lspconfig").pyright.setup({ capabilities = capabilities })
 require("lspconfig").taplo.setup({ capabilities = capabilities })
 require("lspconfig").yamlls.setup({ capabilities = capabilities })
