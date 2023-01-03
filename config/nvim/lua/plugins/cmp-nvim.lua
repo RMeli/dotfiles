@@ -17,6 +17,8 @@ cmp.setup({
                 luasnip = "[Snippet]",
                 buffer = "[Buffer]",
                 path = "[Path]",
+                nvim_lua = "[Lua]",
+                latex_symbols = "[Latex]",
             })[entry.source.name]
             return vim_item
         end,
@@ -34,4 +36,23 @@ cmp.setup({
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
     }),
+
+    -- Use buffer source for '/' and '?'
+    cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = 'buffer' }
+        }
+    }),
+
+    -- Use cmdline and path source for ':'
+    cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            { name = 'path' }
+        }, {
+            { name = 'cmdline' }
+        })
+    })
+
 })
