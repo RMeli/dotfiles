@@ -20,7 +20,7 @@ starship:
 	@echo "Soft link starship.toml"
 	mkdir -p ${HOME}/.config
 	ln -sf ${PWD}/starship.toml ${HOME}/.config/starship.toml
-	sh installers/starship.sh 
+	#sh installers/starship.sh 
 
 vim:
 	@echo "Soft link .vimrc"
