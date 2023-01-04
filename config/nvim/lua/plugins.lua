@@ -152,7 +152,11 @@ return require("packer").startup(function(use)
             require("which-key").setup({})
         end,
     })
-
+    -- [[ project.nvim ]]
+    -- The superior project management solution for neovim
+    use {
+        "ahmedkhalf/project.nvim",
+    }
     -- --- --
     -- LSP --
     -- --- --
