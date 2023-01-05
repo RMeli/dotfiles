@@ -149,7 +149,7 @@ return require("packer").startup(function(use)
     use({
         "folke/which-key.nvim",
         config = function()
-            require("which-key").setup({})
+            require("which-key").setup()
         end,
     })
     -- [[ project.nvim ]]

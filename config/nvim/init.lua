@@ -41,6 +41,7 @@ require("plugins.telescope")
 require("plugins.toggleterm")
 require("plugins.bufferline")
 require("plugins.comment")
+require("plugins.gitsigns")
 
 -- LSP
 require("plugins.lsp.mason")
