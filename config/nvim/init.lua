@@ -21,6 +21,7 @@ vim.cmd([[
 -- require files in ./lua/ folder
 require("vars")
 require("setup")
+require("keymaps")
 require("plugins")
 
 -- ------------- --
