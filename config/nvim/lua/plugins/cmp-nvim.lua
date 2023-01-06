@@ -78,8 +78,17 @@ cmp.setup({
       c = cmp.mapping.close(), -- Command mode
     }),
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end, {
+      "i",
+      "s",
+    }),
   }),
-
   -- Use buffer source for '/' and '?'
   cmp.setup.cmdline({ "/", "?" }, {
     mapping = cmp.mapping.preset.cmdline(),
