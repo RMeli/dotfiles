@@ -31,6 +31,7 @@ require("plugins")
 -- Load plugin configurations
 
 require("plugins.colorschemes")
+require("plugins.which-key")
 require("plugins.notify")
 require("plugins.nvim-tree")
 require("plugins.nvim-treesitter")
