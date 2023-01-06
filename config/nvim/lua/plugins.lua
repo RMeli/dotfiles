@@ -10,7 +10,26 @@ vim.cmd([[
   augroup end
 ]])
 
-return require("packer").startup(function(use)
+-- Use protected call to abort
+local ok, packer = pcall(require, "packer")
+if not ok then
+    vim.notify("require('packer') failed!", "error")
+    return
+end
+
+packer.init({
+    max_jobs = 4,
+    --  Use packer within pop-up window (as opposed to split view)
+    display = {
+        open_fn = function()
+            return require("packer.util").float({ border = "rounded" })
+        end,
+    },
+})
+
+return packer.startup(function(use)
+    use "wbthomason/packer.nvim" -- Packer manages itself
+
     -- [[ nvim-tree ]]
     -- A file explorer tree for neovim written in lua
     use({
@@ -39,8 +58,11 @@ return require("packer").startup(function(use)
         end,
     })
 
-    -- [[ lualine.nvim ]]
-    -- A blazing fast and easy to configure neovim statusline written in pure lua
+    -- [[ darkplus.nvim ]]
+    -- Darkplus inspired colorscheme written in lua.
+    -- https://github.com/LunarVim/darkplus.nvim
+    use ("lunarvim/darkplus.nvim")
+
     use({
         "nvim-lualine/lualine.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true },
@@ -93,6 +115,7 @@ return require("packer").startup(function(use)
     -- Git integration for buffers
     use({
         "lewis6991/gitsigns.nvim",
+        requires = { { "nvim-lua/plenary.nvim" } },
     })
 
     use({
@@ -154,9 +177,9 @@ return require("packer").startup(function(use)
     })
     -- [[ project.nvim ]]
     -- The superior project management solution for neovim
-    use {
+    use({
         "ahmedkhalf/project.nvim",
-    }
+    })
     -- --- --
     -- LSP --
     -- --- --

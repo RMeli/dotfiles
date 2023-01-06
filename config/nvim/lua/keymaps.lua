@@ -10,7 +10,6 @@ local keymap = vim.api.nvim_set_keymap
 -- --------------------------- --
 -- Keymaps for normal mode (n) --
 -- --------------------------- --
-
 -- Window navigation
 -- Remove need for w (window) key
 keymap("n", "<C-h>", "<C-w>h", opts)
