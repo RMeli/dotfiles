@@ -47,38 +47,4 @@ require("plugins.gitsigns")
 -- LSP
 require("plugins.lsp.mason")
 require("plugins.lsp.null-ls")
-
--- Allows to add nvim-cmp support to LSPs
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
-capabilities.offsetEncoding = { "utf-16" }
-
--- [[ nvim-lspconfig ]]
-require("lspconfig").bashls.setup({ capabilities = capabilities })
-require("lspconfig").clangd.setup({ capabilities = capabilities })
-require("lspconfig").cmake.setup({ capabilities = capabilities })
-require("lspconfig").dockerls.setup({ capabilities = capabilities })
-require("lspconfig").fortls.setup({ capabilities = capabilities })
-require("lspconfig").julials.setup({ capabilities = capabilities })
-require("lspconfig").ltex.setup({ capabilities = capabilities })
-require("lspconfig").sumneko_lua.setup({
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        version = "Lua 5.1",
-      },
-      completion = {
-        showWord = "Disable",
-      },
-      diagnostics = {
-        globals = { "vim" },
-      },
-    },
-  },
-})
-require("lspconfig").ltex.setup({ capabilities = capabilities })
-require("lspconfig").pyright.setup({ capabilities = capabilities })
-require("lspconfig").taplo.setup({ capabilities = capabilities })
-require("lspconfig").yamlls.setup({ capabilities = capabilities })
+require("plugins.lsp.lspconfig")
