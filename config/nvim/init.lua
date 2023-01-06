@@ -30,7 +30,7 @@ require("plugins")
 
 -- Load plugin configurations
 
-require("plugins.github-nvim-theme")
+require("plugins.colorschemes")
 require("plugins.notify")
 require("plugins.nvim-tree")
 require("plugins.nvim-treesitter")
@@ -63,20 +63,20 @@ require("lspconfig").fortls.setup({ capabilities = capabilities })
 require("lspconfig").julials.setup({ capabilities = capabilities })
 require("lspconfig").ltex.setup({ capabilities = capabilities })
 require("lspconfig").sumneko_lua.setup({
-    capabilities = capabilities,
-    settings = {
-        Lua = {
-            runtime = {
-                version = "Lua 5.1",
-            },
-            completion = {
-                showWord = "Disable",
-            },
-            diagnostics = {
-                globals = { "vim" },
-            },
-        },
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      runtime = {
+        version = "Lua 5.1",
+      },
+      completion = {
+        showWord = "Disable",
+      },
+      diagnostics = {
+        globals = { "vim" },
+      },
     },
+  },
 })
 require("lspconfig").ltex.setup({ capabilities = capabilities })
 require("lspconfig").pyright.setup({ capabilities = capabilities })

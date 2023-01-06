@@ -28,7 +28,7 @@ packer.init({
 })
 
 return packer.startup(function(use)
-    use "wbthomason/packer.nvim" -- Packer manages itself
+    use("wbthomason/packer.nvim") -- Packer manages itself
 
     -- [[ nvim-tree ]]
     -- A file explorer tree for neovim written in lua
@@ -51,17 +51,17 @@ return packer.startup(function(use)
     -- [[ github-nvim-theme ]]
     -- Github's Neovim themes
     --use({ "projekt0n/github-nvim-theme" })
-    use({
-        "projekt0n/github-nvim-theme",
-        config = function()
-            require("github-theme").setup({})
-        end,
-    })
+    use("projekt0n/github-nvim-theme")
 
-    -- [[ darkplus.nvim ]]
-    -- Darkplus inspired colorscheme written in lua.
-    -- https://github.com/LunarVim/darkplus.nvim
-    use ("lunarvim/darkplus.nvim")
+    -- [[ colorschemes ]]
+    -- Collection of colorschemes made to be compatible with LunarVim
+    -- https://github.com/LunarVim/Colorschemes
+    use("lunarvim/colorschemes")
+
+    -- [[ tokyonight.nvim ]]
+    -- A clean, dark Neovim theme written in Lua, with support for lsp, treesitter and lots of plugins
+    -- https://github.com/folke/tokyonight.nvim
+    use("folke/tokyonight.nvim")
 
     use({
         "nvim-lualine/lualine.nvim",
