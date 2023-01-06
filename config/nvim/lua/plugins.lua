@@ -148,6 +148,11 @@ return packer.startup(function(use)
     requires = { "hrsh7th/nvim-cmp" },
   })
 
+  use({
+    "hrsh7th/cmp-nvim-lua",
+    requires = { "hrsh7th/nvim-cmp" },
+  })
+
   -- [[ vim-vsnip ]]
   -- Snippet plugin for vim/nvim that supports LSP/VSCode's snippet format
   use({

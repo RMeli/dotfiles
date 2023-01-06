@@ -43,7 +43,7 @@ cmp.setup({
   formatting = {
     -- Set fields in popup window
     -- Order is important
-    fields = {"kind", "abbr", "menu" },
+    fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
       -- Define symbols
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
@@ -62,6 +62,7 @@ cmp.setup({
   sources = {
     -- Order is important, this is how they will show up
     { name = "nvim_lsp" },
+    { name = "nvim_lua" },
     { name = "buffer" },
     { name = "path" },
   },
