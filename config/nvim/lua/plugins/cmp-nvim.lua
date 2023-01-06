@@ -33,7 +33,7 @@ local kind_icons = {
   Operator = "",
   TypeParameter = "",
 }
- 
+
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -61,9 +61,9 @@ cmp.setup({
   },
   sources = {
     -- Order is important, this is how they will show up
-   { name = "nvim_lsp" },
-   { name = "buffer" },
-   { name = "path" },
+    { name = "nvim_lsp" },
+    { name = "buffer" },
+    { name = "path" },
   },
   mapping = cmp.mapping.preset.insert({
     -- ["<C-k>"] = cmp.mapping.select_prev_item(),
