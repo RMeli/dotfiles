@@ -2,8 +2,8 @@
 -- Create key bindings that stick
 -- https://github.com/folke/which-key.nvim
 
- require("which-key").setup({
-    icons = {
+require("which-key").setup({
+  icons = {
     breadcrumb = "",
     separator = "ﭠ",
     group = "",

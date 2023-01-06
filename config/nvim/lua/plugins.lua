@@ -175,7 +175,7 @@ return packer.startup(function(use)
 
   -- [[ which-key.nvim ]]
   use({
-    "folke/which-key.nvim"
+    "folke/which-key.nvim",
   })
   -- [[ project.nvim ]]
   -- The superior project management solution for neovim
