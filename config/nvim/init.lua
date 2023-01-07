@@ -44,6 +44,7 @@ require("plugins.toggleterm")
 require("plugins.bufferline")
 require("plugins.comment")
 require("plugins.gitsigns")
+require("plugins.autopairs")
 
 -- LSP
 require("plugins.lsp.mason")

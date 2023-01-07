@@ -122,6 +122,11 @@ return packer.startup(function(use)
     "rcarriga/nvim-notify",
   })
 
+  -- [[ nvim-autopairs ]]
+  -- autopairs for neovim written by lua
+  -- https://github.com/windwp/nvim-autopairs
+  use("windwp/nvim-autopairs")
+
   -- [[ nvim-cmp ]]
   -- A completion plugin for neovim coded in Lua
   use({ "hrsh7th/nvim-cmp" })
@@ -163,15 +168,6 @@ return packer.startup(function(use)
   -- [[ null-ls ]]
   -- Use Neovim as a LS to inject LSP diagnostics, code actions, and more via Lua
   use({ "jose-elias-alvarez/null-ls.nvim" })
-
-  -- [[ nvim-autopairs ]]
-  -- autopairs for neovim written by lua
-  use({
-    "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup({})
-    end,
-  })
 
   -- [[ which-key.nvim ]]
   use({
