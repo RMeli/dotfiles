@@ -37,12 +37,14 @@ require("gitsigns").setup({
       linehl = "GitSignsChangeLn",
     },
     untracked = {
-      hl = "GitSignsAdd",
+      hl = "", -- No highlight, symbol is blank
       text = "",
       numhl = "GitSignsAddNr",
       linehl = "GitSignsAddLn",
     },
   },
+  numhl = true, -- Highlight numbers
+  linehl = false, -- highlight lines
   current_line_blame = true,
   current_line_blame_opts = {
     delay = 500,
