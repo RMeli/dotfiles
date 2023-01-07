@@ -33,6 +33,12 @@ require("nvim-tree").setup({
   diagnostics = {
     enable = true,
     show_on_dirs = true,
+    icons = {
+      hint = "ﱴ",
+      info = "",
+      warning = "",
+      error = "",
+    },
   },
 })
 
