@@ -47,6 +47,7 @@ require("plugins.comment")
 require("plugins.gitsigns")
 require("plugins.autopairs")
 require("plugins.project")
+require("plugins.trouble")
 
 -- LSP
 require("plugins.lsp.mason")
