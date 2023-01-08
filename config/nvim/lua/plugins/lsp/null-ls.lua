@@ -15,7 +15,9 @@ require("null-ls").setup({
   border = "rounded",
   sources = {
     -- Lua
-    formatting.stylua.with({ extra_args = { "--indent-width", "2", "--indent-type", "Spaces" } }),
+    formatting.stylua.with({
+      extra_args = { "--indent-width", "2", "--indent-type", "Spaces" },
+    }),
     -- C/C++/CUDA
     -- null_ls.builtins.diagnostics.clang_check,
     formatting.clang_format,
@@ -37,5 +39,8 @@ local wk = require("which-key")
 
 wk.register({
   ["<leader>l"] = { name = "+LSP" },
-  ["<leader>lf"] = { "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", "Format File" },
+  ["<leader>lf"] = {
+    "<cmd>lua vim.lsp.buf.format{ async = true }<cr>",
+    "Format File",
+  },
 })

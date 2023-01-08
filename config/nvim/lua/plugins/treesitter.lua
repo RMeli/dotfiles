@@ -48,7 +48,10 @@ tsconfig.setup({
       lookahead = true, -- Automatically jump forward to textobj
       keymaps = {
         ["af"] = { query = "@function.outer", desc = "Select Function (All)" },
-        ["if"] = { query = "@function.inner", desc = "Select Function (Inside)" },
+        ["if"] = {
+          query = "@function.inner",
+          desc = "Select Function (Inside)",
+        },
         ["ac"] = { query = "@class.outer", desc = "Select Class (All)" },
         ["ic"] = { query = "@class.inner", desc = "Select Class (Inside)" },
       },
