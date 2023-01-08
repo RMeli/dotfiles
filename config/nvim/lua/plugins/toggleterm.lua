@@ -4,7 +4,7 @@
 
 local ok, tt = pcall(require, "toggleterm")
 if not ok then
-    return
+  return
 end
 
 tt.setup({
@@ -15,7 +15,7 @@ tt.setup({
   end,
   direction = "float",
   float_opts = {
-    border = 'curved',
+    border = "curved",
   },
 })
 
@@ -25,17 +25,17 @@ tt.setup({
 local term = require("toggleterm.terminal").Terminal
 
 -- TODO: Check if executables exist!
-local lazygit = term:new({cmd = "lazygit", hidden=true})
-local htop = term:new({cmd = "htop", hidden=true})
+local lazygit = term:new({ cmd = "lazygit", hidden = true })
+local htop = term:new({ cmd = "htop", hidden = true })
 
 -- Define global functions
 -- Can be called with "<cmd>lua FUNCTION<cr>"
 function _LAZYGIT_TOGGLE()
-    lazygit:toggle()
+  lazygit:toggle()
 end
 
 function _HTOP_TOGGLE()
-    htop:toggle()
+  htop:toggle()
 end
 
 -- [[ keymaps ]]
