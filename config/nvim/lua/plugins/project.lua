@@ -13,7 +13,7 @@ project.setup({})
 
 local telescope_ok, telescope = pcall(require, "telescope")
 if telescope_ok then
-  require("telescope").load_extension("projects")
+  telescope.load_extension("projects")
 
   local wk = require("which-key")
   wk.register({

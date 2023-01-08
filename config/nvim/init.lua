@@ -32,7 +32,7 @@ require("plugins")
 -- Load plugin configurations
 
 require("plugins.colorschemes")
-require("plugins.which-key")
+require("plugins.whichkey")
 require("plugins.notify")
 require("plugins.tree")
 require("plugins.treesitter")
