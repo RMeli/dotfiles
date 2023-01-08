@@ -43,8 +43,9 @@ require("nvim-tree").setup({
 })
 
 -- [[ keymaps ]]
+local wk = require("which-key")
 
-local opts = { noremap = true, silent = true }
-local keymap = vim.api.nvim_set_keymap
-
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+wk.register({
+  ["<leader>t"] = { name = "+tree" },
+  ["<leader>te"] = { "<cmd>NvimTreeToggle<cr>", "Toggle File Explorer" },
+})

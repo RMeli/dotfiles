@@ -30,6 +30,11 @@ require("null-ls").setup({
   },
 })
 
-local opts = { noremap = true, silent = true }
-local keymap = vim.api.nvim_set_keymap
-keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
+-- [[ keymaps ]]
+
+local wk = require("which-key")
+
+wk.register({
+  ["<leader>l"] = { name = "+LSP" },
+  ["<leader>lf"] = { "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", "Format File" },
+})
