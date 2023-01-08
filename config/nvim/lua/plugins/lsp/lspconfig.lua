@@ -2,6 +2,12 @@
 -- Quickstart configs for Nvim LSP
 -- https://github.com/neovim/nvim-lspconfig
 
+local b = "rounded" -- define border
+
+require("lspconfig.ui.windows").default_options = {
+  border = b,
+}
+
 -- [[ capabilities ]]
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -41,7 +47,7 @@ local config = {
   float = {
     focusable = false,
     style = "minimal",
-    border = "rounded",
+    border = b,
     source = "always",
     header = "",
     prefix = "",
