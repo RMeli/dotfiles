@@ -45,6 +45,7 @@ require("plugins.bufferline")
 require("plugins.comment")
 require("plugins.gitsigns")
 require("plugins.autopairs")
+require("plugins.project")
 
 -- LSP
 require("plugins.lsp.mason")
