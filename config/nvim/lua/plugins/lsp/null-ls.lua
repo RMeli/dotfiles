@@ -15,7 +15,7 @@ require("null-ls").setup({
   border = "rounded",
   sources = {
     -- Lua
-    formatting.stylua.with({ extra_args = { "--indent_width", "2", "--indent_type", "Spaces" } }),
+    formatting.stylua.with({ extra_args = { "--indent-width", "2", "--indent-type", "Spaces" } }),
     -- C/C++/CUDA
     -- null_ls.builtins.diagnostics.clang_check,
     formatting.clang_format,

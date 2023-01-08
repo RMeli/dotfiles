@@ -42,6 +42,7 @@ return packer.startup(function(use)
   -- Nvim Treesitter configurations and abstraction layer
   use({
     "nvim-treesitter/nvim-treesitter",
+    require = "nvim-treesitter/nvim-treesitter-textobjects",
     run = function()
       local tsupdate = require("nvim-treesitter.install").update({ with_sync = true })
       tsupdate()

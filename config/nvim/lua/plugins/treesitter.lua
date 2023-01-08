@@ -4,6 +4,7 @@
 
 local ok, tsconfig = pcall(require, "nvim-tresitter.configs")
 if not ok then
+  vim.notify("nvim-tresitter not available")
   return
 end
 
@@ -33,4 +34,51 @@ tsconfig.setup({
     enable = true,
   },
   indent = { enable = true, disable = { "" } },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true, -- Automatically jump forward to textobj
+      keymaps = {
+        ["af"] = { query = "@function.outer", desc = "Select Function (All)" },
+        ["if"] = { query = "@function.inner", desc = "Select Function (Inside)" },
+        ["ac"] = { query = "@class.outer", desc = "Select Class (All)" },
+        ["ic"] = { query = "@class.inner", desc = "Select Class (Inside)" },
+      },
+      selection_modes = {
+        ["@parameter.outer"] = "v", -- charwise
+        ["@function.outer"] = "V", -- linewise
+        ["@class.outer"] = "<c-v>", -- blockwise
+      },
+      include_surrounding_whitespace = false,
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]m"] = { query = "@function.outer", desc = "Next Function Start" },
+        ["]]"] = { query = "@class.outer", desc = "Next Class Start" },
+      },
+      goto_next_end = {
+        ["]M"] = "@function.outer",
+        ["]["] = "@class.outer",
+      },
+      goto_previous_start = {
+        ["[m"] = "@function.outer",
+        ["[["] = "@class.outer",
+      },
+      goto_previous_end = {
+        ["[M"] = "@function.outer",
+        ["[]"] = "@class.outer",
+      },
+    },
+  },
 })

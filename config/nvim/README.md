@@ -17,6 +17,7 @@ brew install ripgrep # Telescope's live grep
 
 - [neovim-basic-ide](https://github.com/LunarVim/nvim-basic-ide)
 - [neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
+- [vvnraman/dotfiles](https://github.com/vvnraman/dotfiles)
 
 ### Blogs
 
@@ -26,6 +27,7 @@ brew install ripgrep # Telescope's live grep
 ## YouTube
 
 - [Neovim from Scratch](https://youtube.com/playlist?list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ)
+- [C++ Coding with Neovim](https://www.youtube.com/watch?v=nzRnWUjGJl8)
 
 ### Projects
 
