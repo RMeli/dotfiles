@@ -24,6 +24,7 @@ tt.setup({
 
 local term = require("toggleterm.terminal").Terminal
 
+-- TODO: Check if executables exist!
 local lazygit = term:new({cmd = "lazygit", hidden=true})
 local htop = term:new({cmd = "htop", hidden=true})
 

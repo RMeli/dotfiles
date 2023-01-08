@@ -117,10 +117,12 @@ cmp.setup({
     select = false,
   },
   window = {
-    documentation = true,
-    -- documentation = {
-    --    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    --},
+    completion = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
+    documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
   },
   experimental = {
     ghost_text = true,
