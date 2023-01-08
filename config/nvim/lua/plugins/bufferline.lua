@@ -2,7 +2,7 @@
 -- A snazzy bufferline for Neovim
 -- https://github.com/akinsho/bufferline.nvim
 
-local ok, bufferline = pcall(require, "bufferline")
+local ok, bufferline = REQUIRE_PLUGIN("bufferline")
 if not ok then
   return
 end

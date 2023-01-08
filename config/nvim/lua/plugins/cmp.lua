@@ -2,7 +2,10 @@
 -- A completion plugin for neovim coded in Lua.
 -- https://github.com/hrsh7th/nvim-cmp
 
-local cmp = require("cmp")
+local ok, cmp = REQUIRE_PLUGIN("cmp")
+if not ok then
+  return
+end
 
 -- Require NerdFonts
 -- https://www.nerdfonts.com/cheat-sheet

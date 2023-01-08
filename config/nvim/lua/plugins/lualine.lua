@@ -2,7 +2,7 @@
 -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
 -- https://github.com/nvim-lualine/lualine.nvim
 
-local ok, lualine = pcall(require, "lualine")
+local ok, lualine = REQUIRE_PLUGIN("lualine")
 if not ok then
   return
 end

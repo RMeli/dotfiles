@@ -25,6 +25,7 @@ require("null-ls").setup({
     formatting.fprettify,
     -- Python
     formatting.black,
+    formatting.isort,
     diagnostics.flake8,
     diagnostics.mypy,
   },

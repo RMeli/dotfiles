@@ -2,7 +2,7 @@
 -- A neovim lua plugin to help easily manage multiple terminal windows
 -- https://github.com/akinsho/toggleterm.nvim
 
-local ok, tt = pcall(require, "toggleterm")
+local ok, tt = REQUIRE_PLUGIN("toggleterm")
 if not ok then
   return
 end

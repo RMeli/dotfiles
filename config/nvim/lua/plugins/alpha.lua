@@ -2,7 +2,10 @@
 -- A lua powered greeter like vim-startify/dashboard-nvim
 -- https://github.com/goolord/alpha-nvim
 
-local dashboard = require("alpha.themes.dashboard")
+local ok, dashboard = REQUIRE_PLUGIN("alpha.themes.dashboard")
+if not ok then
+  return
+end
 
 dashboard.section.buttons.val = {
   dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),

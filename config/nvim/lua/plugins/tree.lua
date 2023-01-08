@@ -2,6 +2,11 @@
 -- A file explorer tree for neovim written in lua
 -- https://github.com/nvim-tree/nvim-tree.lua
 
+local ok, tree = REQUIRE_PLUGIN("nvim-tree")
+if not ok then
+  return
+end
+
 require("nvim-tree").setup({
   filters = { dotfiles = true },
   renderer = {

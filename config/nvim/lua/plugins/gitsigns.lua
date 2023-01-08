@@ -2,7 +2,12 @@
 -- Git integration for buffers
 -- https://github.com/lewis6991/gitsigns.nvim
 
-require("gitsigns").setup({
+local ok, gitsigns = REQUIRE_PLUGIN("gitsigns")
+if not ok then
+  return
+end
+
+gitsigns.setup({
   signs = {
     add = {
       hl = "GitSignsAdd",

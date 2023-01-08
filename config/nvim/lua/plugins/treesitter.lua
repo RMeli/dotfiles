@@ -2,9 +2,8 @@
 -- Nvim Treesitter configurations and abstraction layer
 -- https://github.com/nvim-treesitter/nvim-treesitter
 
-local ok, tsconfig = pcall(require, "nvim-tresitter.configs")
+local ok, tsconfig = REQUIRE_PLUGIN("nvim-treesitter.configs")
 if not ok then
-  vim.notify("nvim-tresitter not available")
   return
 end
 

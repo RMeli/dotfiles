@@ -2,7 +2,12 @@
 -- Find, Filter, Preview, Pick. All lua, all the time.
 -- https://github.com/nvim-telescope/telescope.nvim
 
-require("telescope").setup({
+local ok, telescope = REQUIRE_PLUGIN("telescope")
+if not ok then
+  return
+end
+
+telescope.setup({
   defaults = {
     prompt_prefix = " ",
     selection_caret = " ",
