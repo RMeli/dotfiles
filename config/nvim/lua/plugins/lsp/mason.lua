@@ -7,10 +7,11 @@
 
 require("mason").setup({
     ui = {
+        border = "rounded",
         icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
+            package_installed = "",
+            package_pending = "",
+            package_uninstalled = "",
         },
     },
 })
@@ -18,16 +19,16 @@ require("mason").setup({
 -- [[ mason-lspconfig.nvim ]]
 require("mason-lspconfig").setup({
     ensure_installed = {
---        "bashls", -- Bash
---        "clangd", -- C and C++
---        "cmake", -- CMake
---        "dockerls", -- Docker
---        "fortls", -- Fortran
---        "julials", -- Julia
---        "ltex", -- LaTeX
---        "sumneko_lua", -- Lua
---        "pyright", -- Python
---        "taplo", -- TOML
---        "yamlls", -- YAML
+        --        "bashls", -- Bash
+        --        "clangd", -- C and C++
+        --        "cmake", -- CMake
+        --        "dockerls", -- Docker
+        --        "fortls", -- Fortran
+        --        "julials", -- Julia
+        --        "ltex", -- LaTeX
+        --        "sumneko_lua", -- Lua
+        --        "pyright", -- Python
+        --        "taplo", -- TOML
+        --        "yamlls", -- YAML
     },
 })

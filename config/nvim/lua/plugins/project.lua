@@ -2,16 +2,22 @@
 -- The superior project management solution for neovim
 -- https://github.com/ahmedkhalf/project.nvim
 
-require("project_nvim").setup({})
+local ok, project = REQUIRE_PLUGIN("project_nvim")
+if not ok then
+  return
+end
 
-require("nvim-tree").setup({
-  sync_root_with_cwd = true,
-  respect_buf_cwd = true,
-  update_focused_file = {
-    enable = true,
-    update_root = true
-  },
-})
+project.setup({})
 
-require('telescope').load_extension('projects')
-require'telescope'.extensions.projects.projects{}
+-- [[ telescope ]]
+
+local telescope_ok, telescope = pcall(require, "telescope")
+if telescope_ok then
+  telescope.load_extension("projects")
+
+  local wk = require("which-key")
+  wk.register({
+    ["<leader>f"] = { name = "+file" },
+    ["<leader>fp"] = { "<cmd>Telescope projects<cr>", "Find Project" },
+  })
+end
