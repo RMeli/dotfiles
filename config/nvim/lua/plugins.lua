@@ -29,8 +29,8 @@ packer.init({
 
 return packer.startup(function(use)
   use("wbthomason/packer.nvim") -- Packer manages itself
- 
-use 'lewis6991/impatient.nvim'
+
+  use("lewis6991/impatient.nvim")
 
   -- [[ nvim-tree ]]
   -- A file explorer tree for neovim written in lua
