@@ -21,7 +21,7 @@ bufferline.setup({
     max_name_length = 25,
     diagnostics = "nvim_lsp",
     diagnostics_update_in_insert = false,
-    diagnostics_indicator = function(count, level, diagnostics_dict, context)
+    diagnostics_indicator = function(_, _, diagnostics_dict, _)
       local s = ""
       for e, n in pairs(diagnostics_dict) do
         local sym = e == "error" and "" or (e == "warning" and "" or "")

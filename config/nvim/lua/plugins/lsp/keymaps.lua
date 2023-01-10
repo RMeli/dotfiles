@@ -8,13 +8,14 @@ end
 
 -- TODO: Make this work without which-key
 local wk_ok, wk = REQUIRE_PLUGIN("which-key")
-if wk_ok then
+local tb_ok, tb = REQUIRE_PLUGIN("telescope.builtin")
+
+if wk_ok and tb_ok then
   wk.register({
-    ["gD"] = { "<cmd>lua vim.lsp.buf.declatation()<cr>", "Go to Declatation" },
+    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to Declatation" },
     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to Definition" },
     ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Go to Implementation" },
-    ["gl"] = { "<cmd>lua vim.lsp.buf.diagnostic()<cr>", "Diagnostic Float Window" },
-    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "Go to references" },
+    ["gr"] = { tb.lsp_references, "Go to references" },
     -- LSP group
     ["<leader>l"] = { name = "+LSP" },
     ["<leader>lf"] = {
@@ -44,6 +45,3 @@ if wk_ok then
     },
   })
 end
-
--- keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
--- keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
