@@ -32,15 +32,3 @@ require("null-ls").setup({
     diagnostics.mypy,
   },
 })
-
--- [[ keymaps ]]
-
-local wk = require("which-key")
-
-wk.register({
-  ["<leader>l"] = { name = "+LSP" },
-  ["<leader>lf"] = {
-    "<cmd>lua vim.lsp.buf.format{ async = true }<cr>",
-    "Format File",
-  },
-})

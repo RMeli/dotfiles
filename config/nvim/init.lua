@@ -23,6 +23,7 @@ require("utils")
 require("vars")
 require("setup")
 require("keymaps")
+require("plugins.lsp.keymaps")
 require("plugins")
 
 -- Require impatient login if availabl
