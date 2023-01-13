@@ -39,6 +39,9 @@ lualine.setup({
     disabled_filetypes = { "NvimTree" },
   },
   sections = {
+    -- https://github.com/nvim-lualine/lualine.nvim#available-components
     lualine_b = { branch, diff, diagnostics },
+    lualine_c = { "hostname", "filename" },
+    lualine_y = { "searchcount", "progress" },
   },
 })
