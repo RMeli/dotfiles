@@ -7,4 +7,15 @@ if not ok then
   return
 end
 
+notify.setup({
+  icons = {
+    DEBUG = "",
+    ERROR = "",
+    INFO = "",
+    TRACE = "",
+    WARN = "",
+  },
+  timeout = 2500,
+})
+
 vim.notify = notify

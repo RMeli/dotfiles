@@ -30,7 +30,7 @@ packer.init({
 return packer.startup(function(use)
   use("wbthomason/packer.nvim") -- Packer manages itself
 
-  use("lewis(6991/impatient.nvim")
+  use("lewis6991/impatient.nvim")
 
   -- [[ nvim-tree ]]
   -- A file explorer tree for neovim written in lua
@@ -176,6 +176,15 @@ return packer.startup(function(use)
   use({
     "folke/which-key.nvim",
   })
+
+  -- [[ todo-comments.nvim ]]
+  -- Highlight, list and search todo comments in your projects
+  -- https://github.com/folke/todo-comments.nvim
+  use({
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+  })
+
   -- [[ project.nvim ]]
   -- The superior project management solution for neovim
   use({
