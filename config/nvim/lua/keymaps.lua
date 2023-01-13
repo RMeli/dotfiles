@@ -25,6 +25,9 @@ keymap("n", "<S-h>", ":bprev<CR>", opts)
 keymap("n", "<A-j>", ":m .+1<CR>==", opts)
 keymap("n", "<A-k>", ":m .-2<CR>==", opts)
 
+-- Split window
+keymap("n", "<leader>s", "<cmd>vsplit<cr>", opts)
+keymap("n", "<leader>sh", "<cmd>split<cr>", opts)
 -- --------------------------- --
 -- Keymaps for insert mode (i) --
 -- --------------------------- --
