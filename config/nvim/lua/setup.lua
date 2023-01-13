@@ -58,4 +58,8 @@ opt.hlsearch = true -- highlight search matches
 opt.syntax = "ON" -- allow syntax highlighting
 opt.termguicolors = true -- enable term ui colors
 
+-- [[ text ]]
 opt.iskeyword:append("-") -- Condiser dash-linked words as single words
+
+-- [[ clupboard ]]
+vim.opt.clipboard = "unnamedplus"
