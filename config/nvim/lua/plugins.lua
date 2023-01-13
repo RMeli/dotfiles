@@ -30,7 +30,7 @@ packer.init({
 return packer.startup(function(use)
   use("wbthomason/packer.nvim") -- Packer manages itself
 
-  use("lewis6991/impatient.nvim")
+  use("lewis(6991/impatient.nvim")
 
   -- [[ nvim-tree ]]
   -- A file explorer tree for neovim written in lua
@@ -76,7 +76,7 @@ return packer.startup(function(use)
   use({
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
-    requires = { { "nvim-lua/plenary.nvim" } },
+    requires = { { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-project.nvim" } },
   })
 
   -- [[ vim-illuminate ]]

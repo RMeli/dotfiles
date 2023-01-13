@@ -7,6 +7,8 @@ if not ok then
   return
 end
 
+local telescope_extensions = { "project", "notify" }
+
 telescope.setup({
   defaults = {
     prompt_prefix = " ",
@@ -21,6 +23,12 @@ telescope.setup({
   },
 })
 
+-- [[ extensions ]]
+
+for _, extension in ipairs(telescope_extensions) do
+  telescope.load_extension(extension)
+end
+
 -- [[ keymaps ]]
 
 local wk = require("which-key")
@@ -33,7 +41,8 @@ wk.register({
   ["<leader>fg"] = { tb.live_grep, "Grep Files" },
   ["<leader>fb"] = { tb.buffers, "Open Recent Buffer" },
   ["<leader>fs"] = { tb.grep_string, "Search Current String" },
-  ["<leader>fh"] = { tb.help_tags, "Help" },
+  ["<leader>fn"] = { telescope.extensions.notify.notify, "Notify" },
+  ["<leader>f?"] = { tb.help_tags, "Help" },
   -- Treesitter pickers
   ["<leader>ft"] = { tb.treesitter, "Show Code Tree" },
   -- LSP

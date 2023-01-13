@@ -18,6 +18,7 @@ brew install ripgrep # Telescope's live grep
 - [neovim-basic-ide](https://github.com/LunarVim/nvim-basic-ide)
 - [neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
 - [vvnraman/dotfiles](https://github.com/vvnraman/dotfiles)
+- [ofseed/nvim](https://github.com/ofseed/nvim)
 
 ### Blogs
 
