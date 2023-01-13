@@ -35,7 +35,7 @@ local wk = require("which-key")
 local tb = require("telescope.builtin")
 
 wk.register({
-  ["<leader>f"] = { name = "+file" },
+  ["<leader>f"] = { name = "+find" },
   ["<leader>ff"] = { tb.find_files, "Find File" },
   ["<leader>fo"] = { tb.oldfiles, "Open Recent File" },
   ["<leader>fg"] = { tb.live_grep, "Grep Files" },
@@ -44,7 +44,7 @@ wk.register({
   ["<leader>fn"] = { telescope.extensions.notify.notify, "Notify" },
   ["<leader>f?"] = { tb.help_tags, "Help" },
   -- Treesitter pickers
-  ["<leader>ft"] = { tb.treesitter, "Show Code Tree" },
+  ["<leader>fct"] = { tb.treesitter, "Show Code Tree" },
   -- LSP
   -- See also lsp/keymaps.lua
   ["<leader>fi"] = { tb.lsp_implementations, "Find Implementation" },

@@ -34,7 +34,6 @@ pcall(require, "impatient")
 -- ------------- --
 
 -- Load plugin configurations
-
 require("plugins.colorschemes")
 require("plugins.whichkey")
 require("plugins.notify")
@@ -52,6 +51,7 @@ require("plugins.gitsigns")
 require("plugins.autopairs")
 require("plugins.project")
 require("plugins.trouble")
+require("plugins.todo-comments")
 
 -- LSP
 require("plugins.lsp.mason")
