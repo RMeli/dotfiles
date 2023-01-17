@@ -49,7 +49,7 @@ gitsigns.setup({
     },
   },
   numhl = true, -- Highlight numbers
-  linehl = false, -- highlight lines
+  linehl = false, -- Highlight lines
   current_line_blame = true,
   current_line_blame_opts = {
     delay = 500,
