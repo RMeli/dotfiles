@@ -26,7 +26,7 @@ require("keymaps")
 require("plugins.lsp.keymaps")
 require("plugins")
 
--- Require impatient login if availabl
+-- Require impatient login if available
 pcall(require, "impatient")
 
 -- ------------- --
@@ -52,6 +52,7 @@ require("plugins.autopairs")
 require("plugins.project")
 require("plugins.trouble")
 require("plugins.todo-comments")
+require("plugins.persistence")
 
 -- LSP
 require("plugins.lsp.mason")

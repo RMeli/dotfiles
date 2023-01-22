@@ -161,7 +161,11 @@ return packer.startup(function(use)
     requires = { "hrsh7th/nvim-cmp" },
   })
 
-  -- [[ vim-vsnip ]]
+  -- Simple session management for NeoVim
+  use({
+    "folke/persistence.nvim",
+  })
+
   -- Snippet plugin for vim/nvim that supports LSP/VSCode's snippet format
   use({
     "hrsh7th/cmp-vsnip",

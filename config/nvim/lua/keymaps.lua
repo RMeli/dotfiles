@@ -10,6 +10,7 @@ local keymap = vim.api.nvim_set_keymap
 -- --------------------------- --
 -- Keymaps for normal mode (n) --
 -- --------------------------- --
+
 -- Window navigation
 -- Remove need for w (window) key
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -28,6 +29,10 @@ keymap("n", "<A-k>", ":m .-2<CR>==", opts)
 -- Split window
 keymap("n", "<leader>s", "<cmd>vsplit<cr>", opts)
 keymap("n", "<leader>sh", "<cmd>split<cr>", opts)
+
+-- Quit
+keymap("n", "<leader>Q", "<cmd>wqa<cr>", opts)
+
 -- --------------------------- --
 -- Keymaps for insert mode (i) --
 -- --------------------------- --
