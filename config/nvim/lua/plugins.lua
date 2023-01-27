@@ -121,8 +121,18 @@ return packer.startup(function(use)
     requires = { { "nvim-lua/plenary.nvim" } },
   })
 
+  -- [[ diffview.nvim ]]
+  -- Single tabpage interface for easily cycling through diffs
+  use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+
   use({
     "rcarriga/nvim-notify",
+  })
+
+  -- [[ hop.nvim ]]
+  -- Neovim motions on speed!
+  use({
+    "phaazon/hop.nvim",
   })
 
   -- [[ nvim-autopairs ]]

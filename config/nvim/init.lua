@@ -53,6 +53,8 @@ require("plugins.project")
 require("plugins.trouble")
 require("plugins.todo-comments")
 require("plugins.persistence")
+require("plugins.hop")
+require("plugins.diffview")
 
 -- LSP
 require("plugins.lsp.mason")
