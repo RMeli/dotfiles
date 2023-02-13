@@ -26,7 +26,7 @@ require("mason-lspconfig").setup({
     --        "fortls", -- Fortran
     --        "julials", -- Julia
     --        "ltex", -- LaTeX
-    --        "sumneko_lua", -- Lua
+    --        "lua_ls", -- Lua
     --        "pyright", -- Python
     --        "taplo", -- TOML
     --        "yamlls", -- YAML

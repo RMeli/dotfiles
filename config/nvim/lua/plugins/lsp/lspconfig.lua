@@ -67,7 +67,7 @@ require("lspconfig").cmake.setup({ capabilities = capabilities })
 require("lspconfig").fortls.setup({ capabilities = capabilities })
 -- require("lspconfig").julials.setup({ capabilities = capabilities })
 require("lspconfig").ltex.setup({ capabilities = capabilities })
-require("lspconfig").sumneko_lua.setup({
+require("lspconfig").lua_ls.setup({
   capabilities = capabilities,
   settings = {
     Lua = {
