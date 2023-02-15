@@ -1,6 +1,9 @@
 # editors
 .vscode
 
+# macOS
+.DS_Store
+
 # files
 config/nvim/undo/
 config/nvim/site/
