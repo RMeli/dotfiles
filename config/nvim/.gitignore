@@ -1,1 +1,5 @@
-plugin/ 
+# Packer
+plugin/
+
+# Lazy.nvim
+lazy-lock.json

@@ -2,11 +2,6 @@
 -- A blazing fast and easy to configure neovim statusline plugin written in pure lua.
 -- https://github.com/nvim-lualine/lualine.nvim
 
-local ok, lualine = REQUIRE_PLUGIN("lualine")
-if not ok then
-  return
-end
-
 local branch = {
   "branch",
   icons_enabled = true,
@@ -25,23 +20,28 @@ local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
   sections = { "error", "warn" },
-  symbols = { error = "", warn = "" },
+  symbols = { error = " ", warn = " " },
   colored = true,
   update_in_insert = true,
   always_visible = true,
 }
 
-lualine.setup({
-  options = {
-    icons_enabled = true,
-    theme = "auto",
-    always_divide_middle = true,
-    disabled_filetypes = { "NvimTree" },
+return {
+  "nvim-lualine/lualine.nvim",
+  lazy = false,
+  priotiry = 1,
+  opts = {
+    options = {
+      icons_enabled = true,
+      theme = "auto",
+      always_divide_middle = true,
+      disabled_filetypes = { "NvimTree" },
+    },
+    sections = {
+      -- https://github.com/nvim-lualine/lualine.nvim#available-components
+      lualine_b = { branch, diff, diagnostics },
+      lualine_c = { "hostname", "filename" },
+      lualine_y = { "searchcount", "progress" },
+    },
   },
-  sections = {
-    -- https://github.com/nvim-lualine/lualine.nvim#available-components
-    lualine_b = { branch, diff, diagnostics },
-    lualine_c = { "hostname", "filename" },
-    lualine_y = { "searchcount", "progress" },
-  },
-})
+}

@@ -7,5 +7,5 @@ pyver(){
 # Recoursively touch all files
 rtouch(){
     path=$1
-    find ${path} -type f,d -exec touch {} +
+    find ${path} --print --type f,d --exec touch {} +
 }

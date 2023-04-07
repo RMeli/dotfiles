@@ -2,55 +2,62 @@
 -- Find, Filter, Preview, Pick. All lua, all the time.
 -- https://github.com/nvim-telescope/telescope.nvim
 
-local ok, telescope = REQUIRE_PLUGIN("telescope")
-if not ok then
-  return
-end
+local telescope = require("telescope")
+local tb = require("telescope.builtin")
 
 local telescope_extensions = { "project", "notify" }
-
-telescope.setup({
-  defaults = {
-    prompt_prefix = " ",
-    selection_caret = " ",
-    path_display = { "smart" },
-  },
-  -- Find out available pickers with <cmd>Telescope<tab>
-  pickers = {
-    lsp_references = {
-      -- theme = "cursor",
-    },
-  },
-})
-
--- [[ extensions ]]
-
 for _, extension in ipairs(telescope_extensions) do
   telescope.load_extension(extension)
 end
 
--- [[ keymaps ]]
+return {
+  {
+    "nvim-telescope/telescope.nvim",
+    lazy = true,
+    cmd = "Telescope",
+    config = {
 
-local wk = require("which-key")
-local tb = require("telescope.builtin")
-
-wk.register({
-  ["<leader>f"] = { name = "+find" },
-  ["<leader>ff"] = { tb.find_files, "Find File" },
-  ["<leader>fo"] = { tb.oldfiles, "Open Recent File" },
-  ["<leader>fg"] = { tb.live_grep, "Grep Files" },
-  ["<leader>fb"] = { tb.buffers, "Open Recent Buffer" },
-  ["<leader>fs"] = { tb.grep_string, "Search Current String" },
-  ["<leader>fn"] = { telescope.extensions.notify.notify, "Notify" },
-  ["<leader>f?"] = { tb.help_tags, "Help" },
-  -- Treesitter pickers
-  ["<leader>fct"] = { tb.treesitter, "Show Code Tree" },
-  -- LSP
-  -- See also lsp/keymaps.lua
-  ["<leader>fi"] = { tb.lsp_implementations, "Find Implementation" },
-  ["<leader>fd"] = { tb.lsp_definitions, "Find Definitions" },
-  ["<leader>fr"] = { tb.lsp_references, "Find References" },
-  ["<leader>fc"] = { tb.lsp_outgoing_calls, "Find Outgoing Calls" },
-  ["<leader>fC"] = { tb.find_incoming_calls, "Find Incoming Calls" },
-  ["<leader>fl"] = { tb.diagnostics, "Diagnostic Float Window" },
-})
+      defaults = {
+        prompt_prefix = " ",
+        selection_caret = " ",
+        path_display = { "smart" },
+      },
+      -- Find out available pickers with <cmd>Telescope<tab>
+      pickers = {
+        lsp_references = {
+          -- theme = "cursor",
+        },
+      },
+    },
+    keys = {
+      { "<leader>fb", tb.buffers, desc = "Buffers" },
+      { "<leader>ff", tb.find_files, desc = "Files" },
+      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
+      -- git
+      { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
+      { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
+      -- LSP
+      { "<leader>lc", tb.find_outgoing_calls, "Outgoing Calls" },
+      { "<leader>lC", tb.find_incoming_calls, "Incoming Calls" },
+      { "<leader>ld", tb.lsp_definitions, "Definitions" },
+      { "<leader>lD", tb.diagnostics, "Diagnostics" },
+      { "<leader>li", tb.lsp_implementations, "Implementation" },
+      { "<leader>lr", tb.references, "References" },
+      { "<leader>lr", tb.lsp_document_symbols, "Symbols" },
+      -- search
+      { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Current Buffer" },
+      { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+      { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
+      { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+      { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Highlight Groups" },
+      { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+      { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+      { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+      { "<leader>sn", telescope.extensions.notify.notify, desc = "Notify" },
+      { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+      { "<leader>sw", tb.grep_string, desc = "Word" },
+      --      { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+    },
+  },
+}
