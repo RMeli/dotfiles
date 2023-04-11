@@ -54,7 +54,7 @@ return packer.startup(function(use)
   -- [[ github-nvim-theme ]]
   -- Github's Neovim themes
   --use({ "projekt0n/github-nvim-theme" })
-  use("projekt0n/github-nvim-theme")
+  use({ "projekt0n/github-nvim-theme", tag = "v0.0.7" })
 
   -- [[ colorschemes ]]
   -- Collection of colorschemes made to be compatible with LunarVim
@@ -70,6 +70,10 @@ return packer.startup(function(use)
     "nvim-lualine/lualine.nvim",
     requires = { "kyazdani42/nvim-web-devicons", opt = true },
   })
+
+  -- [[ vim-sleuth ]]
+  -- Heuristically set buffer options
+  use({ "tpope/vim-sleuth" })
 
   -- [[ telescope.nvim ]]
   -- Find, Filter, Preview, Pick. All lua, all the time
