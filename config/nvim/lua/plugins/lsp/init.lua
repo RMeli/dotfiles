@@ -24,7 +24,7 @@ return {
     opts = {
       -- options for vim.diagnostic.config()
       diagnostics = {
-        virtual_text = {spacing = 4, prefix = "●" }, -- LSP text appearing after line end
+        virtual_text = { spacing = 4, prefix = "●" }, -- LSP text appearing after line end
         signs = {
           active = signs,
         },
@@ -59,7 +59,7 @@ return {
         lua_ls = {
           settings = {
             Lua = {
-                completion = {
+              completion = {
                 showWord = "Disable",
               },
               diagnostics = {
@@ -154,6 +154,5 @@ return {
         },
       }
     end,
-    opts = function(_, opts) end,
   },
 }

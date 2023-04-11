@@ -52,3 +52,39 @@ keymap("v", "<", "<gv", opts) -- Decrement indentation while keeping selection
 -- Move text up and down
 keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
+
+wk = require("which-key")
+tb = require("telescope.builtin")
+wk.register({
+  ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to Declatation" },
+  ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to Definition" },
+  ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Go to Implementation" },
+  ["gr"] = { tb.lsp_references, "Go to references" },
+  -- LSP group
+  ["<leader>l"] = { name = "+LSP" },
+  ["<leader>lf"] = {
+    "<cmd>lua vim.lsp.buf.format{ async = true }<cr>",
+    "Format File",
+  },
+  ["<leader>li"] = {
+    "<cmd>LspInfo<cr>",
+    "LSP Info",
+  },
+
+  ["<leader>lI"] = {
+    "<cmd>LspInstallInfo<cr>",
+    "LSP Install Info",
+  },
+  ["<leader>lr"] = {
+    "<cmd>lua vim.lsp.buf.rename()<cr>",
+    "Rename",
+  },
+  ["<leader>ls"] = {
+    "<cmd>lua vim.lsp.buf.signature_help()<cr>",
+    "Signature Help",
+  },
+  ["<leader>la"] = {
+    "<cmd>lua vim.lsp.buf.code_action()<cr>",
+    "Code Action",
+  },
+})
