@@ -4,7 +4,7 @@ return {
     "projekt0n/github-nvim-theme",
     version = "v0.0.7",
     lazy = false,
-    priotiry = 100,
+    priority = 100,
     opts = { style = "github_dark" },
     config = function()
       require("github-theme").setup()
