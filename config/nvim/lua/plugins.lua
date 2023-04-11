@@ -186,6 +186,8 @@ return packer.startup(function(use)
     requires = { "hrsh7th/nvim-cmp", "hrsh7th/vim-vsnip" },
   })
 
+  use("folke/neodev.nvim")
+
   -- [[ null-ls ]]
   -- Use Neovim as a LS to inject LSP diagnostics, code actions, and more via Lua
   use({ "jose-elias-alvarez/null-ls.nvim" })
