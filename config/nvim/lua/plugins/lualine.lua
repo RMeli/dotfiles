@@ -29,7 +29,6 @@ local diagnostics = {
 return {
   "nvim-lualine/lualine.nvim",
   lazy = false,
-  priotiry = 1,
   opts = {
     options = {
       icons_enabled = true,

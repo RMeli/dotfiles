@@ -14,11 +14,17 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+      {
+        "hrsh7th/cmp-nvim-lsp",
+      },
+    },
     lazy = false,
     opts = {
       -- options for vim.diagnostic.config()
       diagnostics = {
-        virtual_text = true, -- LSP text appearing after line end
+        virtual_text = {spacing = 4, prefix = "●" }, -- LSP text appearing after line end
         signs = {
           active = signs,
         },
@@ -120,7 +126,8 @@ return {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    lazy = false,
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "mason.nvim" },
     opts = function()
       local nls = require("null-ls")
       local formatting = nls.builtins.formatting
