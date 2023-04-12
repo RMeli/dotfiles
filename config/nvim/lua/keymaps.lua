@@ -60,10 +60,10 @@ keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 -- ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to Definition" },
 --  ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Go to Implementation" },
 --  ["gr"] = { tb.lsp_references, "Go to references" },
-  -- LSP group
+-- LSP group
 --  ["<leader>l"] = { name = "+LSP" },
 --  ["<leader>lf"] = {
- --   "<cmd>lua vim.lsp.buf.format{ async = true }<cr>",
+--   "<cmd>lua vim.lsp.buf.format{ async = true }<cr>",
 --    "Format File",
 --  },
 --  ["<leader>li"] = {
@@ -88,3 +88,11 @@ keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 --    "Code Action",
 --  },
 --})
+--
+
+local wk = require("which-key")
+
+-- [[ tree ]]
+wk.register({
+	["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Toggle File Explorer" },
+})

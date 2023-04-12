@@ -22,21 +22,21 @@
 --end
 
 return {
-  "akinsho/toggleterm.nvim",
-  lazy = false,
-  opts = {
-    open_mapping = [[<c-\>]],
-    insert_mapping = true, -- Open mapping also works in insert mode
-    on_open = function()
-      vim.cmd("wa") -- Save all buffers when opening a terminal
-    end,
-    direction = "float",
-    float_opts = {
-      border = "curved",
-    },
-  },
---  keys = {
---    { "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc = "Open LazyGit Terminal" },
---    { "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "Open HTop Terminal" },
---  },
+	"akinsho/toggleterm.nvim",
+	lazy = false,
+	opts = {
+		open_mapping = [[<c-\>]],
+		insert_mapping = true, -- Open mapping also works in insert mode
+		on_open = function()
+			vim.cmd("wa") -- Save all buffers when opening a terminal
+		end,
+		direction = "float",
+		float_opts = {
+			border = "curved",
+		},
+	},
+	--  keys = {
+	--    { "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc = "Open LazyGit Terminal" },
+	--    { "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "Open HTop Terminal" },
+	--  },
 }
