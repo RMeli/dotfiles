@@ -4,5 +4,5 @@
 
 return {
   "RRethy/vim-illuminate",
-  lazy = false,
+  event = "BufEnter",
 }

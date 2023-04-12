@@ -7,7 +7,6 @@ return {
   lazy = true,
   cmd = "NvimTree",
   opts = {
-
     filters = { dotfiles = true },
     renderer = {
       indent_markers = {

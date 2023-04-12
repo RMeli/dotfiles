@@ -16,21 +16,18 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
-      {
-        "hrsh7th/cmp-nvim-lsp",
-      },
+      { "hrsh7th/cmp-nvim-lsp" },
     },
     lazy = false,
     opts = {
       -- options for vim.diagnostic.config()
       diagnostics = {
-        virtual_text = { spacing = 4, prefix = "●" }, -- LSP text appearing after line end
+        virtual_text = { spacing = 4, prefix = "●" },
         signs = {
           active = signs,
         },
         underline = true,
         update_in_insert = false,
-        --        virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,
         float = {
           focusable = false,
@@ -106,20 +103,22 @@ return {
     },
 
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-      opts = {
-        ensure_installed = {
-          --        "bashls", -- Bash
-          --        "clangd", -- C and C++
-          --        "cmake", -- CMake
-          --        "dockerls", -- Docker
-          --        "fortls", -- Fortran
-          --        "julials", -- Julia
-          --        "ltex", -- LaTeX
-          --        "lua_ls", -- Lua
-          --        "pyright", -- Python
-          --        "taplo", -- TOML
-          --        "yamlls", -- YAML
+      {
+        "williamboman/mason-lspconfig.nvim",
+        opts = {
+          ensure_installed = {
+            --        "bashls", -- Bash
+            --        "clangd", -- C and C++
+            --        "cmake", -- CMake
+            --        "dockerls", -- Docker
+            --        "fortls", -- Fortran
+            --        "julials", -- Julia
+            --        "ltex", -- LaTeX
+            --        "lua_ls", -- Lua
+            --        "pyright", -- Python
+            --        "taplo", -- TOML
+            --        "yamlls", -- YAML
+          },
         },
       },
     },

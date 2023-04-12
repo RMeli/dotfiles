@@ -2,21 +2,12 @@
 -- Find, Filter, Preview, Pick. All lua, all the time.
 -- https://github.com/nvim-telescope/telescope.nvim
 
-local telescope = require("telescope")
-local tb = require("telescope.builtin")
-
-local telescope_extensions = { "project", "notify" }
-for _, extension in ipairs(telescope_extensions) do
-  telescope.load_extension(extension)
-end
-
 return {
-  {
     "nvim-telescope/telescope.nvim",
     lazy = true,
     cmd = "Telescope",
-    config = {
-
+    dependencies = {"ahmedkhalf/project.nvim", "rcarriga/nvim-notify"}, 
+    opts = {
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
@@ -29,21 +20,29 @@ return {
         },
       },
     },
+    config = function()
+--      local telescope = require("telescope")
+--      local tb = require("telescope.builtin")
+--      local telescope_extensions = { "project", "notify" }
+--      for _, extension in ipairs(telescope_extensions) do
+--         telescope.load_extension(extension)
+--      end
+    end,
     keys = {
-      { "<leader>fb", tb.buffers, desc = "Buffers" },
-      { "<leader>ff", tb.find_files, desc = "Files" },
+--      { "<leader>fb", tb.buffers, desc = "Buffers" },
+--      { "<leader>ff", tb.find_files, desc = "Files" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
       -- git
       { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
       { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
       -- LSP
-      { "<leader>lc", tb.find_outgoing_calls, "Outgoing Calls" },
-      { "<leader>lC", tb.find_incoming_calls, "Incoming Calls" },
-      { "<leader>ld", tb.lsp_definitions, "Definitions" },
-      { "<leader>lD", tb.diagnostics, "Diagnostics" },
-      { "<leader>li", tb.lsp_implementations, "Implementation" },
-      { "<leader>lr", tb.references, "References" },
-      { "<leader>lr", tb.lsp_document_symbols, "Symbols" },
+--      { "<leader>lc", tb.find_outgoing_calls, "Outgoing Calls" },
+--      { "<leader>lC", tb.find_incoming_calls, "Incoming Calls" },
+--      { "<leader>ld", tb.lsp_definitions, "Definitions" },
+--      { "<leader>lD", tb.diagnostics, "Diagnostics" },
+--      { "<leader>li", tb.lsp_implementations, "Implementation" },
+--     { "<leader>lr", tb.references, "References" },
+--      { "<leader>lr", tb.lsp_document_symbols, "Symbols" },
       -- search
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Current Buffer" },
       { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
@@ -54,10 +53,9 @@ return {
       { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
       { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
       { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-      { "<leader>sn", telescope.extensions.notify.notify, desc = "Notify" },
+--      { "<leader>sn", telescope.extensions.notify.notify, desc = "Notify" },
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-      { "<leader>sw", tb.grep_string, desc = "Word" },
+--      { "<leader>sw", tb.grep_string, desc = "Word" },
       --      { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
     },
-  },
-}
+  }

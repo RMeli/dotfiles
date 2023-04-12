@@ -26,7 +26,7 @@ return {
     },
     pattern = [[\b(KEYWORDS):]],
   },
-  kays = {
+  keys = {
     { "<leader>ft", "<cmd>:TodoTelescope<cr>", desc = "TODOs" },
     {
       "]t",
