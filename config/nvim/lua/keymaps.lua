@@ -92,7 +92,11 @@ keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 
 local wk = require("which-key")
 
+-- ------------------- --
+-- Keymaps for plugins --
+-- ------------------- --
+
 -- [[ tree ]]
 wk.register({
-	["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Toggle File Explorer" },
+  ["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Toggle File Explorer" },
 })
