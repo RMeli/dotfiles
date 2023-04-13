@@ -62,4 +62,4 @@ opt.termguicolors = true -- enable term ui colors
 opt.iskeyword:append("-") -- Condiser dash-linked words as single words
 
 -- [[ clupboard ]]
-vim.opt.clipboard = "unnamedplus"
+opt.clipboard = "unnamedplus"

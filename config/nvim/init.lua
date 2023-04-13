@@ -23,6 +23,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load lazy.nvim plugin manager
-require("lazy").setup("plugins")
+require("lazy").setup(
+  "plugins", -- Plugins are in modules under lua/plugins
+  {
+    ui = {
+      border = "rounded",
+    },
+  }
+)
 
 require("keymaps")
