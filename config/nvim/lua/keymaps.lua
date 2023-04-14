@@ -98,13 +98,13 @@ local wk = require("which-key")
 
 -- [[ tree ]]
 wk.register({
-	["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Toggle File Explorer" },
+  ["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Toggle File Explorer" },
 })
 
 -- [[ toggleterm ]]
 
 wk.register({
-	--  ["<c-\\>"] = { "<cmd>ToggleTerm<cr>", "Open Terminal" },
-	["<leader>tg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Open LazyGit Terminal" },
-	["<leader>th"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Open HTop Terminal" },
+  --  ["<c-\\>"] = { "<cmd>ToggleTerm<cr>", "Open Terminal" },
+  ["<leader>tg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Open LazyGit Terminal" },
+  ["<leader>th"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Open HTop Terminal" },
 })
