@@ -96,6 +96,14 @@ local wk = require("which-key")
 -- Keymaps for plugins --
 -- ------------------- --
 
+-- [[ diffview ]]
+
+wk.register({
+  ["<leader>gd"] = { "<cmd>DiffviewOpen<cr>", "Open diff view" },
+  ["<leader>gq"] = { "<cmd>DiffviewClose<cr>", "Close diff view" },
+  ["<leader>gh"] = { "<cmd>DiffviewFileHistory<cr>", "File history" },
+})
+
 -- [[ lsp ]]
 
 local tb = require("telescope.builtin")
@@ -132,9 +140,18 @@ wk.register({
   },
 })
 
--- [[ tree ]]
+-- [[ todo-comments ]]
+-- FIXME: Jumps do not work (but work when typed excplicitly)
 wk.register({
-  ["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Toggle File Explorer" },
+  ["<leader>ft"] = { "<cmd>:TodoTelescope<cr>", "TODOs" },
+  ["]t"] = {
+    "<cmd>lua require('todo-comments').jump_next()<cr>",
+    desc = "Next todo comment",
+  },
+  ["[t"] = {
+    "<cmd>lua require('todo-comments').jump_prev()<cr>",
+    desc = "Previous todo comment",
+  },
 })
 
 -- [[ toggleterm ]]
@@ -143,6 +160,11 @@ wk.register({
   --  ["<c-\\>"] = { "<cmd>ToggleTerm<cr>", "Open Terminal" },
   ["<leader>tg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Open LazyGit Terminal" },
   ["<leader>th"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Open HTop Terminal" },
+})
+
+-- [[ tree ]]
+wk.register({
+  ["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Toggle File Explorer" },
 })
 
 -- [[ telescope ]]
