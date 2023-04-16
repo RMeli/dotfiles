@@ -4,10 +4,6 @@
 
 return {
   "sindrets/diffview.nvim",
-  lazy = false, -- TODO: Make lazy
-  keys = {
-    "<leader>gd",
-    "<leader>gq",
-    "<leader>gh",
-  },
+  event = { "BufReadPre", "BufNewFile" },
+  config = true,
 }

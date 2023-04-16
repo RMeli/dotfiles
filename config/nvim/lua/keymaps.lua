@@ -104,6 +104,16 @@ wk.register({
   ["<leader>gh"] = { "<cmd>DiffviewFileHistory<CR>", "File history" },
 })
 
+-- [[ hop ]]
+
+wk.register({
+  ["<leader>hw"] = { "<cmd>HopWord<cr>", "Hop to word" },
+  ["<leader>hc"] = { "<cmd>HopChar1<cr>", "Hop to char" },
+  ["<leader>hl"] = { "<cmd>HopLine<cr>", "Hop to line" },
+  ["<leader>hs"] = { "<cmd>HopLineStart<cr>", "Hop to line start" },
+  ["<leader>ha"] = { "<cmd>HopAnywhere<cr>", "Hop anywhere" },
+})
+
 -- [[ lsp ]]
 
 local tb = require("telescope.builtin")
@@ -216,4 +226,18 @@ wk.register({
   --    { "<leader>so", "<cmd>Telescope vim_options<CR>", desc = "Options" },
   --      { "<leader>sw", tb.grep_string, desc = "Word" },
   --      { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+})
+
+-- [[ trouble ]]
+
+-- FIXME: Check that it works as expected
+wk.register({
+  ["<leader>lx"] = {
+    "<cmd>TroubleToggle document_diagnostics<cr>",
+    desc = "Document Troubles",
+  },
+  ["<leader>lX"] = {
+    "<cmd>TroubleToggle workspace_diagnostics<cr>",
+    desc = "Document Troubles",
+  },
 })

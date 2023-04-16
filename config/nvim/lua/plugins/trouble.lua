@@ -12,8 +12,4 @@ return {
     icons = true,
     use_diagnostic_signs = true, -- use the signs defined in your lsp client
   },
-  keys = {
-    { "<leader>lx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Troubles" },
-    { "<leader>lX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Document Troubles" },
-  },
 }
