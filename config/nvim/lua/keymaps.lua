@@ -53,9 +53,6 @@ keymap("v", "<", "<gv", opts) -- Decrement indentation while keeping selection
 keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 
---wk = require("which-key")
---tb = require("telescope.builtin")
---wk.register({
 --  ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to Declatation" },
 -- ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to Definition" },
 --  ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to Implementation" },
@@ -122,17 +119,25 @@ wk.register({
   ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to Declatation" },
   ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to Definition" },
   ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to Implementation" },
+  -- telescope
   ["gr"] = { tb.lsp_references, "Go to references" },
-  -- LSP group
+  ["<leader>lc"] = { tb.find_outgoing_calls, "Outgoing Calls" },
+  ["<leader>lC"] = { tb.find_incoming_calls, "Incoming Calls" },
+  ["<leader>ld"] = { tb.lsp_definitions, "Definitions" },
+  ["<leader>lD"] = { tb.diagnostics, "Diagnostics" },
+  ["<leader>li"] = { tb.lsp_implementations, "Implementation" },
+  ["<leader>lr"] = { tb.references, "References" },
+  ["<leader>lR"] = { tb.lsp_document_symbols, "Symbols" },
+  -- LSP
   ["<leader>lf"] = {
     "<cmd>lua vim.lsp.buf.format{ async = true }<CR>",
     "Format File",
   },
-  ["<leader>li"] = {
+  ["<leader>Li"] = {
     "<cmd>LspInfo<CR>",
     "LSP Info",
   },
-  ["<leader>lI"] = {
+  ["<leader>LI"] = {
     "<cmd>LspInstallInfo<CR>",
     "LSP Install Info",
   },
@@ -201,36 +206,28 @@ wk.register({
 -- [[ telescope ]]
 
 -- tb already defined above for [[ lsp ]]
+telescope = require("telescope")
 
 wk.register({
   ["<leader>fb"] = { tb.bffers, "Buffers" },
   ["<leader>ff"] = { tb.find_files, "Files" },
   ["<leader>fr"] = { "<cmd>Telescope oldfiles<CR>", "Recent Files" },
   -- git
-  --    { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-  --    { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
-  -- LSP
-  --      { "<leader>lc", tb.find_outgoing_calls, "Outgoing Calls" },
-  --      { "<leader>lC", tb.find_incoming_calls, "Incoming Calls" },
-  --      { "<leader>ld", tb.lsp_definitions, "Definitions" },
-  --      { "<leader>lD", tb.diagnostics, "Diagnostics" },
-  --      { "<leader>li", tb.lsp_implementations, "Implementation" },
-  --     { "<leader>lr", tb.references, "References" },
-  --      { "<leader>lr", tb.lsp_document_symbols, "Symbols" },
+  ["<leader>gc"] = { "<cmd>Telescope git_commits<CR>", "Git Commits" },
+  ["<leader>gs"] = { "<cmd>Telescope git_status<CR>", "Git Status" },
   -- search
-  --    { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Current Buffer" },
-  --    { "<leader>sc", "<cmd>Telescope command_history<CR>", desc = "Command History" },
-  --    { "<leader>sC", "<cmd>Telescope commands<CR>", desc = "Commands" },
-  --    { "<leader>sd", "<cmd>Telescope diagnostics<CR>", desc = "Diagnostics" },
-  --    { "<leader>sh", "<cmd>Telescope help_tags<CR>", desc = "Help Pages" },
-  --    { "<leader>sH", "<cmd>Telescope highlights<CR>", desc = "Highlight Groups" },
-  --    { "<leader>sk", "<cmd>Telescope keymaps<CR>", desc = "Key Maps" },
-  --    { "<leader>sM", "<cmd>Telescope man_pages<CR>", desc = "Man Pages" },
-  --    { "<leader>sm", "<cmd>Telescope marks<CR>", desc = "Jump to Mark" },
-  --      { "<leader>sn", telescope.extensions.notify.notify, desc = "Notify" },
-  --    { "<leader>so", "<cmd>Telescope vim_options<CR>", desc = "Options" },
-  --      { "<leader>sw", tb.grep_string, desc = "Word" },
-  --      { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+  ["<leader>sb"] = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Current Buffer" },
+  ["<leader>sc"] = { "<cmd>Telescope command_history<CR>", "Command History" },
+  ["<leader>sC"] = { "<cmd>Telescope commands<CR>", "Commands" },
+  ["<leader>sd"] = { "<cmd>Telescope diagnostics<CR>", "Diagnostics" },
+  ["<leader>sh"] = { "<cmd>Telescope help_tags<CR>", "Help Pages" },
+  ["<leader>sH"] = { "<cmd>Telescope highlights<CR>", "Highlight Groups" },
+  ["<leader>sk"] = { "<cmd>Telescope keymaps<CR>", "Key Maps" },
+  ["<leader>sM"] = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
+  ["<leader>sm"] = { "<cmd>Telescope marks<CR>", "Jump to Mark" },
+  ["<leader>sn"] = { telescope.extensions.notify.notify, "Notify" },
+  ["<leader>so"] = { "<cmd>Telescope vim_options<CR>", "Options" },
+  ["<leader>sw"] = { tb.grep_string, "Word" },
 })
 
 -- [[ trouble ]]
