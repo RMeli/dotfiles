@@ -46,7 +46,6 @@ return {
   lazy = false,
   opts = function(_, opts)
     local cmp = require("cmp")
-
     opts.snippet = {
       expand = function(args)
         vim.fn["vsnip#anonymous"](args.body)

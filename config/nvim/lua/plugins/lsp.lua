@@ -36,17 +36,17 @@ return {
       "williamboman/mason-lspconfig.nvim",
       opts = {
         ensure_installed = {
-          --        "bashls", -- Bash
-          --        "clangd", -- C and C++
-          --        "cmake", -- CMake
+          "bashls", -- Bash
+          "clangd", -- C and C++
+          "cmake", -- CMake
           --        "dockerls", -- Docker
-          --        "fortls", -- Fortran
+          "fortls", -- Fortran
           --        "julials", -- Julia
           --        "ltex", -- LaTeX
           "lua_ls", -- Lua
           --        "pyright", -- Python
-          --        "taplo", -- TOML
-          --        "yamlls", -- YAML
+          "taplo", -- TOML
+          "yamlls", -- YAML
         },
       },
 
@@ -145,5 +145,8 @@ return {
     require("cmp_nvim_lsp").default_capabilities(capabilities)
 
     vim.diagnostic.config(opts.diagnostics)
+
+    -- Window border
+    require('lspconfig.ui.windows').default_options.border = b
   end,
 }

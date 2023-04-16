@@ -6,8 +6,7 @@ return {
   "windwp/nvim-autopairs",
   lazy = false,
   opts = {
-    disable_filetype = { "TelescopePrompt", "alpha" },
-    enable_check_bracket_line = false, -- Don't add pairs if it already has a close pair in the same line
+    disable_filetype = { "TelescopePrompt", "spectre_panel", "alpha" },
     ignored_next_char = "[%w%.]", -- Don't add pairs if the next char is alphanumeric
     -- treesitter
     check_ts = true,
