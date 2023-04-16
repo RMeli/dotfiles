@@ -4,5 +4,6 @@
 
 return {
   "numToStr/Comment.nvim",
-  lazy = true,
+  lazy = false, -- TODO: Make lazy
+  config = true,
 }

@@ -167,6 +167,11 @@ wk.register({
   },
 })
 
+-- [[ project ]]
+wk.register({
+  ["<leader>fp"] = { "<cmd>Telescope projects<cr>", "Find Project" },
+})
+
 -- [[ todo-comments ]]
 wk.register({
   ["<leader>ft"] = { "<cmd>:TodoTelescope<CR>", "TODOs" },
