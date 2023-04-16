@@ -4,7 +4,7 @@
 
 return {
   "akinsho/bufferline.nvim",
-  lazy = true,
+  lazy = false, -- TODO: Make lazy
   opts = {
     options = {
       mode = "buffers", -- set to "tabs" to only show tabpages instead

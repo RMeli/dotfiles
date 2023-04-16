@@ -27,11 +27,11 @@ keymap("n", "<A-j>", ":m .+1<CR>==", opts)
 keymap("n", "<A-k>", ":m .-2<CR>==", opts)
 
 -- Split window
-keymap("n", "<leader>s", "<cmd>vsplit<cr>", opts)
-keymap("n", "<leader>sh", "<cmd>split<cr>", opts)
+keymap("n", "<leader>s", "<cmd>vsplit<CR>", opts)
+keymap("n", "<leader>sh", "<cmd>split<CR>", opts)
 
 -- Quit
-keymap("n", "<leader>Q", "<cmd>wqa<cr>", opts)
+keymap("n", "<leader>Q", "<cmd>wqa<CR>", opts)
 
 -- --------------------------- --
 -- Keymaps for insert mode (i) --
@@ -56,35 +56,35 @@ keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 --wk = require("which-key")
 --tb = require("telescope.builtin")
 --wk.register({
---  ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to Declatation" },
--- ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to Definition" },
---  ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Go to Implementation" },
+--  ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to Declatation" },
+-- ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to Definition" },
+--  ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to Implementation" },
 --  ["gr"] = { tb.lsp_references, "Go to references" },
 -- LSP group
 --  ["<leader>l"] = { name = "+LSP" },
 --  ["<leader>lf"] = {
---   "<cmd>lua vim.lsp.buf.format{ async = true }<cr>",
+--   "<cmd>lua vim.lsp.buf.format{ async = true }<CR>",
 --    "Format File",
 --  },
 --  ["<leader>li"] = {
---    "<cmd>LspInfo<cr>",
+--    "<cmd>LspInfo<CR>",
 --    "LSP Info",
 --  },
 
 --  ["<leader>lI"] = {
---    "<cmd>LspInstallInfo<cr>",
+--    "<cmd>LspInstallInfo<CR>",
 --    "LSP Install Info",
 --  },
 --  ["<leader>lr"] = {
---    "<cmd>lua vim.lsp.buf.rename()<cr>",
+--    "<cmd>lua vim.lsp.buf.rename()<CR>",
 --    "Rename",
 -----  },
 --  ["<leader>ls"] = {
---    "<cmd>lua vim.lsp.buf.signature_help()<cr>",
+--    "<cmd>lua vim.lsp.buf.signature_help()<CR>",
 --    "Signature Help",
 --  },
 --  ["<leader>la"] = {
---    "<cmd>lua vim.lsp.buf.code_action()<cr>",
+--    "<cmd>lua vim.lsp.buf.code_action()<CR>",
 --    "Code Action",
 --  },
 --})
@@ -99,9 +99,9 @@ local wk = require("which-key")
 -- [[ diffview ]]
 
 wk.register({
-  ["<leader>gd"] = { "<cmd>DiffviewOpen<cr>", "Open diff view" },
-  ["<leader>gq"] = { "<cmd>DiffviewClose<cr>", "Close diff view" },
-  ["<leader>gh"] = { "<cmd>DiffviewFileHistory<cr>", "File history" },
+  ["<leader>gd"] = { "<cmd>DiffviewOpen<CR>", "Open diff view" },
+  ["<leader>gq"] = { "<cmd>DiffviewClose<CR>", "Close diff view" },
+  ["<leader>gh"] = { "<cmd>DiffviewFileHistory<CR>", "File history" },
 })
 
 -- [[ lsp ]]
@@ -109,47 +109,63 @@ wk.register({
 local tb = require("telescope.builtin")
 
 wk.register({
-  ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to Declatation" },
-  ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to Definition" },
-  ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Go to Implementation" },
+  ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to Declatation" },
+  ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to Definition" },
+  ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to Implementation" },
   ["gr"] = { tb.lsp_references, "Go to references" },
   -- LSP group
   ["<leader>lf"] = {
-    "<cmd>lua vim.lsp.buf.format{ async = true }<cr>",
+    "<cmd>lua vim.lsp.buf.format{ async = true }<CR>",
     "Format File",
   },
   ["<leader>li"] = {
-    "<cmd>LspInfo<cr>",
+    "<cmd>LspInfo<CR>",
     "LSP Info",
   },
   ["<leader>lI"] = {
-    "<cmd>LspInstallInfo<cr>",
+    "<cmd>LspInstallInfo<CR>",
     "LSP Install Info",
   },
   ["<leader>lr"] = {
-    "<cmd>lua vim.lsp.buf.rename()<cr>",
+    "<cmd>lua vim.lsp.buf.rename()<CR>",
     "Rename",
   },
   ["<leader>ls"] = {
-    "<cmd>lua vim.lsp.buf.signature_help()<cr>",
+    "<cmd>lua vim.lsp.buf.signature_help()<CR>",
     "Signature Help",
   },
   ["<leader>la"] = {
-    "<cmd>lua vim.lsp.buf.code_action()<cr>",
+    "<cmd>lua vim.lsp.buf.code_action()<CR>",
     "Code Action",
   },
 })
 
--- [[ todo-comments ]]
--- FIXME: Jumps do not work (but work when typed excplicitly)
+-- [[ persistence ]]
+
 wk.register({
-  ["<leader>ft"] = { "<cmd>:TodoTelescope<cr>", "TODOs" },
+  ["<leader>qs"] = {
+    "<cmd>lua require('persistence').load()<CR>",
+    desc = "Load Session",
+  },
+  ["<leader>ql"] = {
+    "<cmd>lua require('persistence').load({ last = true })<CR>",
+    desc = "Load Last Session",
+  },
+  ["<leader>qd"] = {
+    "<cmd>lua require(persistence').stop()<CR>",
+    desc = "Do Not Save Current Session",
+  },
+})
+
+-- [[ todo-comments ]]
+wk.register({
+  ["<leader>ft"] = { "<cmd>:TodoTelescope<CR>", "TODOs" },
   ["]t"] = {
-    "<cmd>lua require('todo-comments').jump_next()<cr>",
+    "<cmd>lua require('todo-comments').jump_next()<CR>",
     desc = "Next todo comment",
   },
   ["[t"] = {
-    "<cmd>lua require('todo-comments').jump_prev()<cr>",
+    "<cmd>lua require('todo-comments').jump_prev()<CR>",
     desc = "Previous todo comment",
   },
 })
@@ -157,14 +173,14 @@ wk.register({
 -- [[ toggleterm ]]
 
 wk.register({
-  --  ["<c-\\>"] = { "<cmd>ToggleTerm<cr>", "Open Terminal" },
-  ["<leader>tg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Open LazyGit Terminal" },
-  ["<leader>th"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Open HTop Terminal" },
+  ["<c-\\>"] = { "<cmd>ToggleTerm<CR>", "Open Terminal" },
+  ["<leader>tg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Open LazyGit Terminal" },
+  ["<leader>th"] = { "<cmd>lua _HTOP_TOGGLE()<CR>", "Open HTop Terminal" },
 })
 
 -- [[ tree ]]
 wk.register({
-  ["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Toggle File Explorer" },
+  ["<leader>e"] = { "<cmd>NvimTreeToggle<CR>", "Toggle File Explorer" },
 })
 
 -- [[ telescope ]]
@@ -174,7 +190,7 @@ wk.register({
 wk.register({
   ["<leader>fb"] = { tb.bffers, "Buffers" },
   ["<leader>ff"] = { tb.find_files, "Files" },
-  ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
+  ["<leader>fr"] = { "<cmd>Telescope oldfiles<CR>", "Recent Files" },
   -- git
   --    { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
   --    { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
@@ -187,17 +203,17 @@ wk.register({
   --     { "<leader>lr", tb.references, "References" },
   --      { "<leader>lr", tb.lsp_document_symbols, "Symbols" },
   -- search
-  --    { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Current Buffer" },
-  --    { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-  --    { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
-  --    { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
-  --    { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-  --    { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Highlight Groups" },
-  --    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
-  --    { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-  --    { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+  --    { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Current Buffer" },
+  --    { "<leader>sc", "<cmd>Telescope command_history<CR>", desc = "Command History" },
+  --    { "<leader>sC", "<cmd>Telescope commands<CR>", desc = "Commands" },
+  --    { "<leader>sd", "<cmd>Telescope diagnostics<CR>", desc = "Diagnostics" },
+  --    { "<leader>sh", "<cmd>Telescope help_tags<CR>", desc = "Help Pages" },
+  --    { "<leader>sH", "<cmd>Telescope highlights<CR>", desc = "Highlight Groups" },
+  --    { "<leader>sk", "<cmd>Telescope keymaps<CR>", desc = "Key Maps" },
+  --    { "<leader>sM", "<cmd>Telescope man_pages<CR>", desc = "Man Pages" },
+  --    { "<leader>sm", "<cmd>Telescope marks<CR>", desc = "Jump to Mark" },
   --      { "<leader>sn", telescope.extensions.notify.notify, desc = "Notify" },
-  --    { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+  --    { "<leader>so", "<cmd>Telescope vim_options<CR>", desc = "Options" },
   --      { "<leader>sw", tb.grep_string, desc = "Word" },
   --      { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
 })
