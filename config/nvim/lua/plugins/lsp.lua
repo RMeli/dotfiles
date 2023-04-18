@@ -24,7 +24,6 @@ local b = "rounded"
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
-
   -- When lazy loading, it is imperative to load mason, then mason-lspconfig,
   -- and finally lspconfig
   dependencies = {
@@ -84,7 +83,6 @@ return {
       dependencies = { "hrsh7th/nvim-cmp" },
     },
   },
-  lazy = false,
   opts = {
     -- options for vim.diagnostic.config()
     diagnostics = {

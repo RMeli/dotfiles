@@ -5,6 +5,7 @@
 return {
   "rcarriga/nvim-notify",
   lazy = false,
+  priority = 99,
   opts = {
     icons = {
       DEBUG = "",
