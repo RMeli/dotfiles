@@ -5,6 +5,7 @@ help:
 	@echo "bash:\n    install .bash_profile"
 	@echo "vim:\n    install .vimrc"
 	@echo "conda:\n    install .condarc"
+	@echo "tmux:\n    install .tmux.conf"
 
 bashshell:
 	@echo "Soft link bash files"
@@ -38,6 +39,12 @@ module:
 
 yabai:
 	ln -sf ${PWD}/yabairc ${HOME}/.yabairc
+
+tmux:
+	@echo ">>> Soft link .tmux.conf"
+	ln -sf ${PWD}/tmux.conf ${HOME}/.tmux.conf
+	@echo ">>> Install Tmux Plugin Manager (TMP)"
+	git clone --depth 1 https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
 
 skhd:
 	mkdir -p ${HOME}/.config/skhd
