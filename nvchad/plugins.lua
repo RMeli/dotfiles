@@ -1,4 +1,4 @@
-nvchad/plugins.lua
+-- nvchad/plugins.lua
 local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
