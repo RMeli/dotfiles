@@ -2,10 +2,11 @@
 
 help:
 	@echo "=== Install Dotfiles ==="
-	@echo "bash:\n    install .bash_profile"
-	@echo "vim:\n    install .vimrc"
-	@echo "conda:\n    install .condarc"
-	@echo "tmux:\n    install .tmux.conf"
+	@echo "bash:\t\tinstall .bash_profile"
+	@echo "vim:\t\tinstall .vimrc"
+	@echo "nvchad:\t\tinstall nvchad custom config"
+	@echo "conda:\t\tinstall .condarc"
+	@echo "tmux:\t\tinstall .tmux.conf"
 
 bashshell:
 	@echo "Soft link bash files"
@@ -32,6 +33,10 @@ nvim:
 	ln -sf ${PWD}/config/nvim ${HOME}/.config/nvim
 	@echo ">>> Install Packer"
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ${HOME}/.config/nvim/site/pack/packer/start/packer.nvim
+
+nv:
+	@echo ">>> Soft link nvchad custom configuration"
+	ln -sf ${PWD}/nvchad ${HOME}/.config/nvim/lua/custom
 
 module:
 	ln -sf ${PWD}/modulerc ${HOME}/.modulerc
