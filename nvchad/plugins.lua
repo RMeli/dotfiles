@@ -1,3 +1,4 @@
+nvchad/plugins.lua
 local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
@@ -44,9 +45,12 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      overrides.treesitter,
-    },
+    opts = overrides.treesitter
+  },
+  
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = overrides.gitsigns
   },
 
   -- To make a plugin not be loaded
