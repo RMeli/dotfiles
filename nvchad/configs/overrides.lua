@@ -58,6 +58,8 @@ M.mason = {
 		"cmake-language-server",
 		"ltex-ls",
 		"bash-language-server",
+		"shellcheck",
+		"cmakelint",
 
 		"yaml-language-server",
 	},
