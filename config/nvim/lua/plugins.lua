@@ -35,9 +35,8 @@ return packer.startup(function(use)
   -- [[ nvim-tree ]]
   -- A file explorer tree for neovim written in lua
   use({
-    "kyazdani42/nvim-tree.lua",
-    requires = "kyazdani42/nvim-web-devicons", -- filesystem icons
-    tag = "nightly",
+    "nvim-tree/nvim-tree.lua",
+    requires = "nvim-tree/nvim-web-devicons" -- filesystem icons
   })
 
   -- [[ nvim-treesitter ]]
@@ -102,7 +101,6 @@ return packer.startup(function(use)
   -- A snazzy bufferline for Neovim
   use({
     "akinsho/bufferline.nvim",
-    tag = "v3.*",
     requires = "nvim-tree/nvim-web-devicons",
   })
 
