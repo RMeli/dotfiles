@@ -20,14 +20,15 @@ require("mason").setup({
 require("mason-lspconfig").setup({
   ensure_installed = {
     --        "bashls", -- Bash
-    --        "clangd", -- C and C++
-    --        "cmake", -- CMake
+    "clangd",        -- C and C++
+    "cmake",         -- CMake
     --        "dockerls", -- Docker
-    --        "fortls", -- Fortran
+    "fortls",        -- Fortran
     --        "julials", -- Julia
     --        "ltex", -- LaTeX
     --        "lua_ls", -- Lua
     --        "pyright", -- Python
+    "ruff",        -- Python
     --        "taplo", -- TOML
     --        "yamlls", -- YAML
   },

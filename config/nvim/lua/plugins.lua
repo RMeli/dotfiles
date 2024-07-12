@@ -53,7 +53,7 @@ return packer.startup(function(use)
   -- [[ github-nvim-theme ]]
   -- Github's Neovim themes
   --use({ "projekt0n/github-nvim-theme" })
-  use({ "projekt0n/github-nvim-theme"})
+  use({ "projekt0n/github-nvim-theme" })
 
   -- [[ colorschemes ]]
   -- Collection of colorschemes made to be compatible with LunarVim
@@ -186,7 +186,7 @@ return packer.startup(function(use)
 
   -- [[ null-ls ]]
   -- Use Neovim as a LS to inject LSP diagnostics, code actions, and more via Lua
-  use({ "nvimtools/none-ls.nvim", requires="nvimtools/none-ls-extras.nvim" })
+  use({ "nvimtools/none-ls.nvim", requires = "nvimtools/none-ls-extras.nvim" })
 
   -- [[ which-key.nvim ]]
   use({

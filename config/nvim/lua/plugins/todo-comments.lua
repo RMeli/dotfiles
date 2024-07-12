@@ -31,8 +31,8 @@ TODOc.setup({
 
 local wk_ok, wk = pcall(require, "which-key")
 if wk_ok then
-  wk.register({
-    ["<leader>f"] = { name = "+find" },
-    ["<leader>ft"] = { "<cmd>:TodoTelescope<cr>", "Find TODOs" },
+  wk.add({
+    { "<leader>f",  group = "find" },
+    { "<leader>ft", "<cmd>:TodoTelescope<cr>", desc = "Find TODOs" },
   })
 end

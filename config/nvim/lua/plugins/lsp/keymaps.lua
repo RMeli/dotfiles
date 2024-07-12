@@ -11,37 +11,17 @@ local wk_ok, wk = REQUIRE_PLUGIN("which-key")
 local tb_ok, tb = REQUIRE_PLUGIN("telescope.builtin")
 
 if wk_ok and tb_ok then
-  wk.register({
-    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go to Declatation" },
-    ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Go to Definition" },
-    ["gI"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Go to Implementation" },
-    ["gr"] = { tb.lsp_references, "Go to references" },
-    -- LSP group
-    ["<leader>l"] = { name = "+LSP" },
-    ["<leader>lf"] = {
-      "<cmd>lua vim.lsp.buf.format{ async = true }<cr>",
-      "Format File",
-    },
-    ["<leader>li"] = {
-      "<cmd>LspInfo<cr>",
-      "LSP Info",
-    },
-
-    ["<leader>lI"] = {
-      "<cmd>LspInstallInfo<cr>",
-      "LSP Install Info",
-    },
-    ["<leader>lr"] = {
-      "<cmd>lua vim.lsp.buf.rename()<cr>",
-      "Rename",
-    },
-    ["<leader>ls"] = {
-      "<cmd>lua vim.lsp.buf.signature_help()<cr>",
-      "Signature Help",
-    },
-    ["<leader>la"] = {
-      "<cmd>lua vim.lsp.buf.code_action()<cr>",
-      "Code Action",
-    },
+  wk.add({
+    { "<leader>l",  group = "LSP" },
+    { "<leader>lI", "<cmd>LspInstallInfo<cr>",                         desc = "LSP Install Info" },
+    { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>",          desc = "Code Action" },
+    { "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", desc = "Format File" },
+    { "<leader>li", "<cmd>LspInfo<cr>",                                desc = "LSP Info" },
+    { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>",               desc = "Rename" },
+    { "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<cr>",       desc = "Signature Help" },
+    { "gD",         "<cmd>lua vim.lsp.buf.declaration()<cr>",          desc = "Go to Declatation" },
+    { "gI",         "<cmd>lua vim.lsp.buf.implementation()<cr>",       desc = "Go to Implementation" },
+    { "gd",         "<cmd>lua vim.lsp.buf.definition()<cr>",           desc = "Go to Definition" },
+    { "gr",         tb.lsp_references,                                 desc = "Go to references" },
   })
 end

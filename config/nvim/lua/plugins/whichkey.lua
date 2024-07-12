@@ -12,11 +12,11 @@ wk.setup({
     border = "single",
     position = "bottom",
   },
-  icons = {
-    breadcrumb = "",
-    separator = "󰙡",
-    group = "",
-  },
+  -- icons = {
+  --   breadcrumb = "",
+  --   separator = "󰙡",
+  --   group = "",
+  -- },
   disable = {
     buftypes = {},
     filetypes = { "TelescopePrompt" },

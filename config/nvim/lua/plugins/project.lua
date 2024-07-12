@@ -16,8 +16,8 @@ if telescope_ok then
   telescope.load_extension("projects")
 
   local wk = require("which-key")
-  wk.register({
-    ["<leader>f"] = { name = "+file" },
-    ["<leader>fp"] = { "<cmd>Telescope projects<cr>", "Find Project" },
+  wk.add({
+    { "<leader>f",  group = "file" },
+    { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Find Project" },
   })
 end

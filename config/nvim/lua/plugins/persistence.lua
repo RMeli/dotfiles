@@ -16,9 +16,11 @@ persistence.setup()
 
 local wk = require("which-key")
 
-wk.register({
-  ["<leader>q"] = { name = "+session" },
-  ["<leader>qs"] = { [[<cmd>lua require("persistence").load()<cr>]], "Load Session" },
-  ["<leader>ql"] = { [[<cmd>lua require("persistence").load({ last = true })<cr>]], "Load Last Session" },
-  ["<leader>qd"] = { [[<cmd>lua require("persistence").stop()<cr>]], "Do Not Save Current Session" },
+wk.add({
+  {
+    { "<leader>q", group = "Session" },
+    { "<leader>qd", '<cmd>lua require("persistence").stop()<cr>', desc = "Do Not Save Current Session" },
+    { "<leader>ql", '<cmd>lua require("persistence").load({ last = true })<cr>', desc = "Load Last Session" },
+    { "<leader>qs", '<cmd>lua require("persistence").load()<cr>', desc = "Load Session" },
+  }
 })

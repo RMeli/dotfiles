@@ -17,10 +17,10 @@ require("nvim-tree").setup({
       git_placement = "after",
       symlink_arrow = " ➛ ",
       show = {
-        file = true, -- show file icons
-        folder = true, -- show folder icons
+        file = true,         -- show file icons
+        folder = true,       -- show folder icons
         folder_arrow = true, -- ?
-        git = true, -- show git icons
+        git = true,          -- show git icons
       },
       glyphs = {
         git = {
@@ -57,6 +57,6 @@ require("nvim-tree").setup({
 -- [[ keymaps ]]
 local wk = require("which-key")
 
-wk.register({
-  ["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Toggle File Explorer" },
+wk.add({
+  { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle File Explorer" },
 })

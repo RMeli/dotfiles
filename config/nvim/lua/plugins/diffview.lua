@@ -11,9 +11,11 @@ diffview.setup({})
 
 local wk = require("which-key")
 
-wk.register({
-  ["<leader>g"] = { name = "+git" },
-  ["<leader>gd"] = { "<cmd>DiffviewOpen<cr>", "Open diff view" },
-  ["<leader>gq"] = { "<cmd>DiffviewClose<cr>", "Close diff view" },
-  ["<leader>gh"] = { "<cmd>DiffviewFileHistory<cr>", "File history" },
-})
+wk.add(
+  {
+    { "<leader>g", group = "git" },
+    { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Open diff view" },
+    { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "File history" },
+    { "<leader>gq", "<cmd>DiffviewClose<cr>", desc = "Close diff view" },
+  }
+)
