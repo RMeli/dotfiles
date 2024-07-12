@@ -14,7 +14,7 @@ wk.setup({
   },
   icons = {
     breadcrumb = "",
-    separator = "ﭠ",
+    separator = "󰙡",
     group = "",
   },
   disable = {

@@ -17,7 +17,7 @@ local branch = {
 -- Updates only when buffer is saved
 local diff = {
   "diff",
-  symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+  symbols = { added = " ", modified = "󰆗 ", removed = " " }, -- changes diff symbols
   colored = true,
 }
 
@@ -25,7 +25,7 @@ local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
   sections = { "error", "warn" },
-  symbols = { error = "", warn = "" },
+  symbols = { error = "󰅘", warn = "" },
   colored = true,
   update_in_insert = true,
   always_visible = true,

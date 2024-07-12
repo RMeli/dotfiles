@@ -39,10 +39,10 @@ require("nvim-tree").setup({
     enable = true,
     show_on_dirs = true,
     icons = {
-      hint = "ﱴ",
+      hint = "󰝶",
       info = "",
       warning = "",
-      error = "",
+      error = "󰅘",
     },
   },
   -- [[ project ]]

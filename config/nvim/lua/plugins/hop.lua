@@ -11,11 +11,11 @@ hop.setup()
 
 local wk = require("which-key")
 
-wk.register({
-  ["<leader>h"] = { name = "+hop" },
-  ["<leader>hw"] = { "<cmd>HopWord<cr>", "Hop to word" },
-  ["<leader>hc"] = { "<cmd>HopChar1<cr>", "Hop to char" },
-  ["<leader>hl"] = { "<cmd>HopLine<cr>", "Hop to line" },
-  ["<leader>hs"] = { "<cmd>HopLineStart<cr>", "Hop to line start" },
-  ["<leader>ha"] = { "<cmd>HopAnywhere<cr>", "Hop anywhere" },
+wk.add({
+  { "<leader>h",  group = "hop" },
+  { "<leader>ha", "<cmd>HopAnywhere<cr>",  desc = "Hop anywhere" },
+  { "<leader>hc", "<cmd>HopChar1<cr>",     desc = "Hop to char" },
+  { "<leader>hl", "<cmd>HopLine<cr>",      desc = "Hop to line" },
+  { "<leader>hs", "<cmd>HopLineStart<cr>", desc = "Hop to line start" },
+  { "<leader>hw", "<cmd>HopWord<cr>",      desc = "Hop to word" },
 })

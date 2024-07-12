@@ -13,7 +13,7 @@ gitsigns.setup({
       text = "",
     },
     change = {
-      text = "",
+      text = "󰆗",
     },
     delete = {
       text = "",

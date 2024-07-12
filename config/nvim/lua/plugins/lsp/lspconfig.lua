@@ -27,9 +27,9 @@ end
 -- Define custom signs
 -- Using empty icons (full icons are used as git symbols)
 local signs = {
-  { name = "DiagnosticSignError", text = "" },
+  { name = "DiagnosticSignError", text = "󰅘" },
   { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "ﱴ" },
+  { name = "DiagnosticSignHint", text = "󰝶" },
   { name = "DiagnosticSignInfo", text = "" },
 }
 for _, sign in ipairs(signs) do
