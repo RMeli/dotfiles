@@ -186,7 +186,7 @@ return packer.startup(function(use)
 
   -- [[ null-ls ]]
   -- Use Neovim as a LS to inject LSP diagnostics, code actions, and more via Lua
-  use({ "nvimtools/none-ls.nvim" })
+  use({ "nvimtools/none-ls.nvim", requires="nvimtools/none-ls-extras.nvim" })
 
   -- [[ which-key.nvim ]]
   use({

@@ -30,7 +30,10 @@ require("null-ls").setup({
     -- Python
     formatting.black,
     formatting.isort,
-    diagnostics.flake8,
+    -- diagnostics.flake8, -- https://github.com/nvimtools/none-ls.nvim/issues/58
+    -- Use none-ls extras
+    require("none-ls.diagnostics.flake8"),
+    require("none-ls.diagnostics.ruff"),
     diagnostics.mypy,
   },
 })
