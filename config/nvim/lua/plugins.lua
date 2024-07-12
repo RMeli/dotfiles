@@ -53,7 +53,7 @@ return packer.startup(function(use)
   -- [[ github-nvim-theme ]]
   -- Github's Neovim themes
   --use({ "projekt0n/github-nvim-theme" })
-  use({ "projekt0n/github-nvim-theme", tag = "v0.0.7" })
+  use({ "projekt0n/github-nvim-theme"})
 
   -- [[ colorschemes ]]
   -- Collection of colorschemes made to be compatible with LunarVim
@@ -78,8 +78,7 @@ return packer.startup(function(use)
   -- Find, Filter, Preview, Pick. All lua, all the time
   use({
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
-    requires = { { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-project.nvim" } },
+    requires = { { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-project.nvim" } }
   })
 
   -- [[ vim-illuminate ]]
@@ -93,8 +92,7 @@ return packer.startup(function(use)
   -- [[ toggleterm.nvim ]]
   -- A neovim lua plugin to help easily manage multiple terminal windows
   use({
-    "akinsho/toggleterm.nvim",
-    tag = "*",
+    "akinsho/toggleterm.nvim"
   })
 
   -- [[ bufferline.nvim ]]
@@ -188,7 +186,7 @@ return packer.startup(function(use)
 
   -- [[ null-ls ]]
   -- Use Neovim as a LS to inject LSP diagnostics, code actions, and more via Lua
-  use({ "jose-elias-alvarez/null-ls.nvim" })
+  use({ "nvimtools/none-ls.nvim" })
 
   -- [[ which-key.nvim ]]
   use({

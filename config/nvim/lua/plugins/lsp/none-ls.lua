@@ -1,10 +1,12 @@
--- [[ null-ls ]]
+-- [[ none-ls ]]
 -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
--- https://github.com/jose-elias-alvarez/null-ls.nvim
+-- https://github.com/nvimtools/none-ls.nvim
+
+-- NOTE: The repo is called none-ls, but the tools is a fork of null-ls.
+--       The original name for the package remains unchanged.
 
 local ok, null_ls = pcall(require, "null-ls")
 if not ok then
-  vim.notify("require('null-ls') failed!")
   return
 end
 

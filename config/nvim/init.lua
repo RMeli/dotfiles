@@ -58,5 +58,5 @@ require("plugins.diffview")
 
 -- LSP
 require("plugins.lsp.mason")
-require("plugins.lsp.null-ls")
+require("plugins.lsp.none-ls")
 require("plugins.lsp.lspconfig")
