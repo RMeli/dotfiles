@@ -2,7 +2,7 @@
 local colorscheme = "github_dark_dimmed"
 
 -- Load GitHub theme
-local ght_ok, ght = REQUIRE_PLUGIN("github_theme")
+local ght_ok, ght = REQUIRE_PLUGIN("github-theme")
 if ght_ok then
   ght.setup()
 end
