@@ -36,7 +36,7 @@ return packer.startup(function(use)
   -- A file explorer tree for neovim written in lua
   use({
     "nvim-tree/nvim-tree.lua",
-    requires = "nvim-tree/nvim-web-devicons" -- filesystem icons
+    requires = "nvim-tree/nvim-web-devicons", -- filesystem icons
   })
 
   -- [[ nvim-treesitter ]]
@@ -78,7 +78,7 @@ return packer.startup(function(use)
   -- Find, Filter, Preview, Pick. All lua, all the time
   use({
     "nvim-telescope/telescope.nvim",
-    requires = { { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-project.nvim" } }
+    requires = { { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-project.nvim" } },
   })
 
   -- [[ vim-illuminate ]]
@@ -92,7 +92,7 @@ return packer.startup(function(use)
   -- [[ toggleterm.nvim ]]
   -- A neovim lua plugin to help easily manage multiple terminal windows
   use({
-    "akinsho/toggleterm.nvim"
+    "akinsho/toggleterm.nvim",
   })
 
   -- [[ bufferline.nvim ]]

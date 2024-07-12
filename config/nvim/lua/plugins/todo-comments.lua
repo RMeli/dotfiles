@@ -32,7 +32,7 @@ TODOc.setup({
 local wk_ok, wk = pcall(require, "which-key")
 if wk_ok then
   wk.add({
-    { "<leader>f",  group = "find" },
+    { "<leader>f", group = "find" },
     { "<leader>ft", "<cmd>:TodoTelescope<cr>", desc = "Find TODOs" },
   })
 end

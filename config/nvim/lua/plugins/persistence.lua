@@ -22,5 +22,5 @@ wk.add({
     { "<leader>qd", '<cmd>lua require("persistence").stop()<cr>', desc = "Do Not Save Current Session" },
     { "<leader>ql", '<cmd>lua require("persistence").load({ last = true })<cr>', desc = "Load Last Session" },
     { "<leader>qs", '<cmd>lua require("persistence").load()<cr>', desc = "Load Session" },
-  }
+  },
 })

@@ -17,7 +17,7 @@ if telescope_ok then
 
   local wk = require("which-key")
   wk.add({
-    { "<leader>f",  group = "file" },
+    { "<leader>f", group = "file" },
     { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Find Project" },
   })
 end

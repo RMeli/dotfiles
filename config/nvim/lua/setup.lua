@@ -10,15 +10,15 @@ opt.autoread = true -- reload file when changed from outside
 opt.updatetime = 300
 
 -- [[ filetypes ]]
-opt.encoding = "utf-8"     -- string encoding
+opt.encoding = "utf-8" -- string encoding
 opt.fileencoding = "utf-8" -- file encoding
 
 -- [[ context ]]
 opt.colorcolumn = "80,120"
-opt.number = true          -- show line numbers
+opt.number = true -- show line numbers
 opt.relativenumber = false -- show relative line numbers
-opt.cursorline = true      -- highlight current line
-opt.showmatch = true       -- highlight matching brakets
+opt.cursorline = true -- highlight current line
+opt.showmatch = true -- highlight matching brakets
 opt.list = true
 opt.showbreak = "↪"
 opt.listchars = "tab:→ "
@@ -39,9 +39,9 @@ opt.listchars:append("eol:↴")
 opt.autoindent = true -- auto-indent new lines
 opt.smartindent = true
 opt.smarttab = true
-opt.tabstop = 4      -- numbef of spaces
-opt.softtabstop = 4  -- number of spaces in inserti mode
-opt.shiftwidth = 4   -- indent size
+opt.tabstop = 4 -- numbef of spaces
+opt.softtabstop = 4 -- number of spaces in inserti mode
+opt.shiftwidth = 4 -- indent size
 opt.expandtab = true -- tabs are spaces
 
 -- [[ splits ]]
@@ -50,12 +50,12 @@ opt.splitbelow = true -- place new window below current
 
 -- [[ search ]]
 opt.ignorecase = true -- ignore case in search patterns
-opt.smartcase = true  -- override ignorecase if search contains caps
-opt.incsearch = true  -- use incremental search
-opt.hlsearch = true   -- highlight search matches
+opt.smartcase = true -- override ignorecase if search contains caps
+opt.incsearch = true -- use incremental search
+opt.hlsearch = true -- highlight search matches
 
 -- [[ theme ]]
-opt.syntax = "ON"        -- allow syntax highlighting
+opt.syntax = "ON" -- allow syntax highlighting
 opt.termguicolors = true -- enable term ui colors
 
 -- [[ text ]]

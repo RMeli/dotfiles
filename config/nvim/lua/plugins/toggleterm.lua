@@ -11,7 +11,7 @@ tt.setup({
   open_mapping = [[<c-\>]],
   insert_mapping = true, -- Open mapping also works in insert mode
   on_open = function()
-    vim.cmd("wa")        -- Save all buffers when opening a terminal
+    vim.cmd("wa") -- Save all buffers when opening a terminal
   end,
   -- direction = "float",
   float_opts = {
@@ -42,7 +42,7 @@ end
 local wk = require("which-key")
 
 wk.add({
-  { "<leader>t",  group = "term" },
+  { "<leader>t", group = "term" },
   { "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc = "Open LazyGit Terminal" },
-  { "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>",    desc = "Open HTop Terminal" },
+  { "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "Open HTop Terminal" },
 })
