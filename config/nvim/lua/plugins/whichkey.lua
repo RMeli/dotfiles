@@ -8,15 +8,7 @@ if not ok then
 end
 
 wk.setup({
-  window = {
-    border = "single",
-    position = "bottom",
-  },
-  -- icons = {
-  --   breadcrumb = "",
-  --   separator = "󰙡",
-  --   group = "",
-  -- },
+  preset="modern",
   disable = {
     buftypes = {},
     filetypes = { "TelescopePrompt" },
