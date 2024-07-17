@@ -8,7 +8,7 @@ if not ok then
 end
 
 require("nvim-tree").setup({
-  filters = { dotfiles = true },
+  filters = { dotfiles = false },
   renderer = {
     indent_markers = {
       enable = true,

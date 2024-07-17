@@ -211,6 +211,8 @@ return packer.startup(function(use)
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
   })
+  
+  use({"github/copilot.vim"})
 
   -- --- --
   -- LSP --
@@ -220,4 +222,5 @@ return packer.startup(function(use)
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   })
+
 end)
