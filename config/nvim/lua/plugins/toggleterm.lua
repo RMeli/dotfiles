@@ -13,11 +13,13 @@ tt.setup({
   on_open = function()
     vim.cmd("wa") -- Save all buffers when opening a terminal
   end,
-  -- direction = "float",
+  on_close = function()
+    vim.cmd("bufdo! e") -- Reload all bbuffers when closing a terminal
+  end,
+  direction = "float",
   float_opts = {
     border = "curved",
   },
-  direction = "float",
 })
 
 -- [[ terminals ]]
