@@ -17,6 +17,7 @@ tt.setup({
   float_opts = {
     border = "curved",
   },
+  direction = "float",
 })
 
 -- [[ terminals ]]
