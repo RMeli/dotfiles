@@ -25,10 +25,10 @@ local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
   sections = { "error", "warn" },
-  symbols = { error = "󰅘", warn = "" },
+  symbols = { error = "󰅘 ", warn = " " },
   colored = true,
   update_in_insert = true,
-  always_visible = true,
+  always_visible = false,
 }
 
 lualine.setup({
@@ -41,7 +41,8 @@ lualine.setup({
   sections = {
     -- https://github.com/nvim-lualine/lualine.nvim#available-components
     lualine_b = { branch, diff, diagnostics },
-    lualine_c = { "hostname", "filename" },
-    lualine_y = { "searchcount", "progress" },
+    lualine_c = { "filename" },
+    lualine_y = { "searchcount", "progress", "location"},
+    lualine_z = { "hostname" },
   },
 })
