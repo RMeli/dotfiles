@@ -34,10 +34,6 @@ nvim:
 	@echo ">>> Install Packer"
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim ${HOME}/.config/nvim/site/pack/packer/start/packer.nvim
 
-nv:
-	@echo ">>> Soft link nvchad custom configuration"
-	ln -sf ${PWD}/nvchad ${HOME}/.config/nvim/lua/custom
-
 module:
 	ln -sf ${PWD}/modulerc ${HOME}/.modulerc
 	ln -sf ${PWD}/modulefiles ${HOME}/.modulefiles
