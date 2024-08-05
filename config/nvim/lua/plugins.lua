@@ -214,6 +214,10 @@ return packer.startup(function(use)
   
   use({"github/copilot.vim"})
 
+  -- [[ markview.nvim]]
+  -- An experimental markdown previewer for NeoVim
+  use({"OXY2DEV/markview.nvim", requires={"nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons"}})
+
   -- --- --
   -- LSP --
   -- --- --
