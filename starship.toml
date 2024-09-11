@@ -10,18 +10,18 @@ error_symbol = "🚫 "
 disabled = true
 
 [cmake]
-format="[$symbol($version )]($style)"
-version_format="${major}.${minor}"
-symbol="CMake "
-style="blue"
-disabled=false
+format = "[$symbol($version )]($style)"
+version_format = "${major}.${minor}"
+symbol = "CMake "
+style = "blue"
+disabled = false
 
 [conda]
 ignore_base = false
 format = "[$symbol$environment](green) "
 
 [git_branch]
-format="[$symbol$branch(:$remote_branch)]($style) "
+format = "[$symbol$branch(:$remote_branch)]($style) "
 symbol = "🔀 "
 truncation_length = 10
 truncation_symbol = "…"
@@ -75,3 +75,5 @@ show_always = true
 [spack]
 format = '[$symbol$environment](dimmed blue) '
 
+[direnv]
+disabled = false
