@@ -22,7 +22,9 @@ direnv allow "${SPACK_BUILD_DIR}"
 mv "${ENVRC_TMP}" "${SPACK_SOURCE_DIR}/.envrc"
 direnv allow "${SPACK_SOURCE_DIR}"
 
+# Be friendly to LSPs
 mkdir -p "${SPACK_SOURCE_DIR}/build"
 ln -s "${SPACK_BUILD_DIR}/compile_commands.json" "${SPACK_SOURCE_DIR}/build/compile_commands.json"
 
-pushd "${SPACK_SOURCE_DIR}" || exit
+#pushd "${SPACK_SOURCE_DIR}" || exit
+cd "${SPACK_SOURCE_DIR}"

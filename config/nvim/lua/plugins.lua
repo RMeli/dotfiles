@@ -88,9 +88,7 @@ return packer.startup(function(use)
   -- [[ indent-blankline.nvim ]]
   -- Indent guides for Neovim
   use({ "lukas-reineke/indent-blankline.nvim" })
-
-  -- [[ toggleterm.nvim ]]
-  -- A neovim lua plugin to help easily manage multiple terminal windows
+  -- u neovim lua plugin to help easily manage multiple terminal windows
   use({
     "akinsho/toggleterm.nvim",
   })
