@@ -69,13 +69,15 @@ KEYS=$(curl -s -S --ssl-reqd \
     -d "{\"username\": \"$USERNAME\", \"password\": \"$PASSWORD\", \"otp\": \"$OTP\"}" \
     "$MFA_KEYS_URL")
 
+echo "${KEYS}"
+
 if [ $? != 0 ]; then
     exit 1
 fi
 
 echo "  Retrieving the SSH keys..."
 
-DICT_KEY=$(echo "${KEYS}" | cut -d \" -f 2)
+echo ${DICT_KEY}
 if [ "${DICT_KEY}" == "payload" ]; then
    MESSAGE=$(echo "${KEYS}" | cut -d \" -f 6)
    ! [ -z "${MESSAGE}" ] && echo "${MESSAGE}"
