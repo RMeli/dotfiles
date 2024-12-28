@@ -24,6 +24,14 @@ return {
         },
       },
       hide_dotfiles = false,
+      hide_gitignord = false,
+      hide_hidden = false,
+      never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+        '.DS_Store',
+      },
+      never_show_by_pattern = { -- uses glob style patterns
+        '.null-ls_*',
+      },
       hijack_netrw_behavior = 'open_current',
     },
     default_component_configs = {
