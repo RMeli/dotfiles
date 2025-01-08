@@ -38,6 +38,7 @@ return {
     end
   end,
   keys = {
+    { [[<c-\>]], '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal' },
     { '<leader>tg', '<cmd>lua _LAZYGIT_TOGGLE()<cr>', desc = 'Open LazyGit Terminal' },
     { '<leader>tt', '<cmd>lua _HTOP_TOGGLE()<cr>', desc = 'Open HTop Terminal' },
   },
