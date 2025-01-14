@@ -42,7 +42,7 @@ esac
 
 OP_ITEM="CSCS"
 USERNAME=$(op item get "$OP_ITEM" --fields label=username)
-PASSWORD=$(op item get "$OP_ITEM" --fields label=password)
+PASSWORD=$(op item get "$OP_ITEM" --fields label=password --reveal)
 OTP=$(op item get "$OP_ITEM" --otp)
 
 #Validate inputs
@@ -68,8 +68,6 @@ KEYS=$(curl -s -S --ssl-reqd \
     "${HEADERS[@]}" \
     -d "{\"username\": \"$USERNAME\", \"password\": \"$PASSWORD\", \"otp\": \"$OTP\"}" \
     "$MFA_KEYS_URL")
-
-echo "${KEYS}"
 
 if [ $? != 0 ]; then
     exit 1
