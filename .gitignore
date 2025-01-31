@@ -7,3 +7,10 @@
 # files
 config/nvim/undo/
 config/nvim/site/
+
+# SPACK
+spack.lock
+.spack-env/
+
+# Neovim
+lazy-lock.json

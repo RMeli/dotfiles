@@ -3,7 +3,7 @@ spack:
     - libtree
     - tmux
     - direnv
-    - htop
+    - htop +hwloc
     - neovim
     - llvm targets=x86 # Select one target to speedup compilation, doen't matter which one  
     - ripgrep
