@@ -1,0 +1,27 @@
+spack:
+  specs:
+    - libtree
+    - tmux
+    - direnv
+    - htop
+    - neovim
+    - llvm targets=x86 # Select one target to speedup compilation, doen't matter which one  
+    - ripgrep
+    - fzf
+    - bat
+    - ruby
+    - go
+    - rust +dev +docs
+    - node-js
+    - npm
+  concretizer:
+    unify: true
+  packages:
+    llvm:
+      require: 
+        - "@18"
+        - "~gold"
+        - "~libomptarget"
+  view:
+    default:
+      root: ${HOME}/${CLUSTER_NAME}/dev.view
