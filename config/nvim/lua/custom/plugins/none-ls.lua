@@ -20,7 +20,7 @@ return {
         -- null_ls.builtins.diagnostics.clang_check,
         formatting.clang_format,
         -- CMake
-        formatting.cmake_format,
+        -- formatting.cmake_format,
         -- Fortran
         formatting.fprettify,
         -- Python
