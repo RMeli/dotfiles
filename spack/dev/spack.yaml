@@ -5,7 +5,7 @@ spack:
     - direnv
     - htop +hwloc
     - neovim
-    - llvm targets=x86 # Select one target to speedup compilation, doen't matter which one  
+    - llvm
     - ripgrep
     - fzf
     - bat
@@ -14,11 +14,18 @@ spack:
     - rust +dev +docs
     - node-js
     - npm
+    - ccache
+    - python
+    - py-pip
   concretizer:
     unify: true
   packages:
+    python:
+      require:
+        - "@3.11"
     llvm:
       require: 
+        - "targets=x86" # Select one target to speedup compilation, doen't matter which one
         - "@18"
         - "~gold"
         - "~libomptarget"
