@@ -61,8 +61,8 @@ cp "${ENVRC_TMP}" "${SPACK_BUILD_DIR}/.envrc"
 direnv allow "${SPACK_BUILD_DIR}"
 
 # Add .envrc in SPACK_SOURCE_DIR so that nvim integrated terminal is correctly set up
-# mv "${ENVRC_TMP}" "${SPACK_SOURCE_DIR}/.envrc"
-# direnv allow "${SPACK_SOURCE_DIR}"
+ mv "${ENVRC_TMP}" "${SPACK_SOURCE_DIR}/.envrc"
+ direnv allow "${SPACK_SOURCE_DIR}"
 
 # Be friendly to LSPs
 mkdir -p "${SPACK_SOURCE_DIR}/build"
