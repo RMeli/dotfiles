@@ -30,7 +30,7 @@ vim:
 
 nvim:
 	@echo ">>> Soft link .config/nvim"
-	ln -sf ${PWD}/config/nvim ${HOME}/.config/nvim
+	ln -sf ${PWD}/config/nvim ${XDG_CONFIG_HOME}/nvim
 
 module:
 	ln -sf ${PWD}/modulerc ${HOME}/.modulerc
@@ -41,9 +41,10 @@ yabai:
 
 tmux:
 	@echo ">>> Soft link .tmux.conf"
-	ln -sf ${PWD}/tmux.conf ${HOME}/.tmux.conf
+	mkdir -p ${XDG_CONFIG_HOME}/tmux
+	ln -sf ${PWD}/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
 	@echo ">>> Install Tmux Plugin Manager (TMP)"
-	git clone --depth 1 https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
+	git clone --depth 1 https://github.com/tmux-plugins/tpm ${XDG_CONFIG_HOME}/tmux/plugins/tpm
 
 skhd:
 	mkdir -p ${HOME}/.config/skhd
