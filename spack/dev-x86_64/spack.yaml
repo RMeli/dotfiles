@@ -1,0 +1,34 @@
+spack:
+  specs:
+    - libtree
+    - tmux
+    - direnv
+    - htop +hwloc
+    - neovim
+    - llvm
+    - ripgrep
+    - fzf
+    - bat
+    - ruby
+    - go
+    - rust +dev
+    - node-js
+    - npm
+    - ccache
+    - python
+    - py-uv
+  concretizer:
+    unify: true
+  packages:
+    python:
+      require:
+        - "@3.11"
+    llvm:
+      require: 
+        - "targets=x86" # Select one target to speedup compilation, doen't matter which one
+        - "@18"
+        - "~gold"
+        - "~libomptarget"
+  view:
+    default:
+      root: ${HOME}/x86_64-dev.view
