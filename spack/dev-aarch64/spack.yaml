@@ -11,7 +11,7 @@ spack:
     - bat
     - ruby
     - go
-    - rust +dev +docs
+    - rust +dev
     - node-js
     - npm
     - ccache
@@ -29,6 +29,7 @@ spack:
         - "@18"
         - "~gold"
         - "~libomptarget"
+  #view: false
   view:
     default:
-      root: ${HOME}/${CLUSTER_NAME}/dev.view
+      root: ~/aarch64-dev.view
