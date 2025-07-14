@@ -65,8 +65,7 @@ direnv allow "${SPACK_BUILD_DIR}"
  direnv allow "${SPACK_SOURCE_DIR}"
 
 # Be friendly to LSPs
-mkdir -p "${SPACK_SOURCE_DIR}/build"
-ln -sf "${SPACK_BUILD_DIR}/compile_commands.json" "${SPACK_SOURCE_DIR}/build/compile_commands.json"
+echo "CompileFlags:\n\tCompilationDatabase: ${SPACK_BUILD_DIR}" > "${SPACK_SOURCE_DIR}/.clangd"
 
 # Remove dangling symlinks (from previous builds)
 find ${SPACK_SOURCE_DIR} -xtype l -delete

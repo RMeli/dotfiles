@@ -16,7 +16,7 @@ spack:
     - npm
     - ccache
     - python
-    - py-pip
+    - py-uv
   concretizer:
     unify: true
   packages:
