@@ -1,35 +1,58 @@
 spack:
   specs:
-    - libtree
-    - tmux
-    - direnv
-    - htop +hwloc
-    - neovim
-    - llvm
-    - ripgrep
-    - fzf
-    - bat
-    - ruby
-    - go
-    - rust +dev
-    - node-js
-    - npm
-    - ccache
-    - python
-    - py-uv
+  - libtree
+  - tmux
+  - direnv
+  - htop +hwloc
+  - neovim
+  - llvm
+  - ripgrep
+  - fzf
+  - bat
+  - ruby
+  - go
+  - rust +dev ~docs
+  - node-js
+  - npm
+  - ccache
+  - python
+  - py-uv
+  - py-ruff
+  - py-black
+  - py-isort
+  - py-flake8
+  - py-mypy
+  - py-cmake-format
+  - py-fprettify
   concretizer:
     unify: true
   packages:
+    gcc:
+      externals:
+      - spec: gcc@7.5.0 languages:='c,c++,fortran'
+        prefix: /usr
+        extra_attributes:
+          compilers:
+            c: /usr/bin/gcc
+            cxx: /usr/bin/g++
+            fortran: /usr/bin/gfortran
+      - spec: gcc@12.3.0 languages:='c,c++,fortran'
+        prefix: /usr
+        extra_attributes:
+          compilers:
+            c: /usr/bin/gcc-12
+            cxx: /usr/bin/g++-12
+            fortran: /usr/bin/gfortran-12
     python:
       require:
-        - "@3.11"
+      - '@3.11'
     llvm:
-      require: 
-        - "targets=x86" # Select one target to speedup compilation, doen't matter which one
-        - "@18"
-        - "~gold"
-        - "~libomptarget"
-  #view: false
+      require:
+      - targets=x86     # Select one target to speedup compilation, doen't matter which one
+      - '@18'
+      - ~gold
+      - ~libomptarget
   view:
     default:
-      root: ~/aarch64-dev.view
+      root: /capstor/store/cscs/cscs/csstaff/rmeli/aarch64-dev.view
+      link: run

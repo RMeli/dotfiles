@@ -1,0 +1,10 @@
+name: dev
+store: /user-tools
+spack:
+  repo: https://github.com/spack/spack.git
+  commit: v1.0.0
+  packages:
+    repo: https://github.com/spack/spack-packages.git
+    commit: v2025.07.0 
+modules: False
+version: 2
