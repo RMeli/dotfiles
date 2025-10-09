@@ -24,6 +24,12 @@ warn_bs() {
 	echo "WARN└	  build_stage: <path-to-git-repo>/spack-build-stage/"
 }
 
+if [ "$0" = "$BASH_SOURCE" ]; then
+    echo "ERROR: the '$BASH_SOURCE' script must be sourced, not executed."
+    help
+    exit 1
+fi
+
 if [[ $# -ne 2 ]]; then
 	help
 	return
@@ -32,17 +38,18 @@ fi
 SPACK_ENV=$1
 SPACK_SPEC=$2
 
-if command -v ccache 2>&1 > /dev/null; then
-   export CMAKE_CXX_COMPILER_LAUNCHER=ccache
-   export CMAKE_C_COMPILER_LAUNCHER=ccache
-   export CMAKE_Fortran_COMPILER_LAUNCHER=ccache
-   export CMAKE_CUDA_COMPILER_LAUNCHER=ccache
-   export CMAKE_HIP_COMPILER_LAUNCHER=ccache
-fi
+# WARN: Does not work with Kokkos!
+# WARN: This also modifies the current shell environment
+# if command -v ccache 2>&1 > /dev/null; then
+#    export CMAKE_CXX_COMPILER_LAUNCHER=ccache
+#    export CMAKE_C_COMPILER_LAUNCHER=ccache
+#    export CMAKE_Fortran_COMPILER_LAUNCHER=ccache
+#    export CMAKE_CUDA_COMPILER_LAUNCHER=ccache
+#    export CMAKE_HIP_COMPILER_LAUNCHER=ccache
+# fi
 
-# WARN: This only work if $SPACK_SPEC is just after the 'develop' key
-grep -A 2 "develop:" "${SPACK_ENV}/spack.yaml" | grep -q "${SPACK_SPEC}:" || error_dev "${SPACK_SPEC}" || return
-grep -q "build_stage:" "${SPACK_ENV}/spack.yaml" || warn_bs
+yq ".spack.develop | has(\"${SPACK_SPEC}\")" "$SPACK_ENV/spack.yaml" | grep -q "true" || error_dev "${SPACK_SPEC}" || return
+yq ".spack.config | has(\"build_stage\")" "$SPACK_ENV/spack.yaml" | grep -q "true" || warn_bs
 
 spack -e "${SPACK_ENV}" clean || return
 spack -e "${SPACK_ENV}" concretize -f || return
@@ -69,5 +76,5 @@ echo "CompileFlags:\n\tCompilationDatabase: ${SPACK_BUILD_DIR}" > "${SPACK_SOURC
 
 # Remove dangling symlinks (from previous builds)
 find ${SPACK_SOURCE_DIR} -xtype l -delete
-	
+
 pushd "${SPACK_SOURCE_DIR}" || return
