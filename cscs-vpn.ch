@@ -7,4 +7,4 @@ USER=$(op item get "ETHZ VPN" --fields label=username)
 PASSWORD=$(op item get "ETHZ VPN" --fields label=password --reveal)
 OTP=$(op item get "ETHZ" --otp)
 
-echo -e ${PASSWORD}"\n"${OTP} | sudo openconnect --passwd-on-stdin --user=${USER} -g cscs --useragent AnyConnect sslvpn.ethz.ch/cscs 
+echo -e ${PASSWORD}"\n"${OTP} | sudo openconnect --passwd-on-stdin --user=${USER} -g cscs --useragent AnyConnect --no-xmlpost sslvpn.ethz.ch/cscs 
