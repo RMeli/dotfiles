@@ -1,13 +1,5 @@
 .DEFAULT_GOAL := help
 
-help:
-	@echo "=== Install Dotfiles ==="
-	@echo "bash:\t\tinstall .bash_profile"
-	@echo "vim:\t\tinstall .vimrc"
-	@echo "nvchad:\t\tinstall nvchad custom config"
-	@echo "conda:\t\tinstall .condarc"
-	@echo "tmux:\t\tinstall .tmux.conf"
-
 bashshell:
 	@echo "Soft link bash files"
 	ln -sf ${PWD}/bash_profile ${HOME}/.bash_profile
@@ -15,7 +7,6 @@ bashshell:
 	ln -sf ${PWD}/bash/functions.sh ${HOME}/.functions.sh
 
 conda:
-	@echo "Soft link .condarc"
 	ln -sf ${PWD}/condarc ${HOME}/.condarc
 
 starship:
@@ -32,10 +23,8 @@ module:
 	ln -sf ${PWD}/modulefiles ${HOME}/.modulefiles
 
 tmux:
-	@echo ">>> Soft link .tmux.conf"
 	mkdir -p ${XDG_CONFIG_HOME}/tmux
 	ln -sf ${PWD}/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
-	@echo ">>> Install Tmux Plugin Manager (TMP)"
 	git clone --depth 1 https://github.com/tmux-plugins/tpm ${XDG_CONFIG_HOME}/tmux/plugins/tpm
 
 cscs:
