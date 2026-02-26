@@ -21,12 +21,7 @@ conda:
 starship:
 	@echo "Soft link starship.toml"
 	mkdir -p ${HOME}/.config
-	ln -sf ${PWD}/starship.toml ${HOME}/.config/starship.toml
-	#sh installers/starship.sh 
-
-vim:
-	@echo "Soft link .vimrc"
-	ln -sf ${PWD}/vimrc ${HOME}/.vimrc
+	ln -sf ${PWD}/starship.toml ${XDG_CONFIG_HOME}/starship.toml
 
 nvim:
 	@echo ">>> Soft link .config/nvim"
@@ -36,9 +31,6 @@ module:
 	ln -sf ${PWD}/modulerc ${HOME}/.modulerc
 	ln -sf ${PWD}/modulefiles ${HOME}/.modulefiles
 
-yabai:
-	ln -sf ${PWD}/yabairc ${HOME}/.yabairc
-
 tmux:
 	@echo ">>> Soft link .tmux.conf"
 	mkdir -p ${XDG_CONFIG_HOME}/tmux
@@ -46,10 +38,6 @@ tmux:
 	@echo ">>> Install Tmux Plugin Manager (TMP)"
 	git clone --depth 1 https://github.com/tmux-plugins/tpm ${XDG_CONFIG_HOME}/tmux/plugins/tpm
 
-skhd:
-	mkdir -p ${HOME}/.config/skhd
-	ln -sf ${PWD}/skhdrc ${HOME}/.config/skhd/skhdrc
-
-spack:
-	@echo "Installing Spack (RMeli/Spack)"
-	sh installers/spack.sh
+cscs:
+	ln -sf ${PWD}/cscs-keygen.sh ${HOME}
+	ln -sf ${PWD}/cscs-vpn.sh ${HOME}
