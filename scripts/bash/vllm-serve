@@ -10,6 +10,7 @@ set -euo pipefail
 
 # ── Defaults ─────────────────────────────────────────────────────────────────
 MODEL="${MODEL:-Qwen/Qwen3-Coder-Next}"
+TOOL_CALL_PARSER="${MODEL:-qwen3_coder}"
 SERVED_NAME="${SERVED_NAME:-qwen3-coder-next}"
 REMOTE_PORT="${REMOTE_PORT:-8000}"
 WALLTIME="${WALLTIME:-08:00:00}"
@@ -48,6 +49,7 @@ cat > "$REMOTE_DIR/vllm-serve.sh" <<'SERVE_EOF'
 set -euo pipefail
 
 VLLM_MODEL="${MODEL:-Qwen/Qwen3-Coder-Next}"
+VLLM_TOOL_CALL_PARSER="${TOOL_CALL_PARSER:-qwen3_coder}"
 VLLM_PORT="${PORT:-8000}"
 VLLM_TP="${TP:-4}"
 VLLM_MAX_MODEL_LEN="${MAX_MODEL_LEN:-131072}"
@@ -69,6 +71,7 @@ echo "  Model                  : ${VLLM_MODEL}"
 echo "  Tensor Parallel        : ${VLLM_TP}"
 echo "  Port                   : ${VLLM_PORT}"
 echo "  Max context            : ${VLLM_MAX_MODEL_LEN}"
+echo "  Tool call parser       : ${VLLM_TOOL_CALL_PARSER}"
 echo "  Extra arguments        : ${VLLM_EXTRA_ARGS}"
 echo "  Visible GPUs           : ${CUDA_VISIBLE_DEVICES}"
 echo "  HF cache directory     : ${HF_HOME}"
@@ -90,7 +93,7 @@ exec python3 -m vllm.entrypoints.openai.api_server \
     --no-enable-log-requests \
     --enable-prefix-caching \
     --enable-auto-tool-choice \
-    --tool-call-parser hermes \
+    --tool-call-parser "${VLLM_TOOL_CALL_PARSER}" \
     ${VLLM_EXTRA_ARGS}
 SERVE_EOF
 
