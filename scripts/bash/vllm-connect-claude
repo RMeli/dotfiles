@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+# ──────────────────────────────────────────────────────────────────────────────
+# claude-vllm-connect: Connect Claude Code to a running vLLM server on CSCS.
+#
+# Reads the state file written by claude-vllm-server, opens an SSH tunnel,
+# and launches Claude Code. On exit, the tunnel is closed but the server
+# keeps running — so you can reconnect without waiting for model loading.
+# ──────────────────────────────────────────────────────────────────────────────
+set -euo pipefail
+
+LOCAL_PORT="${LOCAL_PORT:-8000}"
+CLUSTER="${CLUSTER:-daint}"
+SSH_USER="${SSH_USER:-rmeli}"
+
+STATE_FILE="server.state"
+
+TUNNEL_PID=""
+cleanup() {
+    echo ""
+    echo "Closing SSH tunnel..."
+
+    if [[ -n "$TUNNEL_PID" ]] && kill -0 "$TUNNEL_PID" 2>/dev/null; then
+        kill "$TUNNEL_PID" 2>/dev/null || true
+        wait "$TUNNEL_PID" 2>/dev/null || true
+    fi
+
+    echo "Tunnel closed. Server is still running."
+    echo "  To reconnect : ./claude-vllm-connect"
+    echo "  To stop server: ssh $CLUSTER scancel $SLURM_JOBID"
+}
+trap cleanup EXIT INT TERM
+
+# ── Read state file ──────────────────────────────────────────────────────────
+echo "Reading server state from $CLUSTER..."
+
+STATE_CONTENT=$(ssh "$CLUSTER" "cat \$SCRATCH/vllm-claude-code/$STATE_FILE 2>/dev/null" || true)
+
+if [[ -z "$STATE_CONTENT" ]]; then
+    echo "ERROR: No state file found. Is the server running?" >&2
+    echo "  Start it with: ./claude-vllm-server" >&2
+    exit 1
+fi
+
+# Parse state file
+eval "$STATE_CONTENT"
+
+# Verify required variables are set
+if [[ -z "${SLURM_JOBID:-}" || -z "${NODE:-}" || -z "${REMOTE_PORT:-}" || -z "${SERVED_NAME:-}" ]]; then
+    echo "ERROR: State file is incomplete. Re-run ./claude-vllm-server" >&2
+    exit 1
+fi
+
+echo ""
+echo "============================================================"
+echo "  Server job  : $SLURM_JOBID"
+echo "  Node        : $NODE"
+echo "  Remote port : $REMOTE_PORT"
+echo "  Local port  : $LOCAL_PORT"
+echo "  Model       : $SERVED_NAME"
+echo "============================================================"
+echo ""
+
+# ── Verify job is still running ──────────────────────────────────────────────
+JOB_STATE=$(ssh "$CLUSTER" "squeue -j $SLURM_JOBID -h -o '%T'" 2>/dev/null || echo "")
+
+if [[ "$JOB_STATE" != "RUNNING" ]]; then
+    echo "ERROR: Job $SLURM_JOBID is not running (state: '${JOB_STATE:-gone}')." >&2
+    echo "  Re-start the server with: ./claude-vllm-server" >&2
+
+    # Clean stale state file
+    ssh "$CLUSTER" "rm -f \$SCRATCH/vllm-claude-code/$STATE_FILE" 2>/dev/null || true
+    SLURM_JOBID=""
+    exit 1
+fi
+
+# ── Verify server is healthy ─────────────────────────────────────────────────
+echo -n "Checking server health..."
+if ssh "$CLUSTER" "curl -s --connect-timeout 5 http://$NODE:$REMOTE_PORT/health" &>/dev/null; then
+    echo " OK"
+else
+    echo " FAILED"
+    echo "WARNING: Server health check failed. It may have crashed." >&2
+    echo "  Check logs: ssh $CLUSTER 'tail -50 \$SCRATCH/vllm-claude-code/vllm_${SLURM_JOBID}.log'" >&2
+    echo ""
+    read -p "Continue anyway? [y/N] " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        SLURM_JOBID=""
+        exit 1
+    fi
+fi
+
+# ── Open SSH tunnel ──────────────────────────────────────────────────────────
+echo "Opening SSH tunnel: localhost:$LOCAL_PORT -> $NODE:$REMOTE_PORT"
+ssh -N -J ela,"$CLUSTER" \
+    -L "$LOCAL_PORT":localhost:"$REMOTE_PORT" \
+    -o ServerAliveInterval=60 \
+    -o ServerAliveCountMax=3 \
+    -o StrictHostKeyChecking=no \
+    -o UserKnownHostsFile=/dev/null \
+    "${SSH_USER}@${NODE}" &
+TUNNEL_PID=$!
+
+sleep 3
+
+if ! kill -0 "$TUNNEL_PID" 2>/dev/null; then
+    echo "ERROR: SSH tunnel failed to start" >&2
+    exit 1
+fi
+
+# Verify tunnel works
+if curl -s --connect-timeout 5 "http://localhost:$LOCAL_PORT/health" &>/dev/null; then
+    echo "Tunnel verified."
+else
+    echo "WARNING: Tunnel is up but local health check failed."
+fi
+
+# ── Show available models ────────────────────────────────────────────────────
+echo ""
+MODELS_RESPONSE=$(curl -s "http://localhost:$LOCAL_PORT/v1/models" 2>/dev/null || echo "{}")
+echo "Available models: $MODELS_RESPONSE" | head -1
+echo ""
+
+# ── Launch Claude Code ───────────────────────────────────────────────────────
+echo "============================================================"
+echo "  Launching Claude Code with model: $SERVED_NAME"
+echo "  vLLM server: http://localhost:$LOCAL_PORT"
+echo "  SLURM job: $SLURM_JOBID on $NODE"
+echo ""
+echo "  Press Ctrl+C or exit Claude Code to close the tunnel."
+echo "  The server will keep running for reconnection."
+echo "============================================================"
+echo ""
+
+ANTHROPIC_BASE_URL="http://localhost:$LOCAL_PORT" \
+ANTHROPIC_API_KEY="dummy" \
+ANTHROPIC_AUTH_TOKEN="dummy" \
+ANTHROPIC_DEFAULT_OPUS_MODEL="$SERVED_NAME" \
+ANTHROPIC_DEFAULT_SONNET_MODEL="$SERVED_NAME" \
+ANTHROPIC_DEFAULT_HAIKU_MODEL="$SERVED_NAME" \
+claude --model "$SERVED_NAME"
+
+echo ""
+echo "Claude Code exited."
