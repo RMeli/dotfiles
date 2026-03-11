@@ -10,7 +10,7 @@ set -euo pipefail
 
 # ── Defaults ─────────────────────────────────────────────────────────────────
 MODEL="${MODEL:-Qwen/Qwen3-Coder-Next}"
-TOOL_CALL_PARSER="${MODEL:-qwen3_coder}"
+TOOL_CALL_PARSER="${TOOL_CALL_PARSER:-qwen3_coder}"
 SERVED_NAME="${SERVED_NAME:-qwen3-coder-next}"
 REMOTE_PORT="${REMOTE_PORT:-8000}"
 WALLTIME="${WALLTIME:-08:00:00}"
@@ -21,8 +21,6 @@ VLLM_IMAGE="${VLLM_IMAGE:-vllm/vllm-openai:v0.17.0}"
 TP="${TP:-4}"
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-131072}"
 
-# Remote working directory
-REMOTE_DIR="\$SCRATCH/vllm-claude-code"
 STATE_FILE="server.state"
 
 # ── Create remote files ──────────────────────────────────────────────────────
@@ -113,16 +111,17 @@ echo ""
 
 # ── Submit the job ───────────────────────────────────────────────────────────
 echo "============================================================"
-echo "  Model       : $MODEL"
-echo "  Served name : $SERVED_NAME"
-echo "  Remote port : $REMOTE_PORT"
-echo "  Walltime    : $WALLTIME"
-echo "  Partition   : $PARTITION"
-echo "  Account     : $ACCOUNT"
-echo "  Cluster     : $CLUSTER"
-echo "  Image       : $VLLM_IMAGE"
-echo "  TP          : $TP"
-echo "  Max context : $MAX_MODEL_LEN"
+echo "  Model            : $MODEL"
+echo "  Tool call parser : $TOOL_CALL_PARSER"
+echo "  Served name      : $SERVED_NAME"
+echo "  Remote port      : $REMOTE_PORT"
+echo "  Walltime         : $WALLTIME"
+echo "  Partition        : $PARTITION"
+echo "  Account          : $ACCOUNT"
+echo "  Cluster          : $CLUSTER"
+echo "  Image            : $VLLM_IMAGE"
+echo "  TP               : $TP"
+echo "  Max context      : $MAX_MODEL_LEN"
 echo "============================================================"
 echo ""
 
@@ -134,12 +133,12 @@ SBATCH_SCRIPT=$(cat <<SBATCH_EOF
 #SBATCH --ntasks=1
 #SBATCH --gpus=4
 #SBATCH --time=$WALLTIME
+#SBATCH --chdir=\$SCRATCH/vllm-claude-code
 #SBATCH --output=vllm_%j.log
 #SBATCH --account=$ACCOUNT
 
-cd \$SCRATCH/vllm-claude-code
-
 MODEL="$MODEL" \\
+TOOL_CALL_PARSER=$TOOL_CALL_PARSER \\
 PORT=$REMOTE_PORT \\
 TP=$TP \\
 MAX_MODEL_LEN=$MAX_MODEL_LEN \\
@@ -223,6 +222,7 @@ NODE=$NODE
 REMOTE_PORT=$REMOTE_PORT
 SERVED_NAME=$SERVED_NAME
 MODEL=$MODEL
+TOOL_CALL_PARSER=$TOOL_CALL_PARSER
 EOF"
 
 echo ""

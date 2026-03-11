@@ -10,7 +10,7 @@ set -euo pipefail
 
 LOCAL_PORT="${LOCAL_PORT:-8000}"
 CLUSTER="${CLUSTER:-daint}"
-SSH_USER="${SSH_USER:-rmeli}"
+SSH_USER="${SSH_USER:-$USER}"
 
 STATE_FILE="server.state"
 
@@ -26,7 +26,9 @@ cleanup() {
 
     echo "Tunnel closed. Server is still running."
     echo "  To reconnect : ./claude-vllm-connect"
-    echo "  To stop server: ssh $CLUSTER scancel $SLURM_JOBID"
+    if [[ -n "${SLURM_JOBID:-}" ]]; then
+        echo "  To stop server: ssh $CLUSTER scancel $SLURM_JOBID"
+    fi
 }
 trap cleanup EXIT INT TERM
 
@@ -134,7 +136,6 @@ echo ""
 
 ANTHROPIC_BASE_URL="http://localhost:$LOCAL_PORT" \
 ANTHROPIC_API_KEY="dummy" \
-ANTHROPIC_AUTH_TOKEN="dummy" \
 ANTHROPIC_DEFAULT_OPUS_MODEL="$SERVED_NAME" \
 ANTHROPIC_DEFAULT_SONNET_MODEL="$SERVED_NAME" \
 ANTHROPIC_DEFAULT_HAIKU_MODEL="$SERVED_NAME" \
