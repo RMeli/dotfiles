@@ -1,11 +1,17 @@
 spack:
   specs:
+  # Development
+  - gcc@14
+  - llvm@21
+  - cuda@12.9
+  - cmake
+  - ninja
+  - hwloc +cuda +nvml
   - libtree
   - tmux
   - direnv
   - htop +hwloc
   - neovim
-  - llvm@21
   - ripgrep
   - fzf
   - bat
@@ -22,7 +28,6 @@ spack:
   - jq
   - yq
   - btop
-  - cuda@12.9
   - gh
   - starship
 #  - julia
