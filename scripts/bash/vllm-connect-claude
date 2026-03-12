@@ -35,7 +35,7 @@ trap cleanup EXIT INT TERM
 # ── Read state file ──────────────────────────────────────────────────────────
 echo "Reading server state from $CLUSTER..."
 
-STATE_CONTENT=$(ssh "$CLUSTER" "cat \$SCRATCH/vllm-claude-code/$STATE_FILE 2>/dev/null" || true)
+STATE_CONTENT=$(ssh "$CLUSTER" "cat \$SCRATCH/vllm-server/$STATE_FILE 2>/dev/null" || true)
 
 if [[ -z "$STATE_CONTENT" ]]; then
     echo "ERROR: No state file found. Is the server running?" >&2
@@ -70,7 +70,7 @@ if [[ "$JOB_STATE" != "RUNNING" ]]; then
     echo "  Re-start the server with: ./claude-vllm-server" >&2
 
     # Clean stale state file
-    ssh "$CLUSTER" "rm -f \$SCRATCH/vllm-claude-code/$STATE_FILE" 2>/dev/null || true
+    ssh "$CLUSTER" "rm -f \$SCRATCH/vllm-server/$STATE_FILE" 2>/dev/null || true
     SLURM_JOBID=""
     exit 1
 fi
@@ -82,7 +82,7 @@ if ssh "$CLUSTER" "curl -s --connect-timeout 5 http://$NODE:$REMOTE_PORT/health"
 else
     echo " FAILED"
     echo "WARNING: Server health check failed. It may have crashed." >&2
-    echo "  Check logs: ssh $CLUSTER 'tail -50 \$SCRATCH/vllm-claude-code/vllm_${SLURM_JOBID}.log'" >&2
+    echo "  Check logs: ssh $CLUSTER 'tail -50 \$SCRATCH/vllm-server/vllm_${SLURM_JOBID}.log'" >&2
     echo ""
     read -p "Continue anyway? [y/N] " -n 1 -r
     echo
