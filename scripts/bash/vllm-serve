@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ──────────────────────────────────────────────────────────────────────────────
-# claude-vllm-server: Submit a vLLM inference server job on CSCS Alps.
+# vllm-serve: Submit a vLLM inference server job on CSCS Alps.
 #
 # Creates remote files, submits the SLURM job, and waits until the server is
 # ready. Writes a state file that claude-vllm-connect can read.
@@ -13,7 +13,7 @@ MODEL="${MODEL:-Qwen/Qwen3-Coder-Next}"
 TOOL_CALL_PARSER="${TOOL_CALL_PARSER:-qwen3_coder}"
 SERVED_NAME="${SERVED_NAME:-qwen3-coder-next}"
 REMOTE_PORT="${REMOTE_PORT:-8000}"
-WALLTIME="${WALLTIME:-08:00:00}"
+WALLTIME="${WALLTIME:-12:00:00}"
 PARTITION="${PARTITION:-normal}"
 ACCOUNT="${ACCOUNT:-csstaff}"
 CLUSTER="${CLUSTER:-daint}"
@@ -27,7 +27,7 @@ STATE_FILE="server.state"
 echo "Setting up remote environment on $CLUSTER..."
 
 ssh "$CLUSTER" bash -s <<'SETUP_EOF'
-REMOTE_DIR="$SCRATCH/vllm-claude-code"
+REMOTE_DIR="$SCRATCH/vllm-server"
 mkdir -p "$REMOTE_DIR"
 
 # ── vllm.toml (EDF file) ──
@@ -104,7 +104,7 @@ echo "Remote files created in $REMOTE_DIR"
 SETUP_EOF
 
 # Patch the TOML with the actual image name
-ssh "$CLUSTER" "sed -i 's|VLLM_IMAGE_PLACEHOLDER|$VLLM_IMAGE|' \$SCRATCH/vllm-claude-code/vllm.toml"
+ssh "$CLUSTER" "sed -i 's|VLLM_IMAGE_PLACEHOLDER|$VLLM_IMAGE|' \$SCRATCH/vllm-server/vllm.toml"
 
 echo "Remote setup complete."
 echo ""
@@ -127,13 +127,13 @@ echo ""
 
 SBATCH_SCRIPT=$(cat <<SBATCH_EOF
 #!/bin/bash
-#SBATCH --job-name=vllm-claude
+#SBATCH --job-name=vllm-serve
 #SBATCH --partition=$PARTITION
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --gpus=4
 #SBATCH --time=$WALLTIME
-#SBATCH --chdir=\$SCRATCH/vllm-claude-code
+#SBATCH --chdir=\$SCRATCH/vllm-server
 #SBATCH --output=vllm_%j.log
 #SBATCH --account=$ACCOUNT
 
@@ -171,7 +171,7 @@ while true; do
             ;;
         PENDING|CONFIGURING|REQUEUED)
             echo -n "."
-            sleep 5
+            sleep 10
             ;;
         COMPLETED|FAILED|CANCELLED|TIMEOUT|""|UNKNOWN)
             echo ""
@@ -180,7 +180,7 @@ while true; do
             ;;
         *)
             echo -n "."
-            sleep 5
+            sleep 10
             ;;
     esac
 done
@@ -203,7 +203,7 @@ while (( WAITED < MAX_WAIT )); do
         break
     fi
     echo -n "."
-    sleep 10
+    sleep 60
     WAITED=$((WAITED + 10))
 done
 
@@ -211,12 +211,12 @@ if (( WAITED >= MAX_WAIT )); then
     echo ""
     echo "ERROR: vLLM server did not become ready within $MAX_WAIT seconds." >&2
     echo "Check the job log:"
-    echo "  ssh $CLUSTER 'tail -50 \$SCRATCH/vllm-claude-code/vllm_${SLURM_JOBID}.log'" >&2
+    echo "  ssh $CLUSTER 'tail -50 \$SCRATCH/vllm-server/vllm_${SLURM_JOBID}.log'" >&2
     exit 1
 fi
 
 # ── Write state file ─────────────────────────────────────────────────────────
-ssh "$CLUSTER" "cat > \$SCRATCH/vllm-claude-code/$STATE_FILE <<EOF
+ssh "$CLUSTER" "cat > \$SCRATCH/vllm-server/$STATE_FILE <<EOF
 SLURM_JOBID=$SLURM_JOBID
 NODE=$NODE
 REMOTE_PORT=$REMOTE_PORT
@@ -241,5 +241,5 @@ echo "  To stop the server:"
 echo "    ssh $CLUSTER scancel $SLURM_JOBID"
 echo ""
 echo "  To check logs:"
-echo "    ssh $CLUSTER 'tail -f \$SCRATCH/vllm-claude-code/vllm_${SLURM_JOBID}.log'"
+echo "    ssh $CLUSTER 'tail -f \$SCRATCH/vllm-server/vllm_${SLURM_JOBID}.log'"
 echo "============================================================"
