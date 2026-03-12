@@ -56,8 +56,9 @@ mounts = ["/capstor", "/iopsstor", "/users"]
 workdir = "${PWD}"
 
 [annotations]
-com.hooks.aws_ofi_nccl.enabled = "true"
-com.hooks.aws_ofi_nccl.variant = "cuda12"
+com.hooks.netstack.source = "artifact"
+#com.hooks.aws_ofi_nccl.enabled = "true"
+#com.hooks.aws_ofi_nccl.variant = "cuda12"
 
 [env]
 NCCL_DEBUG="INFO"
