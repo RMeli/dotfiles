@@ -26,7 +26,3 @@ tmux:
 	mkdir -p ${XDG_CONFIG_HOME}/tmux
 	ln -sf ${PWD}/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
 	git clone --depth 1 https://github.com/tmux-plugins/tpm ${XDG_CONFIG_HOME}/tmux/plugins/tpm
-
-cscs:
-	ln -sf ${PWD}/cscs-keygen.sh ${HOME}
-	ln -sf ${PWD}/cscs-vpn.sh ${HOME}
