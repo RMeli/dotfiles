@@ -8,7 +8,7 @@
 
 set -euo pipefail
 
-# ── Defaults ─────────────────────────────────────────────────────────────────
+# ── Defaults ──────────────────────────────────────────────────────────────────
 MODEL="${MODEL:-Qwen/Qwen3-Coder-Next}"
 TOOL_CALL_PARSER="${TOOL_CALL_PARSER:-qwen3_coder}"
 SERVED_NAME="${SERVED_NAME:-qwen3-coder-next}"
@@ -22,10 +22,23 @@ TP="${TP:-4}"
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-131072}"
 
 STATE_FILE="server.state"
+CLEANUP_DIR=true
 
 # ── Resolve remote scratch path ───────────────────────────────────────────────
 REMOTE_SCRATCH=$(ssh "$CLUSTER" 'echo "$SCRATCH"')
-REMOTE_DIR="$REMOTE_SCRATCH/vllm-server"
+STATE_FILE="server.state"
+REMOTE_STATE_DIR="$REMOTE_SCRATCH/vllm-server"
+
+# Check if another server is already running on this cluster
+EXISTING_STATE=$(ssh "$CLUSTER" "cat $REMOTE_STATE_DIR/$STATE_FILE 2>/dev/null" || true)
+if [[ -n "$EXISTING_STATE" ]]; then
+    echo "ERROR: Another vLLM server is already running on $CLUSTER." >&2
+    echo "  Stop the existing server before starting a new one." >&2
+    echo "  Use: ssh $CLUSTER scancel \$(grep SLURM_JOBID $REMOTE_STATE_DIR/$STATE_FILE | cut -d= -f2)" >&2
+    exit 1
+fi
+
+REMOTE_DIR="$REMOTE_STATE_DIR"
 
 # ── Create remote files ──────────────────────────────────────────────────────
 echo "Setting up remote environment on $CLUSTER..."
@@ -67,7 +80,10 @@ export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0,1,2,3}"
 export HF_HOME="${PWD}/.cache/huggingface"
 export VLLM_CONFIG_ROOT="${PWD}/.config/vllm"
 export VLLM_CACHE_ROOT="${PWD}/.cache/vllm"
-mkdir -p "${HF_HOME}" "${VLLM_CONFIG_ROOT}" "${VLLM_CACHE_ROOT}"
+export TRITON_CACHE_DIR="${PWD}/.cache/triton"
+export TORCHINDUCTOR_CACHE_DIR="${PWD}/.cache/inductor"
+mkdir -p "${HF_HOME}" "${VLLM_CONFIG_ROOT}" "${VLLM_CACHE_ROOT}" \
+         "${TRITON_CACHE_DIR}" "${TORCHINDUCTOR_CACHE_DIR}"
 
 echo "======================================================================"
 echo "  Model                  : ${VLLM_MODEL}"
@@ -97,6 +113,7 @@ exec python3 -m vllm.entrypoints.openai.api_server \
     --enable-prefix-caching \
     --enable-auto-tool-choice \
     --tool-call-parser "${VLLM_TOOL_CALL_PARSER}" \
+    --compilation-config "{\"cache_dir\": \"${VLLM_CACHE_ROOT}\"}" \
     ${VLLM_EXTRA_ARGS}
 SERVE_EOF
 
