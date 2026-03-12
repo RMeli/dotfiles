@@ -7,6 +7,7 @@
 # ──────────────────────────────────────────────────────────────────────────────
 
 set -euo pipefail
+ulimit -c 0
 
 # ── Defaults ──────────────────────────────────────────────────────────────────
 MODEL="${MODEL:-Qwen/Qwen3-Coder-Next}"
@@ -51,18 +52,23 @@ mkdir -p "$REMOTE_DIR"
 # ── vllm.toml (EDF file) ──
 cat > "$REMOTE_DIR/vllm.toml" <<'TOML_EOF'
 image = "VLLM_IMAGE_PLACEHOLDER"
-mounts = ["/capstor", "/users"]
+mounts = ["/capstor", "/iopsstor", "/users"]
 workdir = "${PWD}"
 
 [annotations]
 com.hooks.aws_ofi_nccl.enabled = "true"
 com.hooks.aws_ofi_nccl.variant = "cuda12"
+
+[env]
+NCCL_DEBUG="INFO"
+MPICH_GPU_SUPPORT_ENABLED="0"
 TOML_EOF
 
 # ── vllm-serve.sh ──
 cat > "$REMOTE_DIR/vllm-serve.sh" <<'SERVE_EOF'
 #!/usr/bin/env bash
 set -euo pipefail
+ulimit -c 0
 
 VLLM_MODEL="${MODEL:-Qwen/Qwen3-Coder-Next}"
 VLLM_TOOL_CALL_PARSER="${TOOL_CALL_PARSER:-qwen3_coder}"
@@ -99,8 +105,6 @@ echo "  vLLM cache directory   : ${VLLM_CACHE_ROOT}"
 echo "  hostname               : $(hostname)"
 echo "======================================================================"
 echo ""
-
-ulimit -c 0
 
 echo "Starting vLLM OpenAI-compatible server..."
 exec python3 -m vllm.entrypoints.openai.api_server \
@@ -158,6 +162,8 @@ SBATCH_SCRIPT=$(cat <<SBATCH_EOF
 #SBATCH --chdir=$REMOTE_DIR
 #SBATCH --output=vllm_%j.log
 #SBATCH --account=$ACCOUNT
+
+ulimit -c 0
 
 MODEL="$MODEL" \\
 TOOL_CALL_PARSER=$TOOL_CALL_PARSER \\
