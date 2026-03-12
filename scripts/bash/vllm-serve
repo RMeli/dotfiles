@@ -27,14 +27,14 @@ CLEANUP_DIR=true
 # ── Resolve remote scratch path ───────────────────────────────────────────────
 REMOTE_SCRATCH=$(ssh "$CLUSTER" 'echo "$SCRATCH"')
 STATE_FILE="server.state"
-REMOTE_STATE_DIR="$REMOTE_SCRATCH/vllm-server"
+REMOTE_STATE_DIR="$REMOTE_SCRATCH/vllm-server/$CLUSTER"
 
 # Check if another server is already running on this cluster
-EXISTING_STATE=$(ssh "$CLUSTER" "cat $REMOTE_STATE_DIR/$STATE_FILE 2>/dev/null" || true)
-if [[ -n "$EXISTING_STATE" ]]; then
-    echo "ERROR: Another vLLM server is already running on $CLUSTER." >&2
+EXISTING_JOB=$(ssh "$CLUSTER" "squeue --me -h -o '%i' --name=vllm-serve" 2>/dev/null || true)
+if [[ -n "$EXISTING_JOB" ]]; then
+    echo "ERROR: Another vLLM server is already running on $CLUSTER (job ID: $EXISTING_JOB)." >&2
     echo "  Stop the existing server before starting a new one." >&2
-    echo "  Use: ssh $CLUSTER scancel \$(grep SLURM_JOBID $REMOTE_STATE_DIR/$STATE_FILE | cut -d= -f2)" >&2
+    echo "  Use: ssh $CLUSTER scancel $EXISTING_JOB" >&2
     exit 1
 fi
 
