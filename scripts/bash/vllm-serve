@@ -64,9 +64,9 @@ if ! command -v vllm &>/dev/null && ! python3 -c "import vllm" 2>/dev/null; then
 fi
 
 export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0,1,2,3}"
-export HF_HOME="${SCRATCH}/.cache/huggingface"
+export HF_HOME="${PWD}/.cache/huggingface"
 export VLLM_CONFIG_ROOT="${PWD}/.config/vllm"
-export VLLM_CACHE_ROOT="${SCRATCH}/.cache/vllm"
+export VLLM_CACHE_ROOT="${PWD}/.cache/vllm"
 mkdir -p "${HF_HOME}" "${VLLM_CONFIG_ROOT}" "${VLLM_CACHE_ROOT}"
 
 echo "======================================================================"
