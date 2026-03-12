@@ -23,11 +23,16 @@ MAX_MODEL_LEN="${MAX_MODEL_LEN:-131072}"
 
 STATE_FILE="server.state"
 
+# ── Resolve remote scratch path ───────────────────────────────────────────────
+REMOTE_SCRATCH=$(ssh "$CLUSTER" 'echo "$SCRATCH"')
+REMOTE_DIR="$REMOTE_SCRATCH/vllm-server"
+
 # ── Create remote files ──────────────────────────────────────────────────────
 echo "Setting up remote environment on $CLUSTER..."
+echo "Remote working directory: $REMOTE_DIR"
 
-ssh "$CLUSTER" bash -s <<'SETUP_EOF'
-REMOTE_DIR="$SCRATCH/vllm-server"
+ssh "$CLUSTER" bash -s -- "$REMOTE_DIR" <<'SETUP_EOF'
+REMOTE_DIR="$1"
 mkdir -p "$REMOTE_DIR"
 
 # ── vllm.toml (EDF file) ──
@@ -104,7 +109,7 @@ echo "Remote files created in $REMOTE_DIR"
 SETUP_EOF
 
 # Patch the TOML with the actual image name
-ssh "$CLUSTER" "sed -i 's|VLLM_IMAGE_PLACEHOLDER|$VLLM_IMAGE|' \$SCRATCH/vllm-server/vllm.toml"
+ssh "$CLUSTER" "sed -i 's|VLLM_IMAGE_PLACEHOLDER|$VLLM_IMAGE|' $REMOTE_DIR/vllm.toml"
 
 echo "Remote setup complete."
 echo ""
@@ -133,7 +138,7 @@ SBATCH_SCRIPT=$(cat <<SBATCH_EOF
 #SBATCH --ntasks=1
 #SBATCH --gpus=4
 #SBATCH --time=$WALLTIME
-#SBATCH --chdir=\$SCRATCH/vllm-server
+#SBATCH --chdir=$REMOTE_DIR
 #SBATCH --output=vllm_%j.log
 #SBATCH --account=$ACCOUNT
 
@@ -143,7 +148,7 @@ PORT=$REMOTE_PORT \\
 TP=$TP \\
 MAX_MODEL_LEN=$MAX_MODEL_LEN \\
 EXTRA_ARGS="--served-model-name $SERVED_NAME" \\
-srun --environment=\$PWD/vllm.toml ./vllm-serve.sh
+srun --environment=$REMOTE_DIR/vllm.toml ./vllm-serve.sh
 SBATCH_EOF
 )
 
@@ -202,6 +207,17 @@ while (( WAITED < MAX_WAIT )); do
         echo " READY"
         break
     fi
+
+    # Check the job is still alive
+    JOB_STATE=$(ssh "$CLUSTER" "squeue -j $SLURM_JOBID -h -o '%T'" 2>/dev/null || echo "UNKNOWN")
+    if [[ "$JOB_STATE" != "RUNNING" && "$JOB_STATE" != "CONFIGURING" ]]; then
+        echo ""
+        echo "ERROR: Job $SLURM_JOBID is no longer running (state: $JOB_STATE)." >&2
+        echo "Last 25 lines of job log:" >&2
+        ssh "$CLUSTER" "tail -25 $REMOTE_DIR/vllm_${SLURM_JOBID}.log" >&2 || true
+        exit 1
+    fi
+
     echo -n "."
     sleep 60
     WAITED=$((WAITED + 10))
@@ -211,12 +227,12 @@ if (( WAITED >= MAX_WAIT )); then
     echo ""
     echo "ERROR: vLLM server did not become ready within $MAX_WAIT seconds." >&2
     echo "Check the job log:"
-    echo "  ssh $CLUSTER 'tail -50 \$SCRATCH/vllm-server/vllm_${SLURM_JOBID}.log'" >&2
+    echo "  ssh $CLUSTER 'tail -50 $REMOTE_DIR/vllm_${SLURM_JOBID}.log'" >&2
     exit 1
 fi
 
 # ── Write state file ─────────────────────────────────────────────────────────
-ssh "$CLUSTER" "cat > \$SCRATCH/vllm-server/$STATE_FILE <<EOF
+ssh "$CLUSTER" "cat > $REMOTE_DIR/$STATE_FILE <<EOF
 SLURM_JOBID=$SLURM_JOBID
 NODE=$NODE
 REMOTE_PORT=$REMOTE_PORT
@@ -241,5 +257,5 @@ echo "  To stop the server:"
 echo "    ssh $CLUSTER scancel $SLURM_JOBID"
 echo ""
 echo "  To check logs:"
-echo "    ssh $CLUSTER 'tail -f \$SCRATCH/vllm-server/vllm_${SLURM_JOBID}.log'"
+echo "    ssh $CLUSTER 'tail -f $REMOTE_DIR/vllm_${SLURM_JOBID}.log'"
 echo "============================================================"
