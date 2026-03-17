@@ -99,8 +99,8 @@ ssh -N -J ela,"$CLUSTER" \
     -L "$LOCAL_PORT":localhost:"$REMOTE_PORT" \
     -o ServerAliveInterval=60 \
     -o ServerAliveCountMax=3 \
-    -o StrictHostKeyChecking=no \
-    -o UserKnownHostsFile=/dev/null \
+    -o BatchMode=yes \
+    -v \
     "${SSH_USER}@${NODE}" &
 TUNNEL_PID=$!
 
