@@ -181,7 +181,7 @@ SUBMIT_OUTPUT=$(ssh "$CLUSTER" "cat <<'REMOTE_EOF' | sbatch
 $SBATCH_SCRIPT
 REMOTE_EOF")
 
-SLURM_JOBID=$(echo "$SUBMIT_OUTPUT" | grep -oP '\d+' | tail -1)
+SLURM_JOBID=$(echo "$SUBMIT_OUTPUT" | grep -oE '[0-9]+' | tail -1)
 if [[ -z "$SLURM_JOBID" ]]; then
     echo "ERROR: Failed to submit job. Output: $SUBMIT_OUTPUT" >&2
     exit 1
