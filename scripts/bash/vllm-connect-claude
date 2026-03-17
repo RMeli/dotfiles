@@ -112,15 +112,27 @@ if ! kill -0 "$TUNNEL_PID" 2>/dev/null; then
 fi
 
 # Verify tunnel works
-if curl -s --connect-timeout 5 "http://localhost:$LOCAL_PORT/health" &>/dev/null; then
-    echo "Tunnel verified."
-else
-    echo "WARNING: Tunnel is up but local health check failed."
+if ! curl -s --connect-timeout 5 "http://localhost:$LOCAL_PORT/health" &>/dev/null; then
+    echo "ERROR: Tunnel is up but local health check failed." >&2
+    exit 1
+fi
+echo "Tunnel verified."
+
+# ── Verify models are available ──────────────────────────────────────────────
+echo ""
+MODELS_RESPONSE=$(curl -s --connect-timeout 5 "http://localhost:$LOCAL_PORT/v1/models" 2>/dev/null || echo "{}")
+
+if [[ -z "$MODELS_RESPONSE" || "$MODELS_RESPONSE" == "{}" ]]; then
+    echo "ERROR: No models available from the server." >&2
+    exit 1
 fi
 
-# ── Show available models ────────────────────────────────────────────────────
-echo ""
-MODELS_RESPONSE=$(curl -s "http://localhost:$LOCAL_PORT/v1/models" 2>/dev/null || echo "{}")
+# Check if the response contains at least one model
+if ! echo "$MODELS_RESPONSE" | grep -q '"id"'; then
+    echo "ERROR: No models found in server response." >&2
+    exit 1
+fi
+
 echo "Available models: $MODELS_RESPONSE" | head -1
 echo ""
 
