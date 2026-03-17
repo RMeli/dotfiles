@@ -94,14 +94,9 @@ else
 fi
 
 # ── Open SSH tunnel ──────────────────────────────────────────────────────────
+# Forward through the login node to the compute node (no SSH to compute node needed)
 echo "Opening SSH tunnel: localhost:$LOCAL_PORT -> $NODE:$REMOTE_PORT"
-ssh -N -J ela,"$CLUSTER" \
-    -L "$LOCAL_PORT":localhost:"$REMOTE_PORT" \
-    -o ServerAliveInterval=60 \
-    -o ServerAliveCountMax=3 \
-    -o BatchMode=yes \
-    -v \
-    "${SSH_USER}@${NODE}" &
+ssh -N -L "$LOCAL_PORT":"$NODE":"$REMOTE_PORT" "$CLUSTER" &
 TUNNEL_PID=$!
 
 sleep 3
