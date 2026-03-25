@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # ──────────────────────────────────────────────────────────────────────────────
+# WARNING: This script is "vibe-coded" and may contain security issues!
+# ───────────────────────────────────────────────────────────────────────────────────
 # claude-vllm-connect: Connect Claude Code to a running vLLM server on CSCS.
 #
 # Reads the state file written by claude-vllm-server, opens an SSH tunnel,
@@ -8,6 +10,23 @@
 # ──────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
 ulimit -c 0
+
+# ── Vibe-coded warning ───────────────────────────────────────────────────────────────────────────────────────
+{
+  echo ""
+  echo "⚠️  WARNING: This script is VIBE-CODED and may contain security issues!"
+  echo ""
+  echo "⚠️  Vibe-coded scripts are not security-audited and may contain vulnerabilities"
+  echo "    including command injection, insecure temp file handling, or privilege escalation."
+  echo ""
+} >&2
+
+read -p "Do you want to proceed? [y/N] " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Aborted." >&2
+    exit 1
+fi
 
 LOCAL_PORT="${LOCAL_PORT:-8000}"
 CLUSTER="${CLUSTER:-daint}"

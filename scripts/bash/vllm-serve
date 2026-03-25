@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # ──────────────────────────────────────────────────────────────────────────────
+# WARNING: This script is "vibe-coded" and may contain security issues!
+# ──────────────────────────────────────────────────────────────────────
 # vllm-serve: Submit a vLLM inference server job on CSCS Alps.
+#
+# WARNING: Vibe-coded scripts are not security-audited and may contain
+# vulnerabilities including command injection, insecure temp file handling, or
+# privilege escalation paths.
 #
 # Creates remote files, submits the SLURM job, and waits until the server is
 # ready. Writes a state file that claude-vllm-connect can read.
@@ -8,6 +14,23 @@
 
 set -euo pipefail
 ulimit -c 0
+
+# ── Vibe-coded warning ──────────────────────────────────────────────────────
+{
+  echo ""
+  echo "⚠️  WARNING: This script is VIBE-CODED and may contain security issues!"
+  echo ""
+  echo "⚠️  Vibe-coded scripts are not security-audited and may contain vulnerabilities"
+  echo "    including command injection, insecure temp file handling, or privilege escalation."
+  echo ""
+} >&2
+
+read -p "Do you want to proceed? [y/N] " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Aborted." >&2
+    exit 1
+fi
 
 # ── Defaults ──────────────────────────────────────────────────────────────────
 MODEL="${MODEL:-Qwen/Qwen3-Coder-Next}"
