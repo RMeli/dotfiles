@@ -113,14 +113,13 @@ else
 fi
 
 # ── Open SSH tunnel ──────────────────────────────────────────────────────────
+# Forward through the login node to the compute node (no SSH to compute node needed)
+if lsof -iTCP:"$LOCAL_PORT" -sTCP:LISTEN &>/dev/null; then
+    echo "ERROR: Port $LOCAL_PORT is already in use." >&2
+    exit 1
+fi
 echo "Opening SSH tunnel: localhost:$LOCAL_PORT -> $NODE:$REMOTE_PORT"
-ssh -N -J ela,"$CLUSTER" \
-    -L "$LOCAL_PORT":localhost:"$REMOTE_PORT" \
-    -o ServerAliveInterval=60 \
-    -o ServerAliveCountMax=3 \
-    -o StrictHostKeyChecking=no \
-    -o UserKnownHostsFile=/dev/null \
-    "${SSH_USER}@${NODE}" &
+ssh -N -L "$LOCAL_PORT":"$NODE":"$REMOTE_PORT" "$CLUSTER" &
 TUNNEL_PID=$!
 
 sleep 3
@@ -131,16 +130,25 @@ if ! kill -0 "$TUNNEL_PID" 2>/dev/null; then
 fi
 
 # Verify tunnel works
-if curl -s --connect-timeout 5 "http://localhost:$LOCAL_PORT/health" &>/dev/null; then
-    echo "Tunnel verified."
-else
-    echo "WARNING: Tunnel is up but local health check failed."
+if ! curl -s --connect-timeout 5 "http://localhost:$LOCAL_PORT/health" &>/dev/null; then
+    echo "ERROR: Tunnel is up but local health check failed." >&2
+    exit 1
+fi
+echo "Tunnel verified."
+
+# ── Verify models are available ──────────────────────────────────────────────
+echo ""
+MODELS_RESPONSE=$(curl -s --connect-timeout 5 "http://localhost:$LOCAL_PORT/v1/models" 2>/dev/null || echo "{}")
+
+MODEL_IDS=$(echo "$MODELS_RESPONSE" | jq -r '.data[].id' 2>/dev/null || echo "")
+
+if [[ -z "$MODEL_IDS" ]]; then
+    echo "ERROR: No models found in server response." >&2
+    exit 1
 fi
 
-# ── Show available models ────────────────────────────────────────────────────
-echo ""
-MODELS_RESPONSE=$(curl -s "http://localhost:$LOCAL_PORT/v1/models" 2>/dev/null || echo "{}")
-echo "Available models: $MODELS_RESPONSE" | head -1
+echo "Available models:"
+echo "$MODEL_IDS" | sed 's/^/  - /'
 echo ""
 
 # ── Launch Claude Code ───────────────────────────────────────────────────────
