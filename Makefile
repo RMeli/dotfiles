@@ -18,6 +18,11 @@ nvim:
 	@echo ">>> Soft link .config/nvim"
 	ln -sf ${PWD}/config/nvim ${XDG_CONFIG_HOME}/nvim
 
+zed:
+	@echo ">>> Soft link .config/zed/settings.json"
+	mkdir -p ${XDG_CONFIG_HOME}/zed
+	ln -sf ${PWD}/config/zed/settings.json ${XDG_CONFIG_HOME}/zed/settings.json
+
 module:
 	ln -sf ${PWD}/modulerc ${HOME}/.modulerc
 	ln -sf ${PWD}/modulefiles ${HOME}/.modulefiles

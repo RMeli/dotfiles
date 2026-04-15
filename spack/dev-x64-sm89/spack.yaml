@@ -3,7 +3,7 @@ spack:
   # Development
   - gcc@14
   - llvm@21
-  - cuda@12.9
+  - cuda@13.1
   - cmake
   - ninja
   - hwloc +cuda +nvml
