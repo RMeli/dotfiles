@@ -7,44 +7,71 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "notification_panel": {
+    "dock": "left",
+  },
+  "chat_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "right",
+  },
+  "project_panel": {
+    "dock": "right",
+  },
   "edit_predictions": {
-    "provider": "copilot"
+    "provider": "copilot",
+  },
+  "terminal": {
+    "detect_venv": {
+      "on": {
+        "directories": [
+          ".env",
+          "env",
+          ".venv",
+          "venv",
+          "build/.venv",
+          "build/venv",
+        ],
+        "activate_script": "default",
+      },
+    },
   },
   "agent": {
     "tool_permissions": {
       "tools": {
         "move_path": {
-          "default": "allow"
+          "default": "allow",
         },
         "create_directory": {
-          "default": "allow"
+          "default": "allow",
         },
         "terminal": {
-          "default": "allow"
-        }
-      }
+          "default": "allow",
+        },
+      },
     },
     "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-opus-4.5",
-      "enable_thinking": true
+      "enable_thinking": true,
     },
     "favorite_models": [],
-    "model_parameters": []
+    "model_parameters": [],
   },
   "agent_servers": {
     "claude-acp": {
-      "type": "registry"
-    }
+      "type": "registry",
+    },
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "vim_mode": true,
-  "icon_theme": "Catppuccin Macchiato",
   "ui_font_size": 16,
   "buffer_font_size": 15,
+  "icon_theme": "Catppuccin Macchiato",
   "theme": "Catppuccin Macchiato",
 }
