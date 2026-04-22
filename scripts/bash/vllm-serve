@@ -1,0 +1,308 @@
+#!/usr/bin/env bash
+# ──────────────────────────────────────────────────────────────────────────────
+# WARNING: This script is "vibe-coded" and may contain security issues!
+# ──────────────────────────────────────────────────────────────────────
+# vllm-serve: Submit a vLLM inference server job on CSCS Alps.
+#
+# WARNING: Vibe-coded scripts are not security-audited and may contain
+# vulnerabilities including command injection, insecure temp file handling, or
+# privilege escalation paths.
+#
+# Creates remote files, submits the SLURM job, and waits until the server is
+# ready. Writes a state file that claude-vllm-connect can read.
+# ──────────────────────────────────────────────────────────────────────────────
+
+set -euo pipefail
+ulimit -c 0
+
+# ── Vibe-coded warning ──────────────────────────────────────────────────────
+{
+  echo ""
+  echo "⚠️  WARNING: This script is VIBE-CODED and may contain security issues!"
+  echo ""
+  echo "⚠️  Vibe-coded scripts are not security-audited and may contain vulnerabilities"
+  echo "    including command injection, insecure temp file handling, or privilege escalation."
+  echo ""
+} >&2
+
+read -p "Do you want to proceed? [y/N] " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Aborted." >&2
+    exit 1
+fi
+
+# ── Defaults ──────────────────────────────────────────────────────────────────
+MODEL="${MODEL:-Qwen/Qwen3-Coder-Next}"
+TOOL_CALL_PARSER="${TOOL_CALL_PARSER:-qwen3_coder}"
+SERVED_NAME="${SERVED_NAME:-qwen3-coder-next}"
+REMOTE_PORT="${REMOTE_PORT:-8000}"
+WALLTIME="${WALLTIME:-12:00:00}"
+PARTITION="${PARTITION:-normal}"
+ACCOUNT="${ACCOUNT:-csstaff}"
+CLUSTER="${CLUSTER:-daint}"
+VLLM_IMAGE="${VLLM_IMAGE:-vllm/vllm-openai:v0.17.0}"
+TP="${TP:-4}"
+MAX_MODEL_LEN="${MAX_MODEL_LEN:-131072}"
+
+STATE_FILE="server.state"
+CLEANUP_DIR=true
+
+# ── Resolve remote scratch path ───────────────────────────────────────────────
+REMOTE_SCRATCH=$(ssh "$CLUSTER" 'echo "$SCRATCH"')
+STATE_FILE="server.state"
+REMOTE_STATE_DIR="$REMOTE_SCRATCH/vllm-server/$CLUSTER"
+
+# Check if another server is already running on this cluster
+EXISTING_JOB=$(ssh "$CLUSTER" "squeue --me -h -o '%i' --name=vllm-serve" 2>/dev/null || true)
+if [[ -n "$EXISTING_JOB" ]]; then
+    echo "ERROR: Another vLLM server is already running on $CLUSTER (job ID: $EXISTING_JOB)." >&2
+    echo "  Stop the existing server before starting a new one." >&2
+    echo "  Use: ssh $CLUSTER scancel $EXISTING_JOB" >&2
+    exit 1
+fi
+
+REMOTE_DIR="$REMOTE_STATE_DIR"
+
+# ── Create remote files ──────────────────────────────────────────────────────
+echo "Setting up remote environment on $CLUSTER..."
+echo "Remote working directory: $REMOTE_DIR"
+
+ssh "$CLUSTER" bash -s -- "$REMOTE_DIR" <<'SETUP_EOF'
+REMOTE_DIR="$1"
+mkdir -p "$REMOTE_DIR"
+
+# ── vllm.toml (EDF file) ──
+cat > "$REMOTE_DIR/vllm.toml" <<'TOML_EOF'
+image = "VLLM_IMAGE_PLACEHOLDER"
+mounts = ["/capstor", "/iopsstor", "/users"]
+workdir = "${PWD}"
+
+[annotations]
+com.hooks.netstack.source = "artifact"
+#com.hooks.aws_ofi_nccl.enabled = "true"
+#com.hooks.aws_ofi_nccl.variant = "cuda12"
+
+[env]
+NCCL_DEBUG="INFO"
+MPICH_GPU_SUPPORT_ENABLED="0"
+TOML_EOF
+
+# ── vllm-serve.sh ──
+cat > "$REMOTE_DIR/vllm-serve.sh" <<'SERVE_EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+ulimit -c 0
+
+VLLM_MODEL="${MODEL:-Qwen/Qwen3-Coder-Next}"
+VLLM_TOOL_CALL_PARSER="${TOOL_CALL_PARSER:-qwen3_coder}"
+VLLM_PORT="${PORT:-8000}"
+VLLM_TP="${TP:-4}"
+VLLM_MAX_MODEL_LEN="${MAX_MODEL_LEN:-131072}"
+VLLM_EXTRA_ARGS="${EXTRA_ARGS:-}"
+
+if ! command -v vllm &>/dev/null && ! python3 -c "import vllm" 2>/dev/null; then
+    echo "ERROR: vLLM not installed." >&2
+    exit 1
+fi
+
+export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0,1,2,3}"
+export HF_HOME="${PWD}/.cache/huggingface"
+export VLLM_CONFIG_ROOT="${PWD}/.config/vllm"
+export VLLM_CACHE_ROOT="${PWD}/.cache/vllm"
+export TRITON_CACHE_DIR="${PWD}/.cache/triton"
+export TORCHINDUCTOR_CACHE_DIR="${PWD}/.cache/inductor"
+mkdir -p "${HF_HOME}" "${VLLM_CONFIG_ROOT}" "${VLLM_CACHE_ROOT}" \
+         "${TRITON_CACHE_DIR}" "${TORCHINDUCTOR_CACHE_DIR}"
+
+echo "======================================================================"
+echo "  Model                  : ${VLLM_MODEL}"
+echo "  Tensor Parallel        : ${VLLM_TP}"
+echo "  Port                   : ${VLLM_PORT}"
+echo "  Max context            : ${VLLM_MAX_MODEL_LEN}"
+echo "  Tool call parser       : ${VLLM_TOOL_CALL_PARSER}"
+echo "  Extra arguments        : ${VLLM_EXTRA_ARGS}"
+echo "  Visible GPUs           : ${CUDA_VISIBLE_DEVICES}"
+echo "  HF cache directory     : ${HF_HOME}"
+echo "  vLLM config directory  : ${VLLM_CONFIG_ROOT}"
+echo "  vLLM cache directory   : ${VLLM_CACHE_ROOT}"
+echo "  hostname               : $(hostname)"
+echo "======================================================================"
+echo ""
+
+echo "Starting vLLM OpenAI-compatible server..."
+exec python3 -m vllm.entrypoints.openai.api_server \
+    --model "${VLLM_MODEL}" \
+    --tensor-parallel-size "${VLLM_TP}" \
+    --port "${VLLM_PORT}" \
+    --max-model-len "${VLLM_MAX_MODEL_LEN}" \
+    --trust-remote-code \
+    --no-enable-log-requests \
+    --enable-prefix-caching \
+    --enable-auto-tool-choice \
+    --tool-call-parser "${VLLM_TOOL_CALL_PARSER}" \
+    --compilation-config "{\"cache_dir\": \"${VLLM_CACHE_ROOT}\"}" \
+    ${VLLM_EXTRA_ARGS}
+SERVE_EOF
+
+chmod +x "$REMOTE_DIR/vllm-serve.sh"
+
+# Clean stale state file
+rm -f "$REMOTE_DIR/server.state"
+
+echo "Remote files created in $REMOTE_DIR"
+SETUP_EOF
+
+# Patch the TOML with the actual image name
+ssh "$CLUSTER" "sed -i 's|VLLM_IMAGE_PLACEHOLDER|$VLLM_IMAGE|' $REMOTE_DIR/vllm.toml"
+
+echo "Remote setup complete."
+echo ""
+
+# ── Submit the job ───────────────────────────────────────────────────────────
+echo "============================================================"
+echo "  Model            : $MODEL"
+echo "  Tool call parser : $TOOL_CALL_PARSER"
+echo "  Served name      : $SERVED_NAME"
+echo "  Remote port      : $REMOTE_PORT"
+echo "  Walltime         : $WALLTIME"
+echo "  Partition        : $PARTITION"
+echo "  Account          : $ACCOUNT"
+echo "  Cluster          : $CLUSTER"
+echo "  Image            : $VLLM_IMAGE"
+echo "  TP               : $TP"
+echo "  Max context      : $MAX_MODEL_LEN"
+echo "============================================================"
+echo ""
+
+SBATCH_SCRIPT=$(cat <<SBATCH_EOF
+#!/bin/bash
+#SBATCH --job-name=vllm-serve
+#SBATCH --partition=$PARTITION
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --gpus=4
+#SBATCH --time=$WALLTIME
+#SBATCH --chdir=$REMOTE_DIR
+#SBATCH --output=vllm_%j.log
+#SBATCH --account=$ACCOUNT
+
+ulimit -c 0
+
+MODEL="$MODEL" \\
+TOOL_CALL_PARSER=$TOOL_CALL_PARSER \\
+PORT=$REMOTE_PORT \\
+TP=$TP \\
+MAX_MODEL_LEN=$MAX_MODEL_LEN \\
+EXTRA_ARGS="--served-model-name $SERVED_NAME" \\
+srun --environment=$REMOTE_DIR/vllm.toml ./vllm-serve.sh
+SBATCH_EOF
+)
+
+echo "Submitting job to $CLUSTER..."
+SUBMIT_OUTPUT=$(ssh "$CLUSTER" "cat <<'REMOTE_EOF' | sbatch
+$SBATCH_SCRIPT
+REMOTE_EOF")
+
+SLURM_JOBID=$(echo "$SUBMIT_OUTPUT" | grep -oE '[0-9]+' | tail -1)
+if [[ -z "$SLURM_JOBID" ]]; then
+    echo "ERROR: Failed to submit job. Output: $SUBMIT_OUTPUT" >&2
+    exit 1
+fi
+echo "Submitted job $SLURM_JOBID"
+
+# ── Wait for the job to start running ────────────────────────────────────────
+echo -n "Waiting for job to start"
+while true; do
+    JOB_STATE=$(ssh "$CLUSTER" "squeue -j $SLURM_JOBID -h -o '%T'" 2>/dev/null || echo "UNKNOWN")
+
+    case "$JOB_STATE" in
+        RUNNING)
+            echo " RUNNING"
+            break
+            ;;
+        PENDING|CONFIGURING|REQUEUED)
+            echo -n "."
+            sleep 10
+            ;;
+        COMPLETED|FAILED|CANCELLED|TIMEOUT|""|UNKNOWN)
+            echo ""
+            echo "ERROR: Job $SLURM_JOBID is in state '$JOB_STATE'. Check logs." >&2
+            exit 1
+            ;;
+        *)
+            echo -n "."
+            sleep 10
+            ;;
+    esac
+done
+
+# ── Get the compute node ─────────────────────────────────────────────────────
+NODE=$(ssh "$CLUSTER" "squeue -j $SLURM_JOBID -h -o '%N'" 2>/dev/null)
+if [[ -z "$NODE" ]]; then
+    echo "ERROR: Could not determine compute node for job $SLURM_JOBID" >&2
+    exit 1
+fi
+echo "Job running on node: $NODE"
+
+# ── Wait for vLLM server to be ready ─────────────────────────────────────────
+echo -n "Waiting for vLLM server to be ready on $NODE:$REMOTE_PORT"
+MAX_WAIT=600
+WAITED=0
+while (( WAITED < MAX_WAIT )); do
+    if ssh "$CLUSTER" "curl -s --connect-timeout 2 http://$NODE:$REMOTE_PORT/health" &>/dev/null; then
+        echo " READY"
+        break
+    fi
+
+    # Check the job is still alive
+    JOB_STATE=$(ssh "$CLUSTER" "squeue -j $SLURM_JOBID -h -o '%T'" 2>/dev/null || echo "UNKNOWN")
+    if [[ "$JOB_STATE" != "RUNNING" && "$JOB_STATE" != "CONFIGURING" ]]; then
+        echo ""
+        echo "ERROR: Job $SLURM_JOBID is no longer running (state: $JOB_STATE)." >&2
+        echo "Last 25 lines of job log:" >&2
+        ssh "$CLUSTER" "tail -25 $REMOTE_DIR/vllm_${SLURM_JOBID}.log" >&2 || true
+        exit 1
+    fi
+
+    echo -n "."
+    sleep 60
+    WAITED=$((WAITED + 10))
+done
+
+if (( WAITED >= MAX_WAIT )); then
+    echo ""
+    echo "ERROR: vLLM server did not become ready within $MAX_WAIT seconds." >&2
+    echo "Check the job log:"
+    echo "  ssh $CLUSTER 'tail -50 $REMOTE_DIR/vllm_${SLURM_JOBID}.log'" >&2
+    exit 1
+fi
+
+# ── Write state file ─────────────────────────────────────────────────────────
+ssh "$CLUSTER" "cat > $REMOTE_DIR/$STATE_FILE <<EOF
+SLURM_JOBID=$SLURM_JOBID
+NODE=$NODE
+REMOTE_PORT=$REMOTE_PORT
+SERVED_NAME=$SERVED_NAME
+MODEL=$MODEL
+TOOL_CALL_PARSER=$TOOL_CALL_PARSER
+EOF"
+
+echo ""
+echo "============================================================"
+echo "  vLLM server is READY"
+echo ""
+echo "  Job ID      : $SLURM_JOBID"
+echo "  Node        : $NODE"
+echo "  Port        : $REMOTE_PORT"
+echo "  Model       : $SERVED_NAME"
+echo ""
+echo "  To connect Claude Code, run:"
+echo "    ./claude-vllm-connect"
+echo ""
+echo "  To stop the server:"
+echo "    ssh $CLUSTER scancel $SLURM_JOBID"
+echo ""
+echo "  To check logs:"
+echo "    ssh $CLUSTER 'tail -f $REMOTE_DIR/vllm_${SLURM_JOBID}.log'"
+echo "============================================================"

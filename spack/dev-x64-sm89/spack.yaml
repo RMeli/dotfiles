@@ -1,0 +1,48 @@
+spack:
+  specs:
+  # Development
+  - gcc@14
+  - llvm@21
+  - cuda@13.1
+  - cmake
+  - ninja
+  - hwloc +cuda +nvml
+  - libtree
+  - tmux
+  - direnv
+  - htop +hwloc
+  - neovim
+  - ripgrep
+  - fzf
+  - bat
+  - ruby
+  - go
+  - rust@1.92 +dev ~docs
+  - node-js
+  - npm
+  - ccache
+  - python@3.14
+  - py-uv
+  - bat
+    #  - eza
+  - jq
+  - yq
+  - btop
+  - gh
+  - starship
+#  - julia
+  concretizer:
+    unify: true
+  packages:
+    all:
+      require:
+      - cuda_arch=89
+    llvm:
+      require:
+      - targets=x86
+      - ~gold
+      - ~libomptarget
+  view:
+    default:
+      root: ~/dev-x64-sm89.view
+      link: roots
