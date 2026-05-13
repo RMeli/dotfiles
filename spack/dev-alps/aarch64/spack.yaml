@@ -1,0 +1,27 @@
+spack:
+  include:
+  - ../common.yaml
+  specs:
+  - libtree
+  - tmux
+  - direnv
+  - neovim
+  - llvm
+  - ripgrep
+  - fzf
+  - bat
+  - ruby
+  - go
+  - rust +dev ~docs
+  - node-js
+  - npm
+  - ccache
+  - python
+  - py-uv
+  - py-ruff
+  - py-black
+  - py-isort
+  - py-flake8
+  - py-mypy
+  - py-cmake-format
+  - py-fprettify

@@ -1,0 +1,19 @@
+  concretizer:
+    unify: true
+  packages:
+    python:
+      require:
+      - '@3.12'
+    llvm:
+      require:
+      - targets=aarch64 # Select one target to speedup compilation, doen't matter which one
+      - '@22'
+      - ~gold
+      - ~libomptarget
+  view:
+    default:
+      root: $PROJECT/rmeli/$UARCH/sw-stack/view
+      link: run
+  config:
+    install_tree:
+      root: $PROJECT/rmeli/$UARCH/sw-stack/store

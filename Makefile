@@ -28,6 +28,7 @@ module:
 	ln -sf ${PWD}/modulefiles ${HOME}/.modulefiles
 
 tmux:
-	mkdir -p ${XDG_CONFIG_HOME}/tmux
-	ln -sf ${PWD}/tmux.conf ${XDG_CONFIG_HOME}/tmux/tmux.conf
-	git clone --depth 1 https://github.com/tmux-plugins/tpm ${XDG_CONFIG_HOME}/tmux/plugins/tpm
+	# tmux does not support XDG_CONFIG_HOME
+	mkdir -p ~/.config/tmux
+	ln -sf ${PWD}/tmux.conf ~/.tmux.conf
+	git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
