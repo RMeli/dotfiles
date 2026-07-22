@@ -1,5 +1,9 @@
 # Dot Files
 
+> [!warning]
+> Define `XDG_CONFIG_HOME` before running `make`.
+> `export XDG_CONFIG_HOME=$HOME/.config/`
+
 ## CLI Utilities
 
 * [bat](https://github.com/sharkdp/bat): a `cat` clone with wings

@@ -20,3 +20,8 @@ case ":$PATH:" in
 esac
 
 # <<< juliaup initialize <<<
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/romeli/.lmstudio/bin"
+# End of LM Studio CLI section
+

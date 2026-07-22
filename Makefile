@@ -1,3 +1,5 @@
+.PHONY: help bashshell conda starship nvim zed module tmux opencode
+
 .DEFAULT_GOAL := help
 
 bashshell:
@@ -32,3 +34,7 @@ tmux:
 	mkdir -p ~/.config/tmux
 	ln -sf ${PWD}/tmux.conf ~/.tmux.conf
 	git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+
+opencode:
+	mv ${XDG_CONFIG_HOME}/opencode ${XDG_CONFIG_HOME}/opencode.bak
+	ln -sf ${PWD}/opencode ${XDG_CONFIG_HOME}/opencode

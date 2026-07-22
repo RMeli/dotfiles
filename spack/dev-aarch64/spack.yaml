@@ -1,0 +1,52 @@
+spack:
+  specs:
+  # Development
+  - llvm
+  - cmake
+  - ninja
+  - hwloc
+  - libtree
+  - tmux
+  - direnv
+  - htop +hwloc
+  - neovim
+  - ripgrep
+  - fzf
+  - bat
+  - ruby
+  - go
+  - rust@1.92 +dev ~docs
+  - node-js
+  - npm
+  - ccache
+  - python@3.14
+  - py-uv
+  - bat
+  - eza
+  - jq
+  - yq
+  - btop
+  - gh
+  - starship
+  - julia
+  concretizer:
+    unify: true
+  packages:
+    all:
+      require:
+      - ~cuda
+      - ~rocm
+      - '%llvm'
+    llvm:
+      require:
+      - '@22'
+      - targets=aarch64
+      - ~gold
+      - ~libomptarget
+    python:
+      require:
+        - '@3.14'
+  view:
+    default:
+      root: ~/dev-aarch64.view
+      link: roots
