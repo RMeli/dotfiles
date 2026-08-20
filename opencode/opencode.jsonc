@@ -10,18 +10,37 @@
       },
       "models": {
         "moonshotai/Kimi-K2.7-Code": {
-          "name": "Kimi-K2.7-Code"
+          "name": "Kimi-K2.7-Code",
+          "limit": {
+            "context": 262144,
+          }
         },
         "google/gemma-4-31B-it": {
-          "name": "Gemma 4"
+          "name": "Gemma 4",
+          "limit": {
+            "context": 262144,
+          }
         },
         "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16": {
-          "name": "Nemotron 3"
+          "name": "Nemotron 3",
+          "limit": {
+            "context": 262144,
+          }
         },
         "zai-org/GLM-5.2": {
-          "name": "GLM-5.2"
+          "name": "GLM-5.2",
+          "limit": {
+            "context": 976000,
+          }
         }
       }
+    }
+  },
+  "mcp": {
+    "cuda-docs": {
+      "type": "remote",
+      "url": "https://api.copilot.nsight.ngc.nvidia.com/mcp/cuda-docs",
+      "enabled": false
     }
   },
   "formatter": true,
