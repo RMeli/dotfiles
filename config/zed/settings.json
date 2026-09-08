@@ -7,6 +7,26 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "ssh_connections": [
+    {
+      "host": "daint",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/ritom/scratch/cscs/rmeli/cp2k-hpc-benchmarks"
+          ]
+        }
+      ]
+    }
+  ],
+  "cli_default_open_behavior": "new_window",
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
   "notification_panel": {
     "dock": "left",
   },
@@ -20,6 +40,11 @@
     "dock": "right",
   },
   "edit_predictions": {
+    "open_ai_compatible_api": {
+      "max_output_tokens": 256,
+      "model": "moonshotai/Kimi-K2.6",
+      "api_url": "https://ai-gateway.breithorn.svc.cscs.ch/v1/completions/"
+    },
     "provider": "copilot",
   },
   "terminal": {
@@ -38,6 +63,7 @@
     },
   },
   "agent": {
+    "dock": "left",
     "tool_permissions": {
       "tools": {
         "move_path": {
@@ -53,15 +79,26 @@
     },
     "default_profile": "write",
     "default_model": {
+      "effort": "high",
       "provider": "copilot_chat",
-      "model": "claude-opus-4.5",
+      "model": "claude-sonnet-4.6",
       "enable_thinking": true,
     },
     "favorite_models": [],
     "model_parameters": [],
   },
   "agent_servers": {
+    "opencode": {
+      "default_config_options": {
+        "mode": "build",
+        "model": "cscs/zai-org/GLM-5.2"
+      },
+      "type": "registry"
+    },
     "claude-acp": {
+      "default_config_options": {
+        "model": "default"
+      },
       "type": "registry",
     },
   },
