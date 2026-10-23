@@ -12,23 +12,20 @@ spack:
   - neovim
   - ripgrep
   - fzf
-  - bat
   - ruby
   - go
-  - rust@1.92 +dev ~docs
   - node-js
   - npm
   - ccache
-  - python@3.14
-  - py-uv
+  - python
   - bat
-  - eza
+#  - eza
   - jq
   - yq
   - btop
   - gh
   - starship
-  - julia
+  - neovim
   concretizer:
     unify: true
   packages:
@@ -36,10 +33,15 @@ spack:
       require:
       - ~cuda
       - ~rocm
-      - '%llvm'
+    c:
+      prefer:
+      - 'apple-clang'
+    cxx:
+      prefer:
+      - 'apple-clang'
     llvm:
       require:
-      - '@22'
+      - '@23'
       - targets=aarch64
       - ~gold
       - ~libomptarget
@@ -50,3 +52,8 @@ spack:
     default:
       root: ~/dev-aarch64.view
       link: roots
+  config:
+    # Custom install tree
+    # Does not interfere with Spack packages in the default location
+    install_tree:
+      root: ~/.dev-aarch64.install_tree

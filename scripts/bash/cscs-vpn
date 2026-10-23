@@ -3,6 +3,7 @@
 set -u
 
 # Use 1password to automatically connect to VPN
+eval $(op signin)
 USER=$(op item get "ETHZ VPN" --fields label=username)
 PASSWORD=$(op item get "ETHZ VPN" --fields label=password --reveal)
 OTP=$(op item get "ETHZ" --otp)
