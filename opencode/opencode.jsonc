@@ -36,6 +36,12 @@
           "limit": {
             "context": 976000,
             "output": 16384
+        },
+        "zai-org/GLM-5.3": {
+          "name": "GLM-5.3",
+          "limit": {
+            "context": 976000,
+            "output": 16384
           }
         }
       }
@@ -45,15 +51,6 @@
       "options": {
         "baseURL": "https://ai-gateway.forno-tds.tds.cscs.ch/v1/",
         "apiKey": "{env:CSCS_INFERENCE_TDS_API_KEY}"
-      },
-      "models": {
-        "zai-org/GLM-5.3": {
-          "name": "GLM-5.3",
-          "limit": {
-            "context": 976000,
-            "output": 16384
-          }
-        }
       }
     }
   },
