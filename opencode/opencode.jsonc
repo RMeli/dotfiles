@@ -2,11 +2,12 @@
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "plan",
   "model": "cscs/zai-org/GLM-5.3",
+  "shell": "/bin/zsh",
   "providers": {
     "cscs": {
       "name": "CSCS",
-      "npm": "@ai-sdk/anthropic",
       "env": ["CSCS_INFERENCE_API_KEY"],
+      "package": "@ai-sdk/anthropic",
       "settings": {
         "baseURL": "https://api.inference.cscs.ch/v1"
       },
@@ -39,25 +40,11 @@
       }
     }
   },
-  "mcp": {
-    "cuda-docs": {
-      "type": "remote",
-      "url": "https://api.copilot.nsight.ngc.nvidia.com/mcp/cuda-docs",
-      "enabled": false
+  "permissions": [
+    {
+      "action": "shell",
+      "resource": "git push *",
+      "effect": "ask"
     }
-  },
-  "formatter": true,
-  "permission": {
-    "bash": {
-      "rm -rf /*": "deny",
-      "rm -rf ~/*": "deny",
-      "rm -rf $HOME/*": "deny",
-      "rm -rf .": "deny",
-      "rm -rf ..": "deny",
-      "rm -fr /*": "deny",
-      "rm -fr ~/*": "deny",
-      "rm -fr $HOME/*": "deny",
-      "rm *": "ask"
-    }
-  }
+  ]
 }
