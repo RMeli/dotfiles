@@ -1,5 +1,5 @@
 return {
-  'hadronized/hop.nvim',
+  'smoka7/hop.nvim',
   config = true,
   keys = {
     { '<leader>ha', '<cmd>HopAnywhere<cr>', desc = 'Hop anywhere' },
