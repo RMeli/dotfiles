@@ -29,14 +29,35 @@
         },
         "zai-org/GLM-5.2": {
           "name": "GLM 5.2",
-          "capabilities": { "tools": true, "input": ["text", "image"], "output": ["text"] },
+          "capabilities": { "tools": true, "input": ["text", "image"], "output": ["text"]},
           "limit": {"context": 976000, "output": 16384}
         },
         "zai-org/GLM-5.3": {
           "name": "GLM 5.3",
-          "capabilities": { "tools": true, "input": ["text", "image"], "output": ["text"] },
+          "capabilities": { 
+            "tools": true,
+            "input": ["text", "image"],
+            "output": ["text"],
+            "reasoning": {
+              "supported": true,
+              "effort": ["low", "high", "max"]
+            }
+          },
           "limit": {"context": 976000, "output": 16384}
-        }
+        },
+        "zai-org/GLM-5.3-Flash": {
+          "name": "GLM 5.3 Flash",
+          "capabilities": { 
+            "tools": true,
+            "input": ["text", "image"],
+            "output": ["text"],
+            "reasoning": {
+              "supported": true,
+              "effort": ["low", "high", "max"]
+            }
+          },
+          "limit": { "context": 1048576, "output": 524288 }
+	}
       }
     }
   },
